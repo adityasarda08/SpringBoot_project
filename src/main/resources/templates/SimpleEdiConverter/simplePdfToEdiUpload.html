@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Simple PDF to Comma-Separated Text</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: #f8f9fa;
+        }
+
+        .container {
+            max-width: 1200px;
+        }
+
+        .upload-section {
+            background: white;
+            border-radius: 8px;
+            padding: 30px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+        }
+
+        .generated-text-block {
+            background: white;
+            border-radius: 8px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            border-left: 4px solid #28a745; /* Green accent for success/generated content */
+        }
+
+        .section-header { /* Renamed from invoice-header for generality */
+            background: linear-gradient(135deg, #007bff, #0056b3);
+            color: white;
+            padding: 20px;
+            border-radius: 6px;
+            margin-bottom: 25px;
+        }
+
+        .section-header h3 {
+            margin: 0;
+            font-size: 1.4rem;
+            font-weight: 600;
+        }
+
+        .error-message {
+            color: #721c24;
+            background-color: #f8d7da;
+            border: 1px solid #f5c6cb;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 6px;
+            border-left: 4px solid #dc3545;
+        }
+
+        .success-message { /* For general success messages if needed */
+            color: #155724;
+            background-color: #d4edda;
+            border: 1px solid #c3e6cb;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 6px;
+            border-left: 4px solid #28a745;
+        }
+
+        .text-display-area { /* Renamed from full-text-display for this specific use */
+            background-color: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 6px;
+            padding: 20px;
+            font-family: 'Consolas', 'Monaco', monospace;
+            font-size: 0.85rem;
+            line-height: 1.4;
+            max-height: 400px; /* Adjusted height */
+            overflow-y: auto;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #007bff, #0056b3);
+            border: none;
+            padding: 12px 30px;
+            border-radius: 6px;
+            font-weight: 600;
+        }
+
+        .btn-secondary {
+            background-color: #6c757d;
+            border-color: #6c757d;
+        }
+
+        .form-control {
+            border-radius: 6px;
+            padding: 12px 15px;
+            border: 2px solid #e9ecef;
+            transition: border-color 0.2s;
+        }
+
+        .form-control:focus {
+            border-color: #007bff;
+            box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, .25);
+        }
+
+        .no-data-message {
+            text-align: center;
+            padding: 40px;
+            color: #6c757d;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body>
+<div class="container mt-4">
+    <div class="upload-section">
+        <h2 class="mb-4">Simple PDF to Comma-Separated Text Generator</h2>
+
+        <!-- Global Error Display from Controller -->
+        <div class="error-message" th:if="${errorMessage}" th:text="${errorMessage}"></div>
+        <div class="success-message" th:if="${successMessage}" th:text="${successMessage}"></div>
+
+
+        <form class="mb-4" enctype="multipart/form-data" method="POST" th:action="@{/simple-pdf-edi/generate}">
+            <div class="mb-3">
+                <label class="form-label fw-bold" for="pdfFile">Select PDF File</label>
+                <input accept=".pdf" class="form-control" id="pdfFile" name="file" required type="file">
+            </div>
+            <button class="btn btn-primary" type="submit">
+                Upload and Generate Text
+            </button>
+        </form>
+    </div>
+
+    <!-- Display Generated Comma-Separated Text -->
+    <div class="generated-text-block" th:if="${generatedText != null and not #strings.isEmpty(generatedText)}">
+        <div class="section-header">
+            <h3>Generated Comma-Separated Text</h3>
+        </div>
+        <pre class="text-display-area" th:text="${generatedText}"></pre>
+        <button class="btn btn-secondary btn-sm mt-3"
+                th:attr="onclick=|downloadTextFile('${#strings.escapeJavaScript(generatedText)}', '${#strings.isEmpty(originalFileName) ? 'generated_edi.txt' : #strings.escapeJavaScript(originalFileName.substring(0, originalFileName.lastIndexOf('.')) + '.txt')}')|">
+            Download as Text File
+        </button>
+    </div>
+
+    <!-- No Data Message (if PDF processed but no text generated, and no error) -->
+    <div class="no-data-message"
+         th:if="${(generatedText == null or #strings.isEmpty(generatedText)) and successMessage == null and errorMessage == null and initialPage == null}">
+        <!-- 'initialPage' is a hypothetical variable you might set in the controller for the first load to prevent this from showing -->
+        <h5>No Text Generated</h5>
+        <p class="mb-0">The PDF might be empty, image-based, or no text could be extracted.</p>
+    </div>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const pdfFileInput = document.getElementById('pdfFile');
+        if (pdfFileInput) {
+            pdfFileInput.addEventListener('change', function () {
+                // Hide general error/success messages on new file selection
+                document.querySelectorAll('.error-message, .success-message').forEach(alert => {
+                    if (alert.closest('.upload-section')) { // Only hide alerts in the upload section
+                        alert.style.display = 'none';
+                    }
+                });
+                // Optionally, clear the generated text display area
+                const generatedTextBlock = document.querySelector('.generated-text-block');
+                if (generatedTextBlock) {
+                    generatedTextBlock.style.display = 'none';
+                }
+                const noDataMessage = document.querySelector('.no-data-message');
+                if (noDataMessage) {
+                    noDataMessage.style.display = 'none';
+                }
+            });
+        }
+    });
+
+    // JavaScript function for downloading text data
+    function downloadTextFile(textData, filename) {
+        if (!textData || !filename) {
+            console.error("Text data or filename is missing for download.");
+            return;
+        }
+        const blob = new Blob([textData], {type: 'text/plain;charset=utf-8;'});
+        const link = document.createElement('a');
+        if (link.download !== undefined) { // Check if HTML5 download attribute is supported
+            const url = URL.createObjectURL(blob);
+            link.setAttribute('href', url);
+            link.setAttribute('download', filename);
+            link.style.visibility = 'hidden';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            URL.revokeObjectURL(url); // Clean up
+        } else {
+            // Fallback for older browsers
+            alert("Your browser does not support direct file download. Please copy the text manually.");
+        }
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,203 @@
+<!-- Created with Jaspersoft Studio version 7.0.1.final using JasperReports Library version 7.0.1-573496633c2b4074e32f433154b543003f7d2498  -->
+<jasperReport name="ItemMasterReport" language="java" pageWidth="1201" pageHeight="72000" orientation="Landscape" columnWidth="1181" leftMargin="20" rightMargin="0" topMargin="20" bottomMargin="20" uuid="9563a628-1cff-4355-bfbc-567eebab39f8">
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<field name="itemCode" class="java.lang.String"/>
+	<field name="itemName" class="java.lang.String"/>
+	<field name="itemUnit" class="java.lang.String"/>
+	<field name="itemLocation" class="java.lang.String"/>
+	<field name="hsnCode" class="java.lang.String"/>
+	<field name="itemRemark1" class="java.lang.String"/>
+	<field name="itemRemark2" class="java.lang.String"/>
+	<field name="companyCode" class="java.lang.String"/>
+	<variable name="SrNo1" class="java.lang.Integer">
+		<expression><![CDATA[$V{SrNo1}+1]]></expression>
+		<initialValueExpression><![CDATA[0]]></initialValueExpression>
+	</variable>
+	<background splitType="Stretch"/>
+	<pageHeader height="49" splitType="Stretch">
+		<element kind="staticText" uuid="f4fd1edf-2844-4a03-96da-0d8639a70d28" x="0" y="19" width="233" height="15" fontName="Times New Roman" fontSize="10.0" bold="false">
+			<text><![CDATA[Item Master Data Details Report As on]]></text>
+		</element>
+		<element kind="staticText" uuid="5794a71b-9703-4075-978d-090f62ed540b" mode="Opaque" x="83" y="34" width="150" height="15" backcolor="#99FF99" fontName="Times New Roman" fontSize="8.0" bold="false">
+			<text><![CDATA[Item Name]]></text>
+			<box leftPadding="2" rightPadding="2">
+				<topPen lineWidth="0.5"/>
+				<leftPen lineWidth="0.5"/>
+				<bottomPen lineWidth="0.5"/>
+				<rightPen lineWidth="0.5"/>
+			</box>
+		</element>
+		<element kind="textField" uuid="f158a655-f672-4e06-b7e5-613ebbde5397" x="501" y="0" width="129" height="18" fontSize="8.0" hTextAlign="Right">
+			<expression><![CDATA["Page  "+$V{PAGE_NUMBER}+"  of  "]]></expression>
+		</element>
+		<element kind="textField" uuid="d0c0d2c9-dd75-4636-a2fa-a34bbcdb7459" x="630" y="0" width="158" height="18" fontSize="8.0" evaluationTime="Report">
+			<expression><![CDATA[" " + $V{PAGE_NUMBER}]]></expression>
+		</element>
+		<element kind="staticText" uuid="0b32f55a-6f49-4ff2-b38f-3f2588f4be55" mode="Opaque" x="30" y="34" width="53" height="15" backcolor="#99FF99" fontName="Times New Roman" fontSize="8.0" bold="false">
+			<text><![CDATA[Item Code]]></text>
+			<box leftPadding="2" rightPadding="2">
+				<topPen lineWidth="0.5"/>
+				<leftPen lineWidth="0.5"/>
+				<bottomPen lineWidth="0.5"/>
+				<rightPen lineWidth="0.5"/>
+			</box>
+		</element>
+		<element kind="staticText" uuid="d125dea4-6edb-4519-a897-511eb84b32cc" mode="Opaque" x="233" y="34" width="37" height="15" backcolor="#99FF99" fontSize="8.0">
+			<text><![CDATA[ACUnit]]></text>
+			<box leftPadding="2" rightPadding="2">
+				<topPen lineWidth="0.5"/>
+				<leftPen lineWidth="0.5"/>
+				<bottomPen lineWidth="0.5"/>
+				<rightPen lineWidth="0.5"/>
+			</box>
+		</element>
+		<element kind="staticText" uuid="9b904161-75e7-4f73-88ed-2eca8eef5ea1" mode="Opaque" x="341" y="34" width="59" height="15" backcolor="#99FF99" fontSize="8.0">
+			<text><![CDATA[HSN Code]]></text>
+			<box leftPadding="2" rightPadding="2">
+				<topPen lineWidth="0.5"/>
+				<leftPen lineWidth="0.5"/>
+				<bottomPen lineWidth="0.5"/>
+				<rightPen lineWidth="0.5"/>
+			</box>
+		</element>
+		<element kind="staticText" uuid="661977f7-0c4d-44b2-a1ce-f7d672b6cef1" mode="Opaque" x="400" y="34" width="98" height="15" backcolor="#99FF99" fontSize="8.0">
+			<text><![CDATA[Item remark1]]></text>
+			<box leftPadding="2" rightPadding="2">
+				<topPen lineWidth="0.5"/>
+				<leftPen lineWidth="0.5"/>
+				<bottomPen lineWidth="0.5"/>
+				<rightPen lineWidth="0.5"/>
+			</box>
+		</element>
+		<element kind="staticText" uuid="8395f43f-c9cd-4c71-a738-cdb48997784a" mode="Opaque" x="498" y="34" width="129" height="15" backcolor="#99FF99" fontSize="8.0">
+			<text><![CDATA[ItemRemark]]></text>
+			<box leftPadding="2" rightPadding="2">
+				<topPen lineWidth="0.5"/>
+				<leftPen lineWidth="0.5"/>
+				<bottomPen lineWidth="0.5"/>
+				<rightPen lineWidth="0.5"/>
+			</box>
+		</element>
+		<element kind="staticText" uuid="10538e25-29cf-478b-a59f-f3dfbab6ebf9" mode="Opaque" x="0" y="34" width="30" height="15" backcolor="#99FF99" fontName="Times New Roman" fontSize="8.0" bold="false" hTextAlign="Center">
+			<text><![CDATA[Sr.No]]></text>
+			<box leftPadding="2" rightPadding="2">
+				<topPen lineWidth="0.5"/>
+				<leftPen lineWidth="0.5"/>
+				<bottomPen lineWidth="0.5"/>
+				<rightPen lineWidth="0.5"/>
+			</box>
+		</element>
+		<element kind="textField" uuid="2d96f127-99e1-4be7-b4bd-1e39dc8920e9" x="233" y="19" width="108" height="15" fontSize="8.0" pattern="dd/MM/yyyy">
+			<expression><![CDATA[new java.util.Date()]]></expression>
+		</element>
+		<element kind="staticText" uuid="0d0efa3c-6b03-4327-993c-de351e2d3695" mode="Opaque" x="270" y="34" width="71" height="15" backcolor="#99FF99" fontSize="8.0">
+			<text><![CDATA[ItemLocation]]></text>
+			<box leftPadding="2" rightPadding="2">
+				<topPen lineWidth="0.5"/>
+				<leftPen lineWidth="0.5"/>
+				<bottomPen lineWidth="0.5"/>
+				<rightPen lineWidth="0.5"/>
+			</box>
+		</element>
+		<element kind="staticText" uuid="0f9b56b0-f421-4301-b0a8-3dc99db6b902" mode="Opaque" x="627" y="34" width="158" height="15" backcolor="#99FF99" fontSize="8.0">
+			<text><![CDATA[company code]]></text>
+			<box leftPadding="2" rightPadding="2">
+				<topPen lineWidth="0.5"/>
+				<leftPen lineWidth="0.5"/>
+				<bottomPen lineWidth="0.5"/>
+				<rightPen lineWidth="0.5"/>
+			</box>
+		</element>
+	</pageHeader>
+	<columnHeader splitType="Stretch"/>
+	<detail>
+		<band height="15" splitType="Stretch">
+			<element kind="textField" uuid="9746e21f-4f0c-4777-8be3-87570480da30" x="83" y="0" width="150" height="15" fontName="Times New Roman" fontSize="8.0" textAdjust="StretchHeight" vTextAlign="Middle">
+				<expression><![CDATA[$F{itemName}]]></expression>
+				<box leftPadding="2" rightPadding="2">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+			</element>
+			<element kind="textField" uuid="7f8fc199-f20f-4605-8184-d4df39738e61" x="30" y="0" width="53" height="15" fontName="Times New Roman" fontSize="8.0" vTextAlign="Middle">
+				<expression><![CDATA[$F{itemCode}]]></expression>
+				<box leftPadding="2" rightPadding="2">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+			</element>
+			<element kind="textField" uuid="f93b7d1c-85f1-4063-8b09-a6d7d4055500" x="233" y="0" width="37" height="15" fontSize="8.0" vTextAlign="Middle">
+				<expression><![CDATA[$F{itemUnit}]]></expression>
+				<box leftPadding="2" rightPadding="2">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+			</element>
+			<element kind="textField" uuid="875a2358-9bb0-4bbc-9343-e74b72f07211" x="341" y="0" width="59" height="15" fontSize="8.0" vTextAlign="Middle">
+				<expression><![CDATA[$F{hsnCode}]]></expression>
+				<box leftPadding="2" rightPadding="2">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+			</element>
+			<element kind="textField" uuid="dc8128aa-1de2-42be-9ca9-79dfb586f158" x="400" y="0" width="98" height="15" fontSize="8.0" vTextAlign="Middle">
+				<expression><![CDATA[$F{itemRemark1}]]></expression>
+				<box leftPadding="2" rightPadding="2">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+			</element>
+			<element kind="textField" uuid="01a11587-5630-408e-b273-5577eeab28c5" x="627" y="0" width="158" height="15" fontSize="8.0" vTextAlign="Middle">
+				<expression><![CDATA[$F{companyCode}]]></expression>
+				<box leftPadding="2" rightPadding="2">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+			</element>
+			<element kind="textField" uuid="db191f60-1ef6-4c94-abe1-a1b224c4e345" x="498" y="0" width="129" height="15" fontSize="8.0" vTextAlign="Middle">
+				<expression><![CDATA[$F{itemRemark2}]]></expression>
+				<box leftPadding="2" rightPadding="2">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+			</element>
+			<element kind="textField" uuid="80626099-928f-440b-94c5-39ecec34a48c" x="0" y="0" width="30" height="15" fontSize="8.0" hTextAlign="Center" vTextAlign="Middle">
+				<expression><![CDATA[$V{SrNo1}]]></expression>
+				<box leftPadding="2" rightPadding="2">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+			</element>
+			<element kind="textField" uuid="7452169e-51ee-49e5-b83e-312ee5ecbb60" x="270" y="0" width="71" height="15" fontSize="8.0" vTextAlign="Middle">
+				<expression><![CDATA[$F{itemLocation}]]></expression>
+				<box leftPadding="2" rightPadding="2">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+			</element>
+		</band>
+	</detail>
+	<columnFooter splitType="Stretch"/>
+	<pageFooter splitType="Stretch"/>
+	<summary height="15" splitType="Stretch"/>
+</jasperReport>

@@ -1,0 +1,229 @@
+<!-- Created with Jaspersoft Studio version 7.0.1.final using JasperReports Library version 7.0.1-573496633c2b4074e32f433154b543003f7d2498  -->
+<jasperReport name="ProcessingChallanForThePeriod1" language="java" columnCount="1" pageWidth="1000" pageHeight="842" columnWidth="960" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="bc5c5504-bd94-415f-8532-4f9492ed8c8d">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<parameter name="startDate" class="java.util.Date"/>
+	<parameter name="endDate" class="java.util.Date"/>
+	<field name="invoiceNumber" class="java.lang.String"/>
+	<field name="companyName" class="java.lang.String"/>
+	<field name="companyAddress" class="java.lang.String"/>
+	<field name="companyPanNo" class="java.lang.String"/>
+	<field name="companyGstNo" class="java.lang.String"/>
+	<field name="companyStateCode" class="java.lang.String"/>
+	<field name="taxReverseCharge" class="java.lang.String"/>
+	<field name="companyContactNo" class="java.lang.String"/>
+	<field name="companyEmail" class="java.lang.String"/>
+	<field name="companyWebsite" class="java.lang.String"/>
+	<field name="invoiceDate" class="java.util.Date"/>
+	<field name="vendorCode" class="java.lang.String"/>
+	<field name="vendorPlantCode" class="java.lang.String"/>
+	<field name="vendorName" class="java.lang.String"/>
+	<field name="vendorAddress" class="java.lang.String"/>
+	<field name="vendorGstNo" class="java.lang.String"/>
+	<field name="vendorCIN" class="java.lang.String"/>
+	<field name="vendorStateCode" class="java.lang.String"/>
+	<field name="vendorPAN" class="java.lang.String"/>
+	<field name="hsnCode" class="java.lang.String"/>
+	<field name="sacCode" class="java.lang.String"/>
+	<field name="itemCode" class="java.lang.String"/>
+	<field name="poNo" class="java.lang.String"/>
+	<field name="lineNo" class="java.lang.String"/>
+	<field name="invoiceQuantity" class="java.lang.Integer"/>
+	<field name="basicRate" class="java.lang.Double"/>
+	<field name="basicAmount" class="java.lang.Double"/>
+	<field name="freight" class="java.lang.Double"/>
+	<field name="othersCharges" class="java.lang.Double"/>
+	<field name="subTotal" class="java.lang.Double"/>
+	<field name="additionalTaxAmount" class="java.lang.Double"/>
+	<field name="taxableAmount" class="java.lang.Double"/>
+	<field name="cgstPercentage" class="java.lang.Double"/>
+	<field name="cgstAmount" class="java.lang.Double"/>
+	<field name="sgstPercentage" class="java.lang.Double"/>
+	<field name="sgstAmount" class="java.lang.Double"/>
+	<field name="utgstPercentage" class="java.lang.Double"/>
+	<field name="utgstAmount" class="java.lang.Double"/>
+	<field name="igstPercentage" class="java.lang.Double"/>
+	<field name="igstAmount" class="java.lang.Double"/>
+	<field name="totalAmount" class="java.lang.Double"/>
+	<field name="ewayBillNo" class="java.lang.String"/>
+	<field name="ewayBillDate" class="java.util.Date"/>
+	<field name="vehicleNo" class="java.lang.String"/>
+	<field name="remark1" class="java.lang.String"/>
+	<field name="remark2" class="java.lang.String"/>
+	<field name="ediNumber" class="java.lang.String"/>
+	<field name="shiftVendorCode" class="java.lang.String"/>
+	<field name="itemRemark1" class="java.lang.String"/>
+	<field name="itemRemark2" class="java.lang.String"/>
+	<field name="signedQrCode" class="java.lang.String"/>
+	<field name="deliveryChallanNo" class="java.lang.String"/>
+	<field name="deliveryChallanDate" class="java.lang.String"/>
+	<field name="deliveryChallanAmount" class="java.lang.Double"/>
+	<field name="tcsValue" class="java.lang.Double"/>
+	<field name="companyCode" class="java.lang.String"/>
+	<field name="itemName" class="java.lang.String"/>
+	<field name="itemUnit" class="java.lang.String"/>
+	<field name="shiftVendorName" class="java.lang.String"/>
+	<field name="shippingAddress" class="java.lang.String"/>
+	<field name="shippingGstNo" class="java.lang.String"/>
+	<field name="shippingStateCode" class="java.lang.String"/>
+	<variable name="ItemWiseDespachQnt" resetType="Group" incrementType="Report" calculation="Sum" resetGroup="ItemCode" class="java.lang.Double">
+		<expression><![CDATA[$F{invoiceQuantity}]]></expression>
+	</variable>
+	<variable name="TotalGstAmount" calculation="Sum" class="java.lang.Double">
+		<expression><![CDATA[$F{totalAmount}]]></expression>
+	</variable>
+	<variable name="totalDespatchQty" calculation="Sum" class="java.lang.Double">
+		<expression><![CDATA[$F{invoiceQuantity}]]></expression>
+	</variable>
+	<variable name="totalItemAmt" resetType="Group" calculation="Sum" resetGroup="ItemCode" class="java.lang.Double">
+		<expression><![CDATA[$F{totalAmount}]]></expression>
+	</variable>
+	<variable name="CGSTtotal" calculation="Sum" class="java.lang.Double">
+		<expression><![CDATA[$F{cgstAmount}]]></expression>
+	</variable>
+	<variable name="SGSTtotal" calculation="Sum" class="java.lang.Double">
+		<expression><![CDATA[$F{sgstAmount}]]></expression>
+	</variable>
+	<variable name="IGSTtotal" calculation="Sum" class="java.lang.Double">
+		<expression><![CDATA[$F{igstAmount}]]></expression>
+	</variable>
+	<group name="ItemCode">
+		<expression><![CDATA[$F{itemCode}]]></expression>
+		<groupFooter>
+			<band height="15">
+				<element kind="textField" uuid="2e9b03bf-b5a0-447a-9f08-2a39632da992" x="360" y="0" width="70" height="15" fontName="Times New Roman" fontSize="8.0" pattern="###0.00" bold="false" hTextAlign="Right">
+					<expression><![CDATA[$F{invoiceQuantity}]]></expression>
+				</element>
+				<element kind="textField" uuid="7f7ed11a-09ea-42dd-947c-4e83e2ad6b23" x="0" y="0" width="70" height="15" fontName="Times New Roman" fontSize="8.0" bold="false" hTextAlign="Center">
+					<expression><![CDATA[$F{itemCode}]]></expression>
+				</element>
+				<element kind="textField" uuid="3149679a-00cf-44d8-8362-17a616a0da32" x="70" y="0" width="220" height="15" fontName="Times New Roman" fontSize="8.0" bold="false" hTextAlign="Center">
+					<expression><![CDATA[$F{itemName}]]></expression>
+				</element>
+				<element kind="textField" uuid="775a4c3b-a516-4311-9905-7237e7edbc60" x="290" y="0" width="70" height="15" fontName="Times New Roman" fontSize="8.0" bold="false" hTextAlign="Center">
+					<expression><![CDATA[$F{itemUnit}]]></expression>
+				</element>
+				<element kind="textField" uuid="e66cb48c-e2cc-43a7-97bd-9e381832f3eb" x="539" y="0" width="48" height="15" fontName="Times New Roman" fontSize="8.0" pattern="###0.00" bold="false" hTextAlign="Right" vTextAlign="Middle">
+					<expression><![CDATA[$F{cgstAmount}]]></expression>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</element>
+				<element kind="textField" uuid="4b862466-fdca-4c60-88a7-d644f15d34a8" x="587" y="0" width="48" height="15" fontName="Times New Roman" fontSize="8.0" pattern="###0.00" bold="false" hTextAlign="Right" vTextAlign="Middle">
+					<expression><![CDATA[$F{sgstAmount}]]></expression>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</element>
+				<element kind="textField" uuid="af06e06f-b536-4ae4-bc95-cafeefda37e0" x="635" y="0" width="48" height="15" fontName="Times New Roman" fontSize="8.0" pattern="###0.00" bold="false" hTextAlign="Right" vTextAlign="Middle">
+					<expression><![CDATA[$F{igstAmount}]]></expression>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</element>
+				<element kind="textField" uuid="0238731c-857f-47d6-84f8-0ad584fe365f" x="683" y="0" width="57" height="15" fontSize="8.0" hTextAlign="Right" vTextAlign="Middle">
+					<expression><![CDATA[$F{totalAmount}]]></expression>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</element>
+				<element kind="textField" uuid="14fc0ec4-bf2a-4fea-ad90-2b982d9857ee" x="430" y="0" width="38" height="15" fontName="Times New Roman" fontSize="8.0" pattern="###0.00" bold="false" hTextAlign="Right" vTextAlign="Middle">
+					<expression><![CDATA[$F{cgstPercentage}]]></expression>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</element>
+				<element kind="textField" uuid="a0808728-f03c-4800-b2fd-21abc8da10f9" x="468" y="0" width="35" height="15" fontName="Times New Roman" fontSize="8.0" pattern="###0.00" bold="false" hTextAlign="Right" vTextAlign="Middle">
+					<expression><![CDATA[$F{sgstPercentage}]]></expression>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</element>
+				<element kind="textField" uuid="13b68172-dc82-4b0b-974b-769a0f85e8f5" x="503" y="0" width="36" height="15" fontName="Times New Roman" fontSize="8.0" pattern="###0.00" bold="false" hTextAlign="Right" vTextAlign="Middle">
+					<expression><![CDATA[$F{igstPercentage}]]></expression>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</element>
+				<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			</band>
+		</groupFooter>
+	</group>
+	<background splitType="Stretch"/>
+	<title height="60" splitType="Stretch">
+		<element kind="textField" uuid="54fc1186-724d-47e2-a00f-c703fc253dc4" x="0" y="0" width="290" height="22" fontName="Times New Roman" fontSize="10.0" bold="false">
+			<expression><![CDATA[$F{companyName}]]></expression>
+		</element>
+		<element kind="textField" uuid="a9bff9c5-d145-4d7f-b3ad-6f22eb9db5f3" x="430" y="22" width="73" height="15" fontName="Times New Roman" fontSize="9.0" pattern="dd/MM/yyyy" bold="false">
+			<expression><![CDATA[$P{endDate}]]></expression>
+		</element>
+		<element kind="textField" uuid="e215dfb9-bbc0-49a4-9cb1-5e0cc3fd8ca8" x="290" y="22" width="70" height="15" fontName="Times New Roman" fontSize="9.0" pattern="dd/MM/yyyy" bold="false" hTextAlign="Right">
+			<expression><![CDATA[$P{startDate}]]></expression>
+		</element>
+		<element kind="staticText" uuid="3dd20f44-15a2-45ea-9921-fdbe3bbf7546" x="0" y="22" width="290" height="15" fontName="Times New Roman" fontSize="9.0" bold="false">
+			<text><![CDATA[ItemWise Process Dispatch Summary]]></text>
+		</element>
+		<element kind="staticText" uuid="3d31f970-4214-4041-b043-76edfaf039a6" x="360" y="22" width="70" height="15" fontName="Times New Roman" fontSize="9.0" bold="false" hTextAlign="Center">
+			<text><![CDATA[To]]></text>
+		</element>
+		<element kind="staticText" uuid="34c6ccde-293d-4b97-bb7b-6ce7dd1af71b" mode="Opaque" x="70" y="37" width="220" height="23" forecolor="#000000" backcolor="#CCCCCC" fontName="Times New Roman" fontSize="9.0" bold="true" hTextAlign="Center" vTextAlign="Top">
+			<text><![CDATA[Item Name]]></text>
+		</element>
+		<element kind="staticText" uuid="f81a2158-2a7e-425e-b983-068af4639f8e" mode="Opaque" x="360" y="37" width="70" height="23" forecolor="#000000" backcolor="#CCCCCC" fontName="Times New Roman" fontSize="9.0" bold="true" hTextAlign="Right" vTextAlign="Top">
+			<text><![CDATA[Dispatch Qty]]></text>
+		</element>
+		<element kind="staticText" uuid="6ab63d68-6ca8-4faa-b08f-4849e7f3ddb9" mode="Opaque" x="0" y="37" width="70" height="23" forecolor="#000000" backcolor="#CCCCCC" fontName="Times New Roman" fontSize="9.0" bold="true" hTextAlign="Center" vTextAlign="Top">
+			<text><![CDATA[ItemCode]]></text>
+		</element>
+		<element kind="staticText" uuid="52d56a1c-d1b5-4f30-8354-426ae4debd76" mode="Opaque" x="290" y="37" width="70" height="23" forecolor="#000000" backcolor="#CCCCCC" fontName="Times New Roman" fontSize="9.0" bold="true" hTextAlign="Center" vTextAlign="Top">
+			<text><![CDATA[ItemUnit]]></text>
+		</element>
+		<element kind="staticText" uuid="0b26acf8-7f6a-44d8-9440-2264ff16e3a9" mode="Opaque" x="539" y="37" width="48" height="23" forecolor="#000000" backcolor="#CCCCCC" fontName="Times New Roman" fontSize="9.0" bold="true" hTextAlign="Right" vTextAlign="Top">
+			<text><![CDATA[CGST Amt]]></text>
+			<property name="com.jaspersoft.studio.unit.width" value="px"/>
+		</element>
+		<element kind="staticText" uuid="87c87cb1-00ec-4668-a6ec-349b99e7986a" mode="Opaque" x="587" y="37" width="48" height="23" forecolor="#000000" backcolor="#CCCCCC" fontName="Times New Roman" fontSize="9.0" bold="true" hTextAlign="Right" vTextAlign="Top">
+			<text><![CDATA[SGST Amt]]></text>
+			<property name="com.jaspersoft.studio.unit.width" value="px"/>
+		</element>
+		<element kind="staticText" uuid="fbb2f1da-eb1f-434b-a0b5-688e448f1c8c" mode="Opaque" x="635" y="37" width="48" height="23" forecolor="#000000" backcolor="#CCCCCC" fontName="Times New Roman" fontSize="9.0" bold="true" hTextAlign="Right" vTextAlign="Top">
+			<text><![CDATA[IGST Amt]]></text>
+			<property name="com.jaspersoft.studio.unit.width" value="px"/>
+		</element>
+		<element kind="staticText" uuid="ad3f420f-178c-45c8-af7f-08a67b73276e" mode="Opaque" x="683" y="37" width="57" height="23" forecolor="#000000" backcolor="#CCCCCC" fontName="Times New Roman" fontSize="9.0" bold="true" hTextAlign="Right" vTextAlign="Top">
+			<text><![CDATA[Total Amount]]></text>
+		</element>
+		<element kind="staticText" uuid="f410a38e-2f23-4109-96d5-2a7cb5c65a1a" mode="Opaque" x="430" y="37" width="38" height="23" forecolor="#000000" backcolor="#CCCCCC" fontName="Times New Roman" fontSize="9.0" bold="true" hTextAlign="Right" vTextAlign="Top">
+			<text><![CDATA[CGST Per]]></text>
+		</element>
+		<element kind="staticText" uuid="f557104a-9db1-4c47-883f-322161f2c23f" mode="Opaque" x="468" y="37" width="35" height="23" forecolor="#000000" backcolor="#CCCCCC" fontName="Times New Roman" fontSize="9.0" bold="true" hTextAlign="Right" vTextAlign="Top">
+			<text><![CDATA[SGST Per]]></text>
+		</element>
+		<element kind="staticText" uuid="19f05fb9-efb3-48c8-85cc-a71c8a8f8b5b" mode="Opaque" x="503" y="37" width="36" height="23" forecolor="#000000" backcolor="#CCCCCC" fontName="Times New Roman" fontSize="9.0" bold="true" hTextAlign="Right" vTextAlign="Top">
+			<text><![CDATA[IGST Per]]></text>
+		</element>
+		<property name="com.jaspersoft.studio.unit.height" value="px"/>
+	</title>
+	<columnHeader splitType="Stretch"/>
+	<columnFooter splitType="Stretch"/>
+	<pageFooter splitType="Stretch"/>
+	<summary height="40" splitType="Stretch">
+		<element kind="staticText" uuid="a793c171-fb9b-4d3c-910f-1ed05a378ccc" mode="Opaque" x="290" y="0" width="70" height="20" forecolor="#000000" backcolor="#CCCCCC" fontName="Times New Roman" fontSize="8.0" bold="true" hTextAlign="Right" vTextAlign="Middle">
+			<text><![CDATA[Total]]></text>
+		</element>
+		<element kind="textField" uuid="d9f2e6a8-b7ca-4cb6-a530-7058eb3bab22" x="360" y="0" width="70" height="20" fontSize="8.0" bold="true" hTextAlign="Right">
+			<expression><![CDATA[$V{totalDespatchQty}]]></expression>
+		</element>
+		<element kind="textField" uuid="2a1b0973-3e5d-4e3d-88a7-632a7385bb80" x="683" y="0" width="57" height="20" fontSize="8.0" bold="true" hTextAlign="Right">
+			<expression><![CDATA[$V{TotalGstAmount}]]></expression>
+		</element>
+		<element kind="textField" uuid="f0c122a0-cd7d-4412-aa73-328e0c154739" x="539" y="0" width="48" height="20" fontSize="8.0" bold="true" hTextAlign="Right">
+			<expression><![CDATA[$V{CGSTtotal}]]></expression>
+		</element>
+		<element kind="textField" uuid="129f3fe3-2097-4f41-b8af-f2a00a057426" x="587" y="0" width="48" height="20" fontSize="8.0" bold="true" hTextAlign="Right">
+			<expression><![CDATA[$V{SGSTtotal}]]></expression>
+		</element>
+		<element kind="textField" uuid="f8eb73db-808b-46e0-b8f0-c39bf071c3ff" x="635" y="0" width="48" height="20" fontSize="8.0" bold="true" hTextAlign="Right">
+			<expression><![CDATA[$V{IGSTtotal}]]></expression>
+		</element>
+		<element kind="staticText" uuid="bc74e6d3-485f-463d-b204-116b25395db0" x="430" y="0" width="38" height="20" fontSize="8.0" hTextAlign="Right">
+			<text><![CDATA[0.0]]></text>
+		</element>
+		<element kind="staticText" uuid="a5770a92-fb75-4d51-8748-13d88bda8314" x="468" y="0" width="35" height="20" fontSize="8.0" hTextAlign="Right">
+			<text><![CDATA[0.0]]></text>
+		</element>
+		<element kind="staticText" uuid="d7d6a84c-2f35-449c-9f14-633db48fab5e" x="503" y="0" width="36" height="20" fontSize="8.0" hTextAlign="Right">
+			<text><![CDATA[0.0]]></text>
+		</element>
+		<property name="com.jaspersoft.studio.unit.height" value="px"/>
+	</summary>
+</jasperReport>

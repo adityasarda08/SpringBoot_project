@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Publish Notification</title>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/fromformat.css" rel="stylesheet">
+</head>
+<body>
+<div class="container">
+    <div class="from_title text-center">
+        <label>Publish Notification</label>
+    </div>
+
+    <form class="from_format" id="notificationForm" method="post" th:action="@{/notifications/save}"
+          th:object="${notification}">
+
+        <!-- Error Message -->
+        <div class="text-danger" role="alert" th:if="${errorMessage}">
+            <span th:text="${errorMessage}"></span>
+        </div>
+
+        <!-- Buttons -->
+        <div class="button_row mb-2">
+            <button class="from_link" type="submit">Publish</button>
+            <a class="from_link" th:href="@{/notifications/list}">List</a>
+            <a class="from_link" th:href="@{/notifications/new}">New</a>
+        </div>
+
+        <!-- Notification Code and Date -->
+        <div class="row">
+            <div class="col-2 text-end">
+                <label class="form-label" for="notificationCode">Notification Code:*</label>
+            </div>
+            <div class="col-2">
+                <input class="form-control" id="notificationCode" maxlength="10" name="notificationCode" required
+                       th:field="*{notificationCode}" type="text">
+            </div>
+
+            <div class="col-2 text-end">
+                <label class="form-label" for="notificationDate">Notification Date:*</label>
+            </div>
+            <div class="col-2">
+                <input class="form-control" id="notificationDate" name="notificationDate" required th:field="*{notificationDate}"
+                       type="date">
+            </div>
+
+            <div class="col-2 text-end">
+                <label class="form-label" for="notificationExpiryDate">Expiry Date:*</label>
+            </div>
+            <div class="col-2">
+                <input class="form-control" id="notificationExpiryDate" name="notificationExpiryDate" required
+                       th:field="*{notificationExpiryDate}" type="date">
+            </div>
+        </div>
+
+        <!-- Company Code -->
+        <div class="row">
+            <div class="col-2 text-end">
+                <label class="form-label" for="companyCode">Company Code:*</label>
+            </div>
+            <div class="col-2">
+                <input class="form-control" id="companyCode" maxlength="6" name="companyCode" required th:field="*{companyCode}"
+                       type="text">
+            </div>
+        </div>
+
+        <!-- Notification Details -->
+        <div class="row">
+            <div class="col-2 text-end">
+                <label class="form-label" for="notificationDetails">Notification Details:*</label>
+            </div>
+            <div class="col-6">
+                <textarea class="form-control" id="notificationDetails" maxlength="300" minlength="10"
+                          name="notificationDetails" required th:field="*{notificationDetails}"></textarea>
+            </div>
+        </div>
+    </form>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

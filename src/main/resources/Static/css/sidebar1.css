@@ -1,0 +1,169 @@
+/* Import Google font - Poppins */
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap");
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+}
+
+.sidebar {
+    position: fixed;
+    height: 100%;
+    width: 17%;
+    background-color: #8DB7E7;
+    padding: 15px;
+}
+
+.logo {
+    font-size: 25px;
+    padding: 0 15px;
+}
+
+.sidebar a {
+    color: #fff;
+    text-decoration: none;
+}
+
+.menu-content {
+    position: relative;
+    height: 100%;
+    width: 100%;
+    margin-top: 15px;
+    /*overflow-y: scroll; */
+}
+
+.menu-item{
+    height: 100%;
+    width: 100%;
+    list-style: none;
+    transition: all 0.4s ease;
+}
+
+.submenu-active .menu-item {
+   transform: translate(-56%);
+}
+
+.menu-title {
+    color: #fff;
+    font-size: 14px;
+    padding: 15px 20px;
+}
+
+/* This is for the sub menu item display setting */
+
+.item a,
+.submenu-item {
+    padding: 5px;
+    margin: 0;
+    /*background-color: red;*/
+    display: inline-block;
+    width: 100%;
+    border-radius: 12px;
+}
+ /* this css work when user */
+
+.item a:hover,
+.submenu-item:hover,
+.submenu .menu-title:hover{
+  background-color: chartreuse;
+}
+
+.submenu-item {
+    color: white;
+    display: flex;
+    justify-content: right;
+    align-items: center;
+    cursor: pointer;
+}
+
+.submenu-item  i{
+  margin-left: 15px;
+}
+
+.submenu{
+    position: absolute;
+    right: calc(-100% - 26px);
+    background: blue;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    display: none;
+}
+
+.show-submenu ~ .submenu{
+    display: block;
+}
+
+.submenu .menu-title{
+    border-radius: 12px;
+    cursor: pointer;
+}
+
+.submenu .menu-title i {
+    margin-right: 10px;
+}
+
+/*  The following css is for the nested summenu item */
+
+
+.item a:hover,
+.nested-submenu-item:hover,
+.nested-submenu .menu-title:hover{
+    background-color: chartreuse;
+}
+
+.nested-submenu-item {
+    color: white;
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    cursor: pointer;
+}
+
+.nested-submenu-item i{
+    margin-left: 15px;
+}
+
+
+.sub-menu-item{
+    list-style: none;
+}
+
+.nested-submenu{
+    position: absolute;
+    right: calc(-100% - 26px);
+    background: #8b2c23;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    display: none;
+}
+
+.nested-submenu-active .sub-menu-item .nested-submenu {
+    transform: translate(-56%);
+}
+
+.show-nested-submenu ~ .nested-submenu{
+    display: block;
+}
+
+.nested-submenu .sub-menu-title{
+    border-radius: 12px;
+    cursor: pointer;
+}
+
+.nested-submenu .sub-menu-title i {
+    margin-left: 10px;
+}
+
+
+
+
+
+
+
+
+
+

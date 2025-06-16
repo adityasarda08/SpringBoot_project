@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>Tax Invoice Report</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .card {
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+
+        .card-header {
+            background-color: #f8f9fa;
+            border-bottom: 1px solid #dee2e6;
+        }
+
+        .form-group label {
+            font-weight: 500;
+        }
+
+        .btn-primary {
+            background-color: #007bff;
+            border-color: #007bff;
+        }
+
+        .btn-primary:hover {
+            background-color: #0069d9;
+            border-color: #0062cc;
+        }
+
+        .error-message {
+            color: #dc3545;
+            font-size: 0.875rem;
+            margin-top: 0.25rem;
+        }
+    </style>
+</head>
+<body>
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="mb-0">Tax Invoice Date Range Report</h4>
+                </div>
+                <div class="card-body">
+                    <form id="reportForm" method="post" target="_blank" th:action="@{/TaxInvoice/generateReport}">
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label for="startDate">Start Date</label>
+                                <input class="form-control" id="startDate" name="startDate" required
+                                       th:value="${startDate}" type="date">
+                                <small class="error-message" id="startDateError"></small>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="endDate">End Date</label>
+                                <input class="form-control" id="endDate" name="endDate" required
+                                       th:value="${endDate}" type="date">
+                                <small class="error-message" id="endDateError"></small>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="itemCode">Item Code</label>
+                            <input class="form-control" id="itemCode" name="itemCode"
+                                   placeholder="Enter item code to filter results"
+                                   type="text">
+                        </div>
+                        <div class="col-12">
+                            <button class="btn btn-primary btn-block" id="generateBtn" type="submit">Generate Report
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const form = document.getElementById('reportForm');
+        const startDateInput = document.getElementById('startDate');
+        const endDateInput = document.getElementById('endDate');
+        const startDateError = document.getElementById('startDateError');
+        const endDateError = document.getElementById('endDateError');
+
+        // Set default dates if empty
+        if (!startDateInput.value) {
+            const now = new Date();
+            const firstDay = new Date(now.getFullYear(), now.getMonth(), 1);
+            startDateInput.value = formatDate(firstDay);
+        }
+
+        if (!endDateInput.value) {
+            const now = new Date();
+            endDateInput.value = formatDate(now);
+        }
+
+        form.addEventListener('submit', function (event) {
+            let isValid = true;
+
+            // Clear previous error messages
+            startDateError.textContent = '';
+            endDateError.textContent = '';
+
+            // Validate start date
+            if (!startDateInput.value) {
+                startDateError.textContent = 'Start date is required';
+                isValid = false;
+            }
+
+            // Validate end date
+            if (!endDateInput.value) {
+                endDateError.textContent = 'End date is required';
+                isValid = false;
+            }
+
+            // Check if end date is after start date
+            if (startDateInput.value && endDateInput.value) {
+                const startDate = new Date(startDateInput.value);
+                const endDate = new Date(endDateInput.value);
+
+                if (endDate < startDate) {
+                    endDateError.textContent = 'End date must be after start date';
+                    isValid = false;
+                }
+            }
+
+            if (!isValid) {
+                event.preventDefault();
+            }
+        });
+
+        // Format date as YYYY-MM-DD
+        function formatDate(date) {
+            const year = date.getFullYear();
+            const month = String(date.getMonth() + 1).padStart(2, '0');
+            const day = String(date.getDate()).padStart(2, '0');
+            return `${year}-${month}-${day}`;
+        }
+    });
+</script>
+</body>
+</html>

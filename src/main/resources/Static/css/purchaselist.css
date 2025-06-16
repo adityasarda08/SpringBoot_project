@@ -1,0 +1,131 @@
+
+.container {
+    margin-left: 0%;
+  
+   
+}
+
+.form-control-sm {
+    font-size: 10px;
+}
+
+.col-form-label {
+    font-size: 10px;
+    padding-right: 0%;
+}
+
+.my-0 {
+    padding: 3px;
+}
+
+form {
+    font-size: smaller;
+}
+
+h1 {
+    font-size: small;
+}
+
+.btn-sm {
+    font-size: 70%;
+}
+
+#search {
+    position: absolute;
+    right: 12px;
+    font-weight: bold;
+}
+
+
+
+/* Customize scrollbar */
+::-webkit-scrollbar {
+  width: 8px; /* Decrease the width */
+  height: 8px; /* Decrease the height */
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #888;
+  border-radius: 6px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: #555;
+}
+
+/* Table heading */
+#my-table th {
+  background-color: #0F52BA; /* Green background */
+  color: white;
+  font-size: 10px; /* Reduce font size */
+  font-weight: bold;
+  padding: 3px; /* Reduce padding */
+  border: 1px solid #ddd; /* Add border to table heading */
+  white-space: nowrap;
+}
+
+/* Dynamically added rows */
+#my-table tbody tr:hover {
+  background-color: #f0f8ff; /* Light blue color */
+}
+
+#my-table tbody td input {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Adjusting font sizes */
+h1 {
+  font-size: 14px;
+}
+
+.table th, .table td {
+  font-size: 10px;
+  
+}
+
+.action-buttons .btn {
+  font-size: 10px;
+}
+/* Set font size for table headings */
+
+
+/* Set font size for table headings */
+.table th {
+    font-size: 10px; /* Set the desired font size */
+    white-space: nowrap; /* Prevent wrapping */
+   
+}
+
+
+
+#my-table input[type="text"],
+#my-table input[type="number"] {
+    
+   
+    box-sizing: border-box;
+}
+/* Styling for the purchase order table */
+#my-table {
+    width: 100%;
+    border-collapse: collapse;
+     
+}
+
+/* Additional table styling */
+#my-table {
+  width: 100%;
+  border-collapse: collapse;
+  border: 1px solid #ddd; /* Add border to the table */
+}
+
+
+/* Additional table row styling */
+#my-table tr {
+  border-bottom: 1px solid #ddd; /* Add bottom border to each table row */
+}
+
+#my-table tr:last-child {
+  border-bottom: none; /* Remove bottom border from the last table row */
+}
+

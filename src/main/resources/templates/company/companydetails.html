@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Company Form</title>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/fromformat.css" rel="stylesheet">
+</head>
+
+<body>
+<div class="container">
+    <div class="from_title">
+        <label>Company Master Form</label>
+    </div>
+
+    <!--<div class="from_format">-->
+    <form class="from_format" id="companyForm" method="post" th:action="@{/companies/save}"
+          th:object="${companyDetails}">
+
+
+        <!-- Error Message -->
+        <div class="text-danger" role="alert" th:if="${errorMessage}">
+            <span th:text="${errorMessage}"></span>
+        </div>
+
+        <!-- Submit and List Buttons -->
+        <div class="button_row mb-2">
+            <button class="from_link" form="companyForm" type="submit">Save</button>
+            <a class="from_link" th:href="@{/companies/list}">List</a>
+            <a class="from_link " th:href="@{/companies/new}">New</a>
+        </div>
+
+        <!-- Company Code and Password -->
+        <div class="row ">
+            <div class=" col-2 col-xl-2 col-md-2 text-end">
+                <label class="form-label" for="companyCode">Company Code:*</label>
+            </div>
+            <div class="col-2">
+                <input class="form-control" id="companyCode" required th:field="*{companyCode}"
+                       type="text">
+            </div>
+
+
+            <div class="col-2 text-end">
+                <label class="form-label" for="password">Password:*</label>
+            </div>
+            <div class="col-2">
+                <input class="form-control" id="password" required th:field="*{password}"
+                       type="password">
+            </div>
+
+            <div class="col-2 text-end">
+                <label class="form-label" for="taxReverseCharge">Tax Reverse Charge:*</label>
+            </div>
+            <div class="col-2">
+                <select class="form-select" id="taxReverseCharge" required
+                        th:field="*{taxReverseCharge}">
+                    <option value="yes">Yes</option>
+                    <option value="no">No</option>
+                </select>
+            </div>
+
+        </div>
+
+        <!-- Company Name -->
+        <div class="row ">
+            <div class="col-2 text-end">
+                <label class="form-label" for="companyName">Company Name:*</label>
+            </div>
+            <div class="col-6">
+                <input class="form-control" id="companyName" maxlength="100" required
+                       th:field="*{companyName}" type="text">
+            </div>
+        </div>
+
+        <!-- Address -->
+        <div class="row ">
+            <div class="col-2 text-end">
+                <label class="form-label" for="companyAddress">Address:*</label>
+            </div>
+            <div class="col-6">
+                <input class="form-control" id="companyAddress" maxlength="150" required
+                       th:field="*{companyAddress}" type="text">
+            </div>
+
+        </div>
+        <div class="row">
+            <div class="col-2 text-end">
+                <label class="form-label" for="website">Website:</label>
+            </div>
+            <div class="col-6">
+                <input class="form-control" id="website" th:field="*{companyWebsite}">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-2 text-end">
+                <label class="form-label" for="email">Email:</label>
+            </div>
+            <div class="col-6">
+                <input class="form-control" id="email" th:field="*{companyEmail}" type="email">
+            </div>
+            <div class="col-2 text-end">
+                <label class="form-label" for="CinNo">Cin Number:</label>
+            </div>
+            <div class="col-2">
+                <input class="form-control" id="CinNo" maxlength="25" th:field="*{companyCinNo}"
+                       type="text">
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-2 text-end">
+                <label class="form-label" for="companyGstNo">GST Number:*</label>
+            </div>
+            <div class="col-2">
+                <input class="form-control" id="companyGstNo" maxlength="18"
+                       pattern="[0-9]{2}[A-Z]{5}[0-9]{4}[A-Z]{1}[1-9A-Z]{1}Z[0-9A-Z]{1}" required
+                       th:field="*{companyGstNo}" type="text">
+            </div>
+            <div class="col-2 text-end">
+                <label class="form-label" for="companyStateCode">State Code:*</label>
+            </div>
+            <div class="col-2">
+                <input class="form-control" id="companyStateCode" pattern="[0-9]{2}" required
+                       th:field="*{companyStateCode}" type="text">
+            </div>
+            <div class="col-2 text-end">
+                <label class="form-label" for="companyStateName">State Name:*</label>
+            </div>
+            <div class="col-2">
+                <input class="form-control" id="companyStateName" required
+                       th:field="*{companyStateName}" type="text">
+            </div>
+        </div>
+
+        <!-- PAN and Contact -->
+        <div class="row">
+            <div class="col-2 text-end">
+                <label class="form-label" for="companyPinCode">Pin Code:</label>
+            </div>
+            <div class="col-2">
+                <input class="form-control" id="companyPinCode"
+                       th:field="*{companyPinCode}" type="text">
+            </div>
+            <div class="col-2 text-end">
+                <label class="form-label" for="panNo">PAN Number:*</label>
+            </div>
+            <div class="col-2">
+                <input class="form-control" id="panNo" maxlength="12" pattern="[A-Z]{5}[0-9]{4}[A-Z]{1}"
+                       required th:field="*{companyPanNo}" type="text">
+            </div>
+            <div class="col-2 text-end">
+                <label class="form-label" for="contactNo">Contact Number:</label>
+            </div>
+            <div class="col-2">
+                <input class="form-control" id="contactNo" maxlength="25" th:field="*{companyContactNo}"
+                       type="text">
+            </div>
+        </div>
+
+
+        <!-- Website -->
+        <div class="row">
+            <div class="col-2 text-end">
+                <label class="form-label" for="Remark1">Remark1:</label>
+            </div>
+            <div class="col-2">
+                <input class="form-control" id="Remark1" maxlength="25" th:field="*{companyRemark1}"
+                       type="text">
+            </div>
+            <div class="col-2 text-end">
+                <label class="form-label" for="Remark2">Remark2:</label>
+            </div>
+            <div class="col-2">
+                <input class="form-control" id="Remark2" maxlength="25" th:field="*{companyRemark2}"
+                       type="text">
+            </div>
+        </div>
+
+        <!-- Invoice Templates -->
+        <div class="row">
+            <div class="col-2 text-end">
+                <label class="form-label" for="InvoiceTemplatesText">Invoice Templates:*</label>
+            </div>
+            <div class="col-2">
+                <select class="form-select" id="InvoiceTemplatesText" required
+                        th:field="*{invoiceTemplates}">
+                    <option value="no">No</option>
+                    <option value="yes">Yes</option>
+
+                </select>
+            </div>
+            <div class="col-2 text-end">
+                <label class="form-label" for="templateName" id="templateNameLabel">Template
+                    Name:*</label>
+            </div>
+            <div class="col-2">
+                <input class="form-control" id="templateName" th:field="*{templateName}" type="text">
+            </div>
+        </div>
+
+        <!-- Invoice Signature -->
+        <div class="row">
+            <div class="col-2 text-end">
+                <label class="form-label" for="InvoiceSignature">Invoice Signature:</label>
+            </div>
+            <div class="col-2">
+                <select class="form-select" id="InvoiceSignature" th:field="*{invoiceSignature}">
+                    <option value="No">No</option>
+                    <option value="1">Yes</option>
+                </select>
+            </div>
+            <div class="col-2 text-end">
+                <label class="form-label" for="InvoiceSignatureName" id="signatureNameLabel">Signature
+                    Name:</label>
+            </div>
+            <div class="col-2">
+                <input class="form-control" id="InvoiceSignatureName" th:field="*{invoiceSignatureName}"
+                       type="text">
+            </div>
+        </div>
+
+        <!-- Invoice Images -->
+        <div class="row">
+            <div class="col-2 text-end">
+                <label class="form-label" for="InvoiceImages">Company Logo:</label>
+            </div>
+            <div class="col-2">
+                <select class="form-select" id="InvoiceImages" th:field="*{companyLogo}">
+                    <option value="No">No</option>
+                    <option value="Yes">Yes</option>
+                </select>
+            </div>
+            <div class="col-2 text-end">
+                <label class="form-label" for="ImageName" id="imageNameLabel">Logo Name:</label>
+            </div>
+            <div class="col-2">
+                <input class="form-control" id="ImageName" th:field="*{logoName}" type="text">
+            </div>
+        </div>
+    </form>
+</div>
+<!--</div>-->
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    function updateRequiredFields() {
+        const invoiceImages = document.getElementById('InvoiceImages').value;
+        const invoiceSignature = document.getElementById('InvoiceSignature').value;
+        const imageName = document.getElementById('ImageName');
+        const signatureName = document.getElementById('InvoiceSignatureName');
+        const imageNameLabel = document.getElementById('imageNameLabel');
+        const signatureNameLabel = document.getElementById('signatureNameLabel');
+
+        const isRequired = (invoiceImages === '1' || invoiceSignature === '1');
+        imageName.required = isRequired;
+        signatureName.required = isRequired;
+
+        if (isRequired) {
+            imageNameLabel.innerHTML = 'Image Name:*';
+            signatureNameLabel.innerHTML = 'Signature Name:*';
+        } else {
+            imageNameLabel.innerHTML = 'Image Name:';
+            signatureNameLabel.innerHTML = 'Signature Name:';
+        }
+    }
+
+    document.getElementById('InvoiceImages').addEventListener('change', updateRequiredFields);
+    document.getElementById('InvoiceSignature').addEventListener('change', updateRequiredFields);
+    document.addEventListener('DOMContentLoaded', updateRequiredFields);
+
+</script>
+</body>
+</html>

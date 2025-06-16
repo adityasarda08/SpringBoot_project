@@ -1,0 +1,181 @@
+@import url(https://fonts.googleapis.com/css?family=Inter:100,200,300,regular,500,600,700,800,900);
+
+/* Resetting Css */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Inter", "sans-serif";
+}
+
+/* setting the sidebar bar width */
+.sidebar {
+    position: fixed; /* adding new css properties */
+    width: 17%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background-color: #8DB7E7;
+/ / background-image: linear-gradient(to right, #ffcc99, #0b5037);
+    padding: 15px;
+    z-index: 99; /* property specifies the stack order of an element. */
+}
+
+.user-img {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+.user-img img {
+    width: 100%;
+    object-fit: cover;
+}
+
+/* setting the sidebar bar Head setting as display */
+
+.sidebar .head {
+    display: flex;
+    gap: 10px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #f6f6f6;
+}
+
+.user-details .title {
+    font-size: 13px;
+    font-weight: 500;
+    color: #994cb2;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+}
+
+.user-details .nav .menu {
+    position: relative;
+    height: 100%;
+    width: 100%;
+    /*margin-top: 40px; */
+    overflow-y: scroll;
+}
+
+
+.menu::-webkit-scrollbar {
+    display: none;
+}
+
+.user-details .name
+.menu .title {
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.sidebar .nav .menu ul li {
+    list-style: none;
+    margin-bottom: 5px;
+}
+
+.sidebar .nav .menu ul li a {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    color: blue;
+    text-transform: uppercase;
+    padding: 8px 8px;
+    border-radius: 8px;
+    transition: all .3s ease-in-out;
+}
+
+.dashboard-item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.sidebar .nav .menu ul li a:hover
+.sidebar .nav .menu ul li:active a {
+    color: #000;
+    background-color: #f6f6f6;
+}
+
+.sidebar .nav .menu ul li .icon {
+    font-size: 15px;
+}
+
+.sidebar .nav .menu ul li .text {
+    flex: 1;
+}
+
+.sidebar .nav .menu ul li .arrow {
+    font-size: 14px;
+}
+
+.sidebar .nav .menu .sub-menu {
+    display: none;
+    margin-left: 20px;
+    padding-left: 20px;
+    padding-top: 5px;
+    border-left: 1px solid #f6f6f6;
+}
+
+.sidebar .nav .menu .sub-menu li a {
+    padding: 10px 8px;
+    font-size: 12px;
+}
+
+/* the blow csss is not check and varified */
+
+/* Add this to your sidebar.css file to properly handle the dropdown functionality */
+
+.dropdown__menu {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease-out;
+}
+
+.sub-menu {
+    margin-left: 20px;
+    padding-left: 20px;
+    padding-top: 5px;
+    border-left: 1px solid #f6f6f6;
+}
+
+.dropdown__item .arrow i {
+    transition: transform 0.4s;
+}
+
+.dropdown__item.active .arrow i {
+    transform: rotate(180deg);
+}
+
+/* Additional styles for notification area */
+#notificationArea {
+    padding: 15px;
+    margin-bottom: 15px;
+    background-color: #fff3cd;
+    border: 1px solid #ffeeba;
+    border-radius: 5px;
+}
+
+/* Dashboard content styling */
+.dashboard-item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    text-align: center;
+}
+
+.dashboard-item h1 {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+}
+
+.dashboard-item p {
+    font-size: 1.25rem;
+}

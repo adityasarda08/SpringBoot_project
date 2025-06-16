@@ -1,0 +1,43 @@
+/* Custom CSS for Vendor Master List page */
+
+/* Set font size for h1 */
+h1 {
+    font-size: 11px; /* Set the desired font size */
+}
+
+/* Set font size for table headings */
+.table th {
+    font-size: 10px; /* Set the desired font size */
+    white-space: nowrap; /* Prevent wrapping */
+    border: 1px solid black; /* Prevent wrapping */
+}
+
+/* Set font size for table content */
+.table td {
+    font-size: 10px; /* Set the desired font size */
+    border: 1px solid black; /* Add border to table cells */
+}
+
+.action-buttons .btn {
+    font-size: 10px; /* Set the desired font size */
+}
+
+/* Fix first table heading */
+.table thead tr:first-child th {
+    position: sticky;
+    top: 0;
+    background-color: gray; /* Background color for table header row */
+    border-bottom: 1px solid black;
+    z-index: 100; /* Ensure it stays above other content */
+}
+
+/* Make other table headings scrollable */
+.table thead tr:not(:first-child) th {
+    position: relative;
+}
+
+/* Ensure tbody scrolls */
+.table tbody {
+    overflow-y: auto;
+    max-height: 300px; /* Adjust as needed */
+}

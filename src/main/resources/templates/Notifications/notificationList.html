@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Notifications</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" th:href="@{/css/tablelist.css}">
+</head>
+<body>
+<div class="container">
+    <div class="table-heading">
+        <h2 class="title">Notification List</h2>
+        <form action="/notifications" class="searchText" method="get">
+            <input name="companyCode" placeholder="Search by Company Code" type="text">
+            <button class="bg-blue-500 text-white px-2 py-1 rounded ml-2" type="submit">Search</button>
+        </form>
+    </div>
+
+    <div class="table-wrapper">
+        <table class="tbl">
+            <thead>
+            <tr>
+                <th>Code</th>
+                <th>Date</th>
+                <th>Details</th>
+                <th>Expiry</th>
+                <th>Company</th>
+                <th>Action</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="notification : ${notifications}">
+                <td th:text="${notification.notificationCode}"></td>
+                <td th:text="${notification.notificationDate}"></td>
+                <td th:text="${notification.notificationDetails}"></td>
+                <td th:text="${notification.notificationExpiryDate}"></td>
+                <td th:text="${notification.companyCode}"></td>
+                <td>
+                    <form method="post" th:action="@{/notifications/delete/{id}(id=${notification.notificationCode})}">
+                        <button class="btn_edit" type="submit">Delete</button>
+                    </form>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
+</html>

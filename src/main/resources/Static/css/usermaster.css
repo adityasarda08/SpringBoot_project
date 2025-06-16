@@ -1,0 +1,42 @@
+
+.container{
+    border: 1px solid #0a53be;
+}
+
+.from-format{
+    border: 1px solid #0a53be;
+}
+.row{
+    margin:3px;
+}
+
+.title{
+    width: 100%;
+    margin-top: 5px;
+    background-color: var(--bs-link-hover-color);
+    font-size: 20px;color: var(--bs-info-bg-subtle);
+    text-transform: uppercase;
+    text-align: center;
+}
+.title label {
+    text-align: center;
+    width: 95%;
+    margin-top: 3px;
+}
+
+.from-start {
+    margin-top: 10px;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.from-button{
+    background-color: var(--bs-primary-bg-subtle);
+}
+
+.from-button button {
+    font-size: 12px;
+    margin: 10px;
+}
+
+.

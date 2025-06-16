@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Vendor List</title>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" th:href="@{/css/tablelist.css}"/>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" rel="stylesheet"/>
+</head>
+
+<body>
+<div class="container">
+    <div class="tbl_container">
+        <div class="table-heading">
+            <div class="title">
+                <h2>Vendor Master List</h2>
+            </div>
+            <div class="searchText">
+                <span class="search-icon">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                </span>
+                <input id="searchVendorInput" placeholder="Search for items.." type="text">
+            </div>
+        </div>
+        <div class="table-wrapper">
+            <table class="tbl" id="vendorTable">
+                <thead>
+                <tr>
+                    <th colspan="2">Action</th>
+                    <th style="width: 80px;">Vendor Code</th>
+                    <th style="width: 80px;">Plant Code</th>
+                    <th style="width: 300px;">Vendor Name</th>
+                    <th style="width: 300px;">Address</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="VendorDetails : ${vendors}">
+                    <td data-label="New" style="width: 30px;">
+                        <a class="btn_new" th:href="@{/vendors/new}">
+                            <i class="fa-solid fa-plus"></i>
+                        </a>
+                    </td>
+
+                    <td data-label="Update" style="width: 30px;">
+                        <a class="btn_edit" th:href="@{/vendors/edit/{id}(id=${VendorDetails.id})}">
+                            <i class="fa-solid fa-pen-to-square"></i>
+                        </a>
+                    </td>
+
+                    <!--                    <td data-label="Delete" style="width: 30px;">-->
+                    <!--                        <a class="btn_delete"-->
+                    <!--                           onclick="return confirm('Are you sure you want to delete this vendor?')"-->
+                    <!--                           th:href="@{/vendors/delete/{id}(id=${VendorDetails.vendorId})}">-->
+                    <!--                            <i class="fa-solid fa-trash"></i>-->
+                    <!--                        </a>-->
+                    <!--                    </td>-->
+
+                    <td data-label="Vendor Code" style="width: 80px;" th:text="${VendorDetails.vendorCode}"></td>
+                    <td data-label="Plant Code" style="width: 80px;" th:text="${VendorDetails.vendorPlantCode}"></td>
+                    <td data-label="Vendor Name" style="width: 300px;" th:text="${VendorDetails.vendorName}"></td>
+                    <td data-label="Address" style="width: 300px;" th:text="${VendorDetails.vendorAddress}"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<script>
+
+    document.getElementById('searchVendorInput').addEventListener('keyup', function (event) {
+        filterTable(event);
+    });
+
+    /**
+     * @function filterTable
+     * @description Filters a table based on the input value in a search field.
+     *              This function is designed to work with dynamically generated tables within dropdowns.
+     *              It takes an event object (typically from a keyup event in a search input) and a row index
+     *              to identify the specific table to filter. The function then iterates through the table rows,
+     *              hiding those that do not match the search query and showing those that do.
+     * @param {Event} event - The event object, typically from a keyup event in a search input field.
+     *                        This object is used to get the current search query.
+     * //@param {string|number} rowIndex - A string or number that identifies the specific table to filter.
+     *                                   This is used to construct the selector for the table.
+     * @returns {void}
+     */
+
+    function filterTable(event) {
+        // Declare variables to be used within the function.
+        var filter, table, tr, td, i, j, txtValue;
+        // Get the search query from the input field and convert it to uppercase.
+        // This ensures case-insensitive searching.
+        filter = event.target.value.toUpperCase();
+        // Select the table to filter based on the provided rowIndex.
+        // The selector targets a table within a div with an ID like 'dropdown-content-1'.
+        table = document.querySelector('table');
+        // Get all the table rows (<tr> elements) within the selected table.
+        tr = table.getElementsByTagName('tr');
+        // Loop through all table rows, starting from the second row (index 1).
+        // The first row (index 0) is typically the header row and should not be filtered.
+        for (i = 1; i < tr.length; i++) {
+            // Initially hide the row. It will be shown later if it matches the search query.
+            // Check if the current cell exists.
+            tr[i].style.display = 'none'; // Assume row is hidden
+            // Get all the table cells (<td> elements) within the current row.
+            td = tr[i].getElementsByTagName('td');
+            // Loop through all the table cells in the current row.
+            for (j = 0; j < td.length; j++) {
+                // Check if the current cell exists.
+                if (td[j]) {
+                    // Get the text content of the cell and convert it to uppercase.
+                    txtValue = td[j].textContent || td[j].innerText;
+                    // Check if the cell's text content contains the search query.
+                    // The indexOf() method returns -1 if the query is not found.
+
+                    if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                        // If the query is found, show the row.
+                        tr[i].style.display = ''; // Show row
+                        // Break the inner loop since a match has been found in this row.
+                        // There's no need to check other cells in the same row.
+                        break; // If match found, show the row and skip to the next row
+                    }
+                }
+            }
+        }
+    }
+</script>
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

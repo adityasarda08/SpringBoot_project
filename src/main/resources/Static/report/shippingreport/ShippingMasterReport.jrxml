@@ -1,0 +1,173 @@
+<!-- Created with Jaspersoft Studio version 7.0.1.final using JasperReports Library version 7.0.1-573496633c2b4074e32f433154b543003f7d2498  -->
+<jasperReport name="ShippingMasterReport" language="java" pageWidth="701" pageHeight="720" orientation="Landscape" columnWidth="0" leftMargin="20" rightMargin="0" topMargin="20" bottomMargin="20" uuid="9563a628-1cff-4355-bfbc-567eebab39f8">
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<field name="shiftVendorCode" class="java.lang.String"/>
+	<field name="shiftVendorName" class="java.lang.String"/>
+	<field name="shippingAddress" class="java.lang.String"/>
+	<field name="shippingGstNo" class="java.lang.String"/>
+	<field name="shippingStateCode" class="java.lang.String"/>
+	<field name="companyCode" class="java.lang.String"/>
+	<variable name="SrNo1" class="java.lang.Integer">
+		<expression><![CDATA[$V{SrNo1}+1]]></expression>
+		<initialValueExpression><![CDATA[0]]></initialValueExpression>
+	</variable>
+	<pageHeader height="37" splitType="Stretch">
+		<element kind="staticText" uuid="f4fd1edf-2844-4a03-96da-0d8639a70d28" x="0" y="8" width="233" height="14" fontName="Times New Roman" fontSize="10.0" bold="false">
+			<text><![CDATA[Shipping Master Data Details Report As on]]></text>
+			<box>
+				<pen lineWidth="0.25"/>
+				<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+			</box>
+		</element>
+		<element kind="staticText" uuid="5794a71b-9703-4075-978d-090f62ed540b" mode="Opaque" x="100" y="22" width="133" height="15" backcolor="#99FF99" fontName="Times New Roman" fontSize="8.0" bold="false">
+			<text><![CDATA[ShiftVendorName]]></text>
+			<box leftPadding="2" rightPadding="2">
+				<topPen lineWidth="0.5"/>
+				<leftPen lineWidth="0.5"/>
+				<bottomPen lineWidth="0.5"/>
+				<rightPen lineWidth="0.5"/>
+			</box>
+		</element>
+		<element kind="textField" uuid="f158a655-f672-4e06-b7e5-613ebbde5397" x="400" y="8" width="80" height="14" fontSize="8.0" hTextAlign="Right">
+			<expression><![CDATA["Page  "+$V{PAGE_NUMBER}+"  of  "]]></expression>
+		</element>
+		<element kind="textField" uuid="d0c0d2c9-dd75-4636-a2fa-a34bbcdb7459" x="480" y="8" width="80" height="14" fontSize="8.0" evaluationTime="Report">
+			<expression><![CDATA[" " + $V{PAGE_NUMBER}]]></expression>
+		</element>
+		<element kind="staticText" uuid="0b32f55a-6f49-4ff2-b38f-3f2588f4be55" mode="Opaque" x="30" y="22" width="70" height="15" backcolor="#99FF99" fontName="Times New Roman" fontSize="8.0" bold="false" hTextAlign="Center">
+			<text><![CDATA[ShiftVendorCode]]></text>
+			<box leftPadding="2" rightPadding="2">
+				<topPen lineWidth="0.5"/>
+				<leftPen lineWidth="0.5"/>
+				<bottomPen lineWidth="0.5"/>
+				<rightPen lineWidth="0.5"/>
+			</box>
+		</element>
+		<element kind="staticText" uuid="d125dea4-6edb-4519-a897-511eb84b32cc" mode="Opaque" x="233" y="22" width="97" height="15" backcolor="#99FF99" fontSize="8.0">
+			<text><![CDATA[Shipping Address ]]></text>
+			<box leftPadding="2" rightPadding="2">
+				<topPen lineWidth="0.5"/>
+				<leftPen lineWidth="0.5"/>
+				<bottomPen lineWidth="0.5"/>
+				<rightPen lineWidth="0.5"/>
+			</box>
+		</element>
+		<element kind="staticText" uuid="10538e25-29cf-478b-a59f-f3dfbab6ebf9" mode="Opaque" x="0" y="22" width="30" height="15" backcolor="#99FF99" fontName="Times New Roman" fontSize="8.0" bold="false" hTextAlign="Center">
+			<text><![CDATA[Sr.No]]></text>
+			<box leftPadding="2" rightPadding="2">
+				<topPen lineWidth="0.5"/>
+				<leftPen lineWidth="0.5"/>
+				<bottomPen lineWidth="0.5"/>
+				<rightPen lineWidth="0.5"/>
+			</box>
+		</element>
+		<element kind="textField" uuid="2d96f127-99e1-4be7-b4bd-1e39dc8920e9" x="233" y="8" width="97" height="14" fontSize="8.0" pattern="dd/MM/yyyy">
+			<expression><![CDATA[new java.util.Date()]]></expression>
+			<box>
+				<topPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+				<leftPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+				<bottomPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+				<rightPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+			</box>
+		</element>
+		<element kind="staticText" uuid="0d0efa3c-6b03-4327-993c-de351e2d3695" mode="Opaque" x="330" y="22" width="70" height="15" backcolor="#99FF99" fontSize="8.0" hTextAlign="Right" vTextAlign="Top">
+			<text><![CDATA[Shipping GstNo]]></text>
+			<box leftPadding="2" rightPadding="2">
+				<topPen lineWidth="0.5"/>
+				<leftPen lineWidth="0.5"/>
+				<bottomPen lineWidth="0.5"/>
+				<rightPen lineWidth="0.5"/>
+			</box>
+		</element>
+		<element kind="staticText" uuid="0f9b56b0-f421-4301-b0a8-3dc99db6b902" mode="Opaque" x="480" y="22" width="80" height="15" backcolor="#99FF99" fontSize="8.0" hTextAlign="Right" vTextAlign="Top">
+			<text><![CDATA[company code]]></text>
+			<box leftPadding="2" rightPadding="2">
+				<topPen lineWidth="0.5"/>
+				<leftPen lineWidth="0.5"/>
+				<bottomPen lineWidth="0.5"/>
+				<rightPen lineWidth="0.5"/>
+			</box>
+		</element>
+		<element kind="staticText" uuid="f19ab238-c666-4b7a-a812-057a1c63e45b" mode="Opaque" x="400" y="22" width="80" height="15" backcolor="#99FF99" fontSize="8.0" hTextAlign="Right" vTextAlign="Top">
+			<text><![CDATA[Shipping State Code]]></text>
+			<box leftPadding="2" rightPadding="2">
+				<topPen lineWidth="0.5"/>
+				<leftPen lineWidth="0.5"/>
+				<bottomPen lineWidth="0.5"/>
+				<rightPen lineWidth="0.5"/>
+			</box>
+		</element>
+	</pageHeader>
+	<detail>
+		<band height="15" splitType="Stretch">
+			<element kind="textField" uuid="9746e21f-4f0c-4777-8be3-87570480da30" x="100" y="0" width="133" height="15" fontName="Times New Roman" fontSize="8.0" textAdjust="StretchHeight" vTextAlign="Middle">
+				<expression><![CDATA[$F{shiftVendorName}]]></expression>
+				<box leftPadding="2" rightPadding="2">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+			</element>
+			<element kind="textField" uuid="7f8fc199-f20f-4605-8184-d4df39738e61" x="30" y="0" width="70" height="15" fontName="Times New Roman" fontSize="8.0" hTextAlign="Center" vTextAlign="Middle">
+				<expression><![CDATA[$F{shiftVendorCode}]]></expression>
+				<box leftPadding="2" rightPadding="2">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+			</element>
+			<element kind="textField" uuid="f93b7d1c-85f1-4063-8b09-a6d7d4055500" x="233" y="0" width="97" height="15" fontSize="8.0" vTextAlign="Middle">
+				<expression><![CDATA[$F{shippingAddress}]]></expression>
+				<box leftPadding="2" rightPadding="2">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+			</element>
+			<element kind="textField" uuid="01a11587-5630-408e-b273-5577eeab28c5" x="480" y="0" width="80" height="15" fontSize="8.0" hTextAlign="Right" vTextAlign="Middle">
+				<expression><![CDATA[$F{companyCode}]]></expression>
+				<box leftPadding="2" rightPadding="2">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+			</element>
+			<element kind="textField" uuid="80626099-928f-440b-94c5-39ecec34a48c" x="0" y="0" width="30" height="15" fontSize="8.0" hTextAlign="Center" vTextAlign="Middle">
+				<expression><![CDATA[$V{SrNo1}]]></expression>
+				<box leftPadding="2" rightPadding="2">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+			</element>
+			<element kind="textField" uuid="7452169e-51ee-49e5-b83e-312ee5ecbb60" x="330" y="0" width="70" height="15" fontSize="8.0" hTextAlign="Right" vTextAlign="Middle">
+				<expression><![CDATA[$F{shippingGstNo}]]></expression>
+				<box leftPadding="2" rightPadding="2">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+			</element>
+			<element kind="textField" uuid="490424f8-ff4c-4405-b201-688b69e22d69" x="400" y="0" width="80" height="15" fontSize="8.0" hTextAlign="Right" vTextAlign="Middle">
+				<expression><![CDATA[$F{shippingStateCode}]]></expression>
+				<box leftPadding="2" rightPadding="2">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+			</element>
+		</band>
+	</detail>
+</jasperReport>

@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html data-bs-theme="light" lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0, shrink-to-fit=no"
+          name="viewport">
+    <title>Po information List</title>
+    <link rel="stylesheet" th:href="@{/css/tablelist.css}"/>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" rel="stylesheet"/>
+
+</head>
+<body>
+<div class="container">
+    <div class="tbl_container">
+        <div class="table-heading">
+            <div class="title">
+                <h2>PO Information List</h2>
+            </div>
+            <div class="searchText">
+                <span class="search-icon">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                </span>
+                <input id="itemSearch" placeholder="Search for vendor.." type="text">
+            </div>
+        </div>
+
+        <div class="table-wrapper">
+            <table class="tbl" id="listTable">
+                <thead>
+                <tr>
+                    <th colspan="2">Action</th>
+                    <th style="width: 100px;">Vendor Code</th>
+                    <th style="width: 80px;">Plant Code</th>
+                    <th style="width: 300px;">Vendor Name</th>
+                    <th style="width: 100px;">Item Count</th>
+                </tr>
+                </thead>
+                <tbody>
+                <!-- The following is tr tag is used to print the Company list in html format using table -->
+                <tr th:each="vendorItemSummaryDTO : ${gstPoInfoList}">
+                    <td data-label="New" style="width: 25px;"><a class="btn_new" th:href="@{/gstPoInfo/new}"> <i
+                            class="fa-solid fa-plus"></i>
+                    </a></td>
+                    <td data-label="Update" style="width: 25px;"><a class="btn_edit"
+                                                                    th:href="@{/gstPoInfo/edit/{vendorCode}/{vendorPlantCode}(vendorCode=${vendorItemSummaryDTO.vendorCode},vendorPlantCode=${vendorItemSummaryDTO.vendorPlantCode})}">
+                        <i class="fa-duotone fa-solid fa-pen-to-square"></i>
+                    </a></td>
+                    <td data-label="Vendor Code" style="width: 100px;"
+                        th:text="${vendorItemSummaryDTO.vendorCode}"></td>
+                    <td data-label="Plant Code" style="width: 80px;"
+                        th:text="${vendorItemSummaryDTO.vendorPlantCode}"></td>
+                    <td data-label="Plant Code" style="width: 300px;"
+                        th:text="${vendorItemSummaryDTO.vendorName}"></td>
+                    <td data-label="Item Code" style="width: 100px;" th:text="${vendorItemSummaryDTO.itemCount}"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.getElementById("itemSearch").addEventListener('keyup', function (event) {
+        filterTable(event);
+    });
+
+    function filterTable(event) {
+        // Declare variables to be used within the function.
+        var filter, table, tr, td, i, j, txtValue;
+        // Get the search query from the input field and convert it to uppercase.
+        // This ensures case-insensitive searching.
+        filter = event.target.value.toUpperCase();
+        // Select the table to filter based on the provided rowIndex.
+        // The selector targets a table within a div with an ID like 'dropdown-content-1'.
+        table = document.querySelector('table');
+        // Get all the table rows (<tr> elements) within the selected table.
+        tr = table.getElementsByTagName('tr');
+        // Loop through all table rows, starting from the second row (index 1).
+        // The first row (index 0) is typically the header row and should not be filtered.
+        for (i = 1; i < tr.length; i++) {
+            // Initially hide the row. It will be shown later if it matches the search query.
+            // Check if the current cell exists.
+            tr[i].style.display = 'none'; // Assume row is hidden
+            // Get all the table cells (<td> elements) within the current row.
+            td = tr[i].getElementsByTagName('td');
+            // Loop through all the table cells in the current row.
+            for (j = 0; j < td.length; j++) {
+                // Check if the current cell exists.
+                if (td[j]) {
+                    // Get the text content of the cell and convert it to uppercase.
+                    txtValue = td[j].textContent || td[j].innerText;
+                    // Check if the cell's text content contains the search query.
+                    // The indexOf() method returns -1 if the query is not found.
+
+                    if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                        // If the query is found, show the row.
+                        tr[i].style.display = ''; // Show row
+                        // Break the inner loop since a match has been found in this row.
+                        // There's no need to check other cells in the same row.
+                        break; // If match found, show the row and skip to the next row
+                    }
+                }
+            }
+        }
+    }
+</script>
+
+</body>
+</html>

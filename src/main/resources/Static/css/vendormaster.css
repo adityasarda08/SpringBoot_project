@@ -1,0 +1,124 @@
+/* Custom CSS for Vendor Master List page */
+
+/* Set font size for h1 */
+h1 {
+    font-size: 11px; /* Set the desired font size */
+}
+.btn-sm{
+    font-size: 85%;
+}
+
+/* Set font size for table headings */
+table th {
+     font-size: 10px; /* Set the desired font size */
+     /* Prevent wrapping */
+     border: 1px solid black;  /* Prevent wrapping */
+}
+
+/* Set font size for table content */
+ōōōōō
+table td {
+    font-size: 10px; 
+    height: 10px;
+    /* Set the desired font size */
+}
+
+/* Custom CSS for Vendor Master List page */
+
+/* Set font size for h1 */
+h1 {
+    font-size: 11px; /* Set the desired font size */
+}
+
+/* Set font size for table headings */
+
+
+/* Set font size for table content */
+table td {
+    font-size: 10px; /* Set the desired font size */
+    border: 1px solid black; /* Add border to table cells */
+    
+}
+.action-buttons {
+	padding:1px;
+}
+.action-buttons .btn {
+    font-size: 10px; /* Set the desired font size */
+}
+
+table thead th{
+    border-bottom:1px solid;
+}
+body{
+    line-height: 10px;
+}
+table{
+	
+	width:60%;
+}
+
+td{
+   padding-left:2px;
+}
+ 
+ 
+ .radius{
+position: sticky;
+  top: 0;
+  
+  z-index:1;
+  
+width: 60%;
+    background-color: white;
+}
+
+  .table_header{
+    display: flex;
+    
+    align-items: center;
+    padding: 5px;
+    width:100%;
+     background-color:rgb(100, 149, 237);
+      position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  padding: 5px;
+  z-index:1;
+  border-top-left-radius: 18px;
+    border-top-right-radius: 18px;
+  
+
+
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+	
+	
+	
+	.table_header, .radius{
+		flex-direction: column;
+		align-items: flex-start;
+		  
+		        
+	}
+
+	.search {
+		width: 100%;
+		
+	}
+
+	.add_new {
+		width: 100%;
+		text-align: center;
+		margin-top: 10px;
+	}
+
+	input {
+		width: calc(100% - 20px);
+		margin: 10px 0;
+	}
+	
+	
+
+	

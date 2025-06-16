@@ -1,0 +1,244 @@
+<!-- Created with Jaspersoft Studio version 7.0.1.final using JasperReports Library version 7.0.1-573496633c2b4074e32f433154b543003f7d2498  -->
+<jasperReport name="ItemMasterReport" language="java" pageWidth="1250" pageHeight="72000" orientation="Landscape" columnWidth="1181" leftMargin="20" rightMargin="0" topMargin="20" bottomMargin="20" uuid="9563a628-1cff-4355-bfbc-567eebab39f8">
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<field name="vendorCode" class="java.lang.String"/>
+	<field name="vendorPlantCode" class="java.lang.String"/>
+	<field name="vendorName" class="java.lang.String"/>
+	<field name="vendorAddress" class="java.lang.String"/>
+	<field name="vendorGST" class="java.lang.String"/>
+	<field name="vendorStateCode" class="java.lang.String"/>
+	<field name="vendorCIN" class="java.lang.String"/>
+	<field name="pinCode" class="java.lang.String"/>
+	<field name="vendorPAN" class="java.lang.String"/>
+	<field name="invoiceCopies" class="java.lang.String"/>
+	<field name="remark1" class="java.lang.String"/>
+	<field name="remark2" class="java.lang.String"/>
+	<field name="companyCode" class="java.lang.String"/>
+	<variable name="SrNo1" class="java.lang.Integer">
+		<expression><![CDATA[$V{SrNo1}+1]]></expression>
+		<initialValueExpression><![CDATA[0]]></initialValueExpression>
+	</variable>
+	<background splitType="Stretch"/>
+	<pageHeader height="49" splitType="Stretch">
+		<element kind="staticText" uuid="f4fd1edf-2844-4a03-96da-0d8639a70d28" x="0" y="19" width="233" height="15" fontName="Times New Roman" fontSize="10.0" bold="false">
+			<text><![CDATA[Vendor Master Data Details Report As on]]></text>
+		</element>
+		<element kind="staticText" uuid="5794a71b-9703-4075-978d-090f62ed540b" mode="Opaque" x="83" y="34" width="150" height="15" backcolor="#99FF99" fontName="Times New Roman" fontSize="8.0" bold="false">
+			<text><![CDATA[Vendor Name]]></text>
+			<box leftPadding="2" rightPadding="2">
+				<topPen lineWidth="0.5"/>
+				<leftPen lineWidth="0.5"/>
+				<bottomPen lineWidth="0.5"/>
+				<rightPen lineWidth="0.5"/>
+			</box>
+		</element>
+		<element kind="textField" uuid="f158a655-f672-4e06-b7e5-613ebbde5397" x="474" y="19" width="59" height="15" fontSize="8.0" hTextAlign="Right">
+			<expression><![CDATA["Page  "+$V{PAGE_NUMBER}+"  of  "]]></expression>
+		</element>
+		<element kind="textField" uuid="d0c0d2c9-dd75-4636-a2fa-a34bbcdb7459" x="533" y="19" width="92" height="15" fontSize="8.0" evaluationTime="Report">
+			<expression><![CDATA[" " + $V{PAGE_NUMBER}]]></expression>
+		</element>
+		<element kind="staticText" uuid="0b32f55a-6f49-4ff2-b38f-3f2588f4be55" mode="Opaque" x="30" y="34" width="53" height="15" backcolor="#99FF99" fontName="Times New Roman" fontSize="8.0" bold="false" hTextAlign="Center">
+			<text><![CDATA[Vendor Code]]></text>
+			<box leftPadding="2" rightPadding="2">
+				<topPen lineWidth="0.5"/>
+				<leftPen lineWidth="0.5"/>
+				<bottomPen lineWidth="0.5"/>
+				<rightPen lineWidth="0.5"/>
+			</box>
+		</element>
+		<element kind="staticText" uuid="d125dea4-6edb-4519-a897-511eb84b32cc" mode="Opaque" x="233" y="34" width="60" height="15" backcolor="#99FF99" fontSize="8.0" hTextAlign="Center">
+			<text><![CDATA[Plant Code]]></text>
+			<box leftPadding="2" rightPadding="2">
+				<topPen lineWidth="0.5"/>
+				<leftPen lineWidth="0.5"/>
+				<bottomPen lineWidth="0.5"/>
+				<rightPen lineWidth="0.5"/>
+			</box>
+		</element>
+		<element kind="staticText" uuid="9b904161-75e7-4f73-88ed-2eca8eef5ea1" mode="Opaque" x="474" y="34" width="59" height="15" backcolor="#99FF99" fontSize="8.0" hTextAlign="Right">
+			<text><![CDATA[State Code]]></text>
+			<box leftPadding="2" rightPadding="2">
+				<topPen lineWidth="0.5"/>
+				<leftPen lineWidth="0.5"/>
+				<bottomPen lineWidth="0.5"/>
+				<rightPen lineWidth="0.5"/>
+			</box>
+		</element>
+		<element kind="staticText" uuid="10538e25-29cf-478b-a59f-f3dfbab6ebf9" mode="Opaque" x="0" y="34" width="30" height="15" backcolor="#99FF99" fontName="Times New Roman" fontSize="8.0" bold="false" hTextAlign="Center">
+			<text><![CDATA[Sr.No]]></text>
+			<box leftPadding="2" rightPadding="2">
+				<topPen lineWidth="0.5"/>
+				<leftPen lineWidth="0.5"/>
+				<bottomPen lineWidth="0.5"/>
+				<rightPen lineWidth="0.5"/>
+			</box>
+		</element>
+		<element kind="textField" uuid="2d96f127-99e1-4be7-b4bd-1e39dc8920e9" x="233" y="19" width="60" height="15" fontSize="8.0" pattern="dd/MM/yyyy">
+			<expression><![CDATA[new java.util.Date()]]></expression>
+		</element>
+		<element kind="staticText" uuid="0d0efa3c-6b03-4327-993c-de351e2d3695" mode="Opaque" x="293" y="34" width="181" height="15" backcolor="#99FF99" fontSize="8.0">
+			<text><![CDATA[Vendor Address]]></text>
+			<box leftPadding="2" rightPadding="2">
+				<topPen lineWidth="0.5"/>
+				<leftPen lineWidth="0.5"/>
+				<bottomPen lineWidth="0.5"/>
+				<rightPen lineWidth="0.5"/>
+			</box>
+		</element>
+		<element kind="staticText" uuid="0f9b56b0-f421-4301-b0a8-3dc99db6b902" mode="Opaque" x="533" y="34" width="92" height="15" backcolor="#99FF99" fontSize="8.0" hTextAlign="Right">
+			<text><![CDATA[company code]]></text>
+			<box leftPadding="2" rightPadding="2">
+				<topPen lineWidth="0.5"/>
+				<leftPen lineWidth="0.5"/>
+				<bottomPen lineWidth="0.5"/>
+				<rightPen lineWidth="0.5"/>
+			</box>
+		</element>
+		<element kind="staticText" uuid="ea24d5e9-8d12-4f9b-a8f2-88fcabcf3dbc" mode="Opaque" x="723" y="34" width="93" height="15" backcolor="#99FF99" fontSize="8.0" hTextAlign="Right">
+			<text><![CDATA[CIN Number]]></text>
+			<box leftPadding="2" rightPadding="2">
+				<topPen lineWidth="0.5"/>
+				<leftPen lineWidth="0.5"/>
+				<bottomPen lineWidth="0.5"/>
+				<rightPen lineWidth="0.5"/>
+			</box>
+		</element>
+		<element kind="staticText" uuid="dd4c5398-f686-43c9-adbc-0a85ee43f62f" mode="Opaque" x="625" y="34" width="98" height="15" backcolor="#99FF99" fontSize="8.0" hTextAlign="Right">
+			<text><![CDATA[Gst Number]]></text>
+			<box leftPadding="2" rightPadding="2">
+				<topPen lineWidth="0.5"/>
+				<leftPen lineWidth="0.5"/>
+				<bottomPen lineWidth="0.5"/>
+				<rightPen lineWidth="0.5"/>
+			</box>
+		</element>
+		<element kind="staticText" uuid="80a67403-0120-4893-a15e-1ca5c5b5725d" mode="Opaque" x="816" y="34" width="94" height="15" backcolor="#99FF99" fontSize="8.0" hTextAlign="Right">
+			<text><![CDATA[Pin Code]]></text>
+			<box leftPadding="2" rightPadding="2">
+				<topPen lineWidth="0.5"/>
+				<leftPen lineWidth="0.5"/>
+				<bottomPen lineWidth="0.5"/>
+				<rightPen lineWidth="0.5"/>
+			</box>
+		</element>
+		<element kind="staticText" uuid="00828a1c-8966-42d6-b906-96bbe779541d" mode="Opaque" x="910" y="34" width="94" height="15" backcolor="#99FF99" fontSize="8.0" hTextAlign="Right">
+			<text><![CDATA[Pan code]]></text>
+			<box leftPadding="2" rightPadding="2">
+				<topPen lineWidth="0.5"/>
+				<leftPen lineWidth="0.5"/>
+				<bottomPen lineWidth="0.5"/>
+				<rightPen lineWidth="0.5"/>
+			</box>
+		</element>
+	</pageHeader>
+	<columnHeader splitType="Stretch"/>
+	<detail>
+		<band height="15" splitType="Stretch">
+			<element kind="textField" uuid="9746e21f-4f0c-4777-8be3-87570480da30" x="83" y="0" width="150" height="15" fontName="Times New Roman" fontSize="8.0" textAdjust="StretchHeight" vTextAlign="Middle">
+				<expression><![CDATA[$F{vendorName}]]></expression>
+				<box leftPadding="2" rightPadding="2">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+			</element>
+			<element kind="textField" uuid="7f8fc199-f20f-4605-8184-d4df39738e61" x="30" y="0" width="53" height="15" fontName="Times New Roman" fontSize="8.0" hTextAlign="Center" vTextAlign="Middle">
+				<expression><![CDATA[$F{vendorCode}]]></expression>
+				<box leftPadding="2" rightPadding="2">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+			</element>
+			<element kind="textField" uuid="f93b7d1c-85f1-4063-8b09-a6d7d4055500" x="233" y="0" width="60" height="15" fontSize="8.0" hTextAlign="Center" vTextAlign="Middle">
+				<expression><![CDATA[$F{vendorPlantCode}]]></expression>
+				<box leftPadding="2" rightPadding="2">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+			</element>
+			<element kind="textField" uuid="875a2358-9bb0-4bbc-9343-e74b72f07211" x="474" y="0" width="59" height="15" fontSize="8.0" hTextAlign="Right" vTextAlign="Middle">
+				<expression><![CDATA[$F{vendorStateCode}]]></expression>
+				<box leftPadding="2" rightPadding="2">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+			</element>
+			<element kind="textField" uuid="01a11587-5630-408e-b273-5577eeab28c5" x="533" y="0" width="92" height="15" fontSize="8.0" hTextAlign="Right" vTextAlign="Middle">
+				<expression><![CDATA[$F{companyCode}]]></expression>
+				<box leftPadding="2" rightPadding="2">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+			</element>
+			<element kind="textField" uuid="80626099-928f-440b-94c5-39ecec34a48c" x="0" y="0" width="30" height="15" fontSize="8.0" hTextAlign="Center" vTextAlign="Middle">
+				<expression><![CDATA[$V{SrNo1}]]></expression>
+				<box leftPadding="2" rightPadding="2">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+			</element>
+			<element kind="textField" uuid="7452169e-51ee-49e5-b83e-312ee5ecbb60" x="293" y="0" width="181" height="15" fontSize="8.0" vTextAlign="Middle">
+				<expression><![CDATA[$F{vendorAddress}]]></expression>
+				<box leftPadding="2" rightPadding="2">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+			</element>
+			<element kind="textField" uuid="9f5e1f8a-aacb-4b20-8639-3e22f92003a1" x="625" y="0" width="98" height="15" fontSize="8.0" hTextAlign="Right" vTextAlign="Middle">
+				<expression><![CDATA[$F{vendorGST}]]></expression>
+				<box leftPadding="2" rightPadding="2">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+			</element>
+			<element kind="textField" uuid="75512536-37da-430f-93f8-6b6caebf9b4e" x="723" y="0" width="93" height="15" fontSize="8.0" hTextAlign="Right" vTextAlign="Middle">
+				<expression><![CDATA[$F{vendorCIN}]]></expression>
+				<box leftPadding="2" rightPadding="2">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+			</element>
+			<element kind="textField" uuid="1199437d-0b05-4f64-b42a-076116c00191" x="816" y="0" width="94" height="15" fontSize="8.0" hTextAlign="Right" vTextAlign="Middle">
+				<expression><![CDATA[$F{pinCode}]]></expression>
+				<box leftPadding="2" rightPadding="2">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+			</element>
+			<element kind="textField" uuid="22cd8c1c-eb5d-42a5-99c9-9c2e81d7c6b8" x="910" y="0" width="94" height="15" fontSize="8.0" hTextAlign="Right" vTextAlign="Middle">
+				<expression><![CDATA[$F{vendorPAN}]]></expression>
+				<box leftPadding="2" rightPadding="2">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+			</element>
+		</band>
+	</detail>
+	<columnFooter splitType="Stretch"/>
+	<pageFooter splitType="Stretch"/>
+	<summary height="15" splitType="Stretch"/>
+</jasperReport>

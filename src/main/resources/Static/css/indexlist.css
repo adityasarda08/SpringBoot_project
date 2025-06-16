@@ -1,0 +1,229 @@
+/*
+@import url(https://fonts.googleapis.com/css?family=Inter:100,200,300,regular,500,600,700,800,900);
+
+!* Resetting Css *!
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing: border-box;
+    font-family: "Inter","sans-serif";
+}
+
+.container{
+    margin-left: 5px;
+}
+
+!* setting the sidebar bar width *!
+.sidebar{
+    position: fixed; !* adding new css properties *!
+    width: 50%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background-color: #aabcf0;
+    padding: 15px;
+    z-index: 99; !* property specifies the stack order of an element. *!
+}
+
+.sidebar .head{
+    display: flex;
+    gap: 10px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #f6f6f6;
+}
+
+.user-details .nav .menu{
+    position: relative;
+    height: 100%;
+    width: 100%;
+    overflow-y: scroll;
+}
+
+.menu::-webkit-scrollbar {
+    display: none;
+}
+
+
+.user-details .name
+.menu .title {
+    font-size: 14px;
+    font-weight: 500;
+}
+
+
+.sidebar .nav .menu ul li {
+    list-style: none;
+    margin-bottom: 5px;
+}
+
+.sidebar .nav .menu ul li  a {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    text-decoration: none;
+    font-size: 12px;
+    font-weight: 500;
+    color: blue;
+    text-transform: uppercase;
+    border-radius: 8px;
+    transition: all .3s ease-in-out;
+    !*padding:  8px 8px;*!
+}
+
+.sidebar .nav .menu ul li a:hover
+.sidebar .nav .menu ul li:active  a{
+    color: #000;
+    background-color: #f6f6f6;
+}
+
+.sidebar .nav .menu ul li:hover > a{
+    color: #000;
+    background-color: #f6f6f6;
+}
+
+.sidebar .nav .menu ul li .sub-menu:hover{
+    color: #000;
+    background-color: #f6f6f6;
+}
+
+.sidebar .nav .menu ul li .icon {
+    font-size: 15px;
+}
+.sidebar .nav .menu ul li .text{
+    flex: 1;
+    font-size: 12px;
+    margin: 0;
+    padding: 5px;
+}
+.sidebar .nav .menu ul li .arrow{
+    font-size: 14px;
+}
+.sidebar .nav .menu .sub-menu{
+    display: none;
+    margin-left: 20px;
+    padding-left: 20px;
+    padding-top: 5px;
+    border-left: 1px solid #f6f6f6;
+}
+.sidebar .nav .menu .sub-menu li a{
+    padding:  10px 8px;
+    font-size: 12px;
+}
+
+.sidebar .nav .menu .sub-menu li a:hover {
+    color: #000;
+    background-color: #f6f6f6;
+}
+*/
+
+@import url(https://fonts.googleapis.com/css?family=Inter:100,200,300,regular,500,600,700,800,900);
+
+/* Resetting Css */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Inter", "sans-serif";
+}
+
+.container {
+    margin-left: 5px;
+}
+
+/* setting the sidebar bar width */
+.sidebar {
+    position: fixed; /* adding new css properties */
+    width: 50%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background-color: #aabcf0;
+    padding: 15px;
+    z-index: 99; /* property specifies the stack order of an element. */
+}
+
+.sidebar .head {
+    display: flex;
+    gap: 10px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #f6f6f6;
+}
+
+.user-details .nav .menu {
+    position: relative;
+    height: 100%;
+    width: 100%;
+    overflow-y: scroll;
+}
+
+.menu::-webkit-scrollbar {
+    display: none;
+}
+
+.user-details .name .menu .title {
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.sidebar .nav .menu ul li {
+    list-style: none;
+    margin-bottom: 5px;
+}
+
+.sidebar .nav .menu ul li a {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    text-decoration: none;
+    font-size: 12px;
+    font-weight: 500;
+    color: blue;
+    text-transform: uppercase;
+    border-radius: 8px;
+    transition: all .3s ease-in-out;
+    /*padding:  8px 8px;*/
+}
+
+.sidebar .nav .menu ul li a:hover {
+    color: #000;
+    background-color: #f6f6f6;
+}
+
+.sidebar .nav .menu ul li:hover > a {
+    color: #000;
+    background-color: #f6f6f6;
+}
+
+.sidebar .nav .menu ul li .icon {
+    font-size: 15px;
+}
+
+.sidebar .nav .menu ul li .text {
+    flex: 1;
+    font-size: 12px;
+    margin: 0;
+    padding: 5px;
+}
+
+.sidebar .nav .menu ul li .arrow {
+    font-size: 14px;
+}
+
+.sidebar .nav .menu .sub-menu {
+    display: none;
+    margin-left: 20px;
+    padding-left: 20px;
+    padding-top: 5px;
+    border-left: 1px solid #f6f6f6;
+}
+
+.sidebar .nav .menu .sub-menu li a {
+    padding: 10px 8px;
+    font-size: 12px;
+}
+
+.sidebar .nav .menu .sub-menu li a:hover {
+    color: #000;
+    background-color: #f6f6f6;
+}

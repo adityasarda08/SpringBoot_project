@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <link rel="stylesheet" th:href="@{css/sidebar.css}"/>
+    <link rel="stylesheet" th:href="@{css/topnavbar.css}"/>
+    <title>Dashboard with Dropdown</title>
+    <!-- Include Tailwind CSS for styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-gray-700">
+<!-- Sidebar -->
+<div class="sidebar bg-gray-800 p-5 fixed h-screen w-64 "> <!-- Main Sidebar div -->
+    <h4 class="text-white text-xl mb-4 ">Pages</h4>
+
+    <div>
+        <button class="block text-white hover:bg-gray-700 p-2 rounded transition w-full text-left"
+                onclick="toggleDropdown('Admin')">
+            Company Details
+        </button>
+        <div class="hidden ml-4 mt-2" id="Admin">
+            <!-- Company Page -->
+            <button class="block text-white hover:bg-gray-700 p-2 rounded transition mb-2"
+                    onclick="changeIframeSource('/companies/new')">Company Master
+            </button>
+            <!-- Notification -->
+            <button class="block text-white hover:bg-gray-700 p-2 rounded transition mb-2"
+                    onclick="changeIframeSource('/notifications/new')">Notification details
+            </button>
+        </div>
+    </div>
+
+    <!-- Vendor Page -->
+    <div>
+        <button class="block text-white hover:bg-gray-700 p-2 rounded transition w-full text-left"
+                onclick="toggleDropdown('master')">
+            Master Menu
+        </button>
+        <div class="hidden ml-4 mt-2" id="master">
+            <button class="block text-white hover:bg-gray-700 p-2 rounded transition mb-2"
+                    onclick="changeIframeSource('/vendors/new')">Vendor details
+            </button>
+            <button class="block text-white hover:bg-gray-700 p-2 rounded transition mb-2"
+                    onclick="changeIframeSource('/Item/new')">Item details
+            </button>
+            <button class="block text-white hover:bg-gray-700 p-2 rounded transition mb-2"
+                    onclick="changeIframeSource('/shiftTo/new')">Shipping details
+            </button>
+            <button class="block text-white hover:bg-gray-700 p-2 rounded transition mb-2"
+                    onclick="changeIframeSource('/gstPoInfo/new')">Gst Po Info details
+            </button>
+        </div>
+    </div>
+
+    <div>
+        <button class="block text-white hover:bg-gray-700 p-2 rounded transition w-full text-left"
+                onclick="toggleDropdown('transaction')">
+            Transaction Menu
+        </button>
+        <div class="hidden ml-4 mt-2" id="transaction">
+            <button class="block text-white hover:bg-gray-700 p-2 rounded transition mb-2"
+                    onclick="changeIframeSource('')">Invoice generation
+            </button>
+            <button class="block text-white hover:bg-gray-700 p-2 rounded transition mb-2"
+                    onclick="changeIframeSource('/TaxInvoice/new')">EDI file Upload
+            </button>
+        </div>
+    </div>
+
+    <div>
+        <button class="block text-white hover:bg-gray-700 p-2 rounded transition w-full text-left"
+                onclick="toggleDropdown('Report')">
+            Report Menu
+        </button>
+        <div class="hidden ml-4 mt-2" id="Report">
+            <button class="block text-white hover:bg-gray-700 p-2 rounded transition w-full text-left"
+                    onclick="changeIframeSource('/pages/ItemReports.html')">
+                Item Menu
+            </button>
+            <button class="block text-white hover:bg-gray-700 p-2 rounded transition w-full text-left"
+                    onclick="changeIframeSource('/pages/vendorReport.html')">
+                Vendor Menu
+            </button>
+        </div>
+    </div>
+
+    <!-- Moved "Report to text Menu" inside the sidebar -->
+    <div>
+        <button class="block text-white hover:bg-gray-700 p-2 rounded transition w-full text-left"
+                onclick="toggleDropdown('Pdf')">
+            Report to text Menu
+        </button>
+        <div class="hidden ml-4 mt-2" id="Pdf">
+            <button class="block text-white hover:bg-gray-700 p-2 rounded transition mb-2"
+                    onclick="changeIframeSource('/invoice/pdf')">Pdf to text
+            </button>
+        </div>
+    </div>
+
+</div> <!-- This is the correct closing tag for the main sidebar div -->
+
+<!-- Main Content -->
+<div class="content ml-64 p-5">
+    <!--    Notification Area-->
+    <div class="hidden p-4 mb-4 bg-yellow-100 border border-yellow-300 rounded-lg" id="notificationArea">
+        <h2 class="font-bold">New Notification:</h2>
+        <p id="notificationText">Welcome to the dashboard! You have new updates.</p>
+    </div>
+    <!-- Dashboard Content -->
+    <div class="h-screen flex flex-col justify-center itemDetails-center" id="dashboard-content">
+        <h1 class="text-4xl font-bold text-white mb-4">Welcome to the Dashboard</h1>
+        <p class="text-2xl text-white">Dataline System</p>
+    </div>
+
+    <!-- iframe container (hidden by default, shown when navigating to tabs) -->
+    <div class="h-screen hidden" id="iframe-container">
+        <iframe class="w-full h-full border border-red-900" id="iframe-content" src=""></iframe>
+    </div>
+</div>
+
+<script>
+    // Function to display notification and load notification page in iframe
+    function displayNotification() {
+        // Show the notification area
+        document.getElementById('notificationArea').classList.remove('hidden');
+
+        // Load the notification page inside the iframe
+        document.getElementById('dashboard-content').classList.add('hidden');
+        document.getElementById('iframe-container').classList.remove('hidden');
+        document.getElementById('iframe-content').src = '/notifications/dashlist';
+    }
+
+    // Call the function to display the notification when the page loads
+    window.onload = function () {
+        displayNotification();  // Trigger notification display
+    };
+
+    // Function to toggle dropdown visibility
+    function toggleDropdown(dropdownId) {
+        const dropdown = document.getElementById(dropdownId);
+        dropdown.classList.toggle('hidden');
+    }
+
+    // Function to change iframe source
+    // Note: You have this function defined twice. It's good practice to have only one definition.
+    // The browser will use the last definition it encounters.
+    function changeIframeSource(url) {
+        document.getElementById('dashboard-content').classList.add('hidden');
+        document.getElementById('iframe-container').classList.remove('hidden');
+        document.getElementById('iframe-content').src = url;
+    }
+</script>
+
+</body>
+</html>

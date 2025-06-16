@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>PDF Invoice Data Extraction</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .result-section {
+            margin-top: 20px;
+            border: 1px solid #dee2e6;
+            border-radius: 5px;
+            padding: 15px;
+        }
+
+        .invoice-block { /* Style for each invoice in multiple view */
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 2px dashed #007bff; /* Separator for multiple invoices */
+        }
+
+        .invoice-block:last-child {
+            border-bottom: none; /* No separator after the last invoice */
+            margin-bottom: 0;
+        }
+
+        .field-row {
+            border-bottom: 1px solid #f0f0f0;
+            padding: 8px 0;
+        }
+
+        .field-label {
+            font-weight: bold;
+            color: #495057;
+        }
+
+        .field-value {
+            color: #28a745;
+        }
+
+        .not-found {
+            color: #dc3545 !important; /* Red, and important to override .field-value if needed */
+            font-style: italic;
+        }
+
+        .raw-text, .text-format-area { /* Shared style for text areas */
+            max-height: 300px;
+            overflow-y: auto;
+            background-color: #f8f9fa;
+            padding: 10px;
+            font-family: monospace;
+            font-size: 12px;
+            width: 100%; /* Make textarea take full width of its container */
+            box-sizing: border-box; /* Include padding and border in the element's total width and height */
+        }
+    </style>
+</head>
+<body>
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-8 mx-auto">
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="mb-0">PDF Invoice Data Extraction</h4>
+                </div>
+                <div class="card-body">
+                    <!-- Upload Form -->
+                    <form enctype="multipart/form-data" method="post" th:action="@{/invoice/upload}">
+                        <div class="mb-3">
+                            <label class="form-label" for="pdfFile">Select PDF Invoice:</label>
+                            <input accept=".pdf" class="form-control" id="pdfFile" name="pdfFile" required type="file">
+                        </div>
+                        <button class="btn btn-primary" type="submit">Upload and Extract Data</button>
+                    </form>
+
+                    <!-- Success Message -->
+                    <div class="alert alert-success mt-3" role="alert" th:if="${successMessage}">
+                        <strong>Success!</strong> <span th:text="${successMessage}"></span>
+                    </div>
+
+                    <!-- Error Message -->
+                    <div class="alert alert-danger mt-3" role="alert" th:if="${errorMessage}">
+                        <strong>Error!</strong> <span th:text="${errorMessage}"></span>
+                    </div>
+
+                    <!-- Results Section -->
+                    <div class="mt-4" th:if="${pdfData != null and pdfData.success == true}">
+
+                        <!-- File Information -->
+                        <div class="result-section" th:if="${pdfData.fileName}">
+                            <h5 class="text-primary">File Information</h5>
+                            <div class="row">
+                                <div class="col-sm-3 field-label">File Name:</div>
+                                <div class="col-sm-9 field-value" th:text="${pdfData.fileName}"></div>
+                            </div>
+                            <div class="row" th:if="${pdfData.pageCount}">
+                                <div class="col-sm-3 field-label">Page Count:</div>
+                                <div class="col-sm-9 field-value" th:text="${pdfData.pageCount}"></div>
+                            </div>
+                            <div class="row"
+                                 th:if="${pdfData.invoiceType == 'multiple' and pdfData.totalInvoices != null}">
+                                <div class="col-sm-3 field-label">Total Invoices Found:</div>
+                                <div class="col-sm-9 field-value" th:text="${pdfData.totalInvoices}"></div>
+                            </div>
+                            <div class="row"
+                                 th:if="${pdfData.invoiceType != 'multiple' and pdfData.patternUsed != null and !#strings.isEmpty(pdfData.patternUsed)}">
+                                <div class="col-sm-3 field-label">Pattern Used:</div>
+                                <div class="col-sm-9 field-value" th:text="${pdfData.patternUsed}"></div>
+                            </div>
+                        </div>
+
+                        <!-- Display for MULTIPLE Invoices -->
+                        <div th:if="${pdfData.invoiceType == 'multiple' and pdfData.multipleInvoices != null and !#lists.isEmpty(pdfData.multipleInvoices)}">
+                            <h4 class="mt-4 text-info">Extracted Data for Multiple Invoices</h4>
+
+                            <!-- Loop for individual invoice details -->
+                            <div class="invoice-block result-section"
+                                 th:each="invoice, iterStat : ${pdfData.multipleInvoices}">
+                                <h5 class="text-info">
+                                    Invoice #<span th:text="${iterStat.count}"></span>
+                                    (<span
+                                        th:text="${invoice.invoiceNumber == 'default' ? 'Unidentified Invoice' : invoice.invoiceNumber}"></span>)
+                                    - Pages: <span th:text="${#strings.arrayJoin(invoice.pages, ', ')}"></span>
+                                </h5>
+                                <div class="mb-2"
+                                     th:if="${invoice.patternUsed != null and !#strings.isEmpty(invoice.patternUsed)}">
+                                    <small><em>Pattern for this invoice: <span th:text="${invoice.patternUsed}"></span></em></small>
+                                </div>
+                                <!-- Placeholder for JS to render extracted data -->
+                                <div th:id="'invoiceDataContainer' + ${iterStat.count}"></div>
+
+                                <!-- Display and Download Text Format for this invoice -->
+                                <div class="mt-3"
+                                     th:if="${invoice.textFormat != null and !#strings.isEmpty(invoice.textFormat)}">
+                                    <h6 class="text-secondary">Generated Text Format for Invoice #<span
+                                            th:text="${iterStat.count}"></span></h6>
+                                    <textarea class="form-control text-format-area"
+                                              readonly rows="10" th:id="'invoiceTextFormat' + ${iterStat.count}"
+                                              th:text="${invoice.textFormat}"></textarea>
+                                    <button class="btn btn-secondary btn-sm mt-2"
+                                            th:attr="onclick='downloadText(\'invoiceTextFormat' + ${iterStat.count} + '\', \'invoice_' + (invoice.invoiceNumber == 'default' ? ('unidentified_' + iterStat.count) : invoice.invoiceNumber) + '_data.txt\')'">
+                                        Download Text for Invoice #<span th:text="${iterStat.count}"></span>
+                                    </button>
+                                </div>
+
+
+                                <!-- Raw Text for this invoice (Collapsible) -->
+                                <div class="result-section mt-3"
+                                     th:if="${invoice.rawText != null and #arrays.length(invoice.rawText) > 0}">
+                                    <h6 class="text-muted">
+                                        <button aria-expanded="false" class="btn btn-link p-0 text-muted btn-sm"
+                                                data-bs-toggle="collapse"
+                                                th:attr="data-bs-target='#rawTextCollapseInvoice' + ${iterStat.count}"
+                                                type="button">
+                                            Raw Text for this Invoice (Click to expand)
+                                        </button>
+                                    </h6>
+                                    <div class="collapse" th:id="'rawTextCollapseInvoice' + ${iterStat.count}">
+                                        <div class="raw-text">
+                                            <div th:each="line : ${invoice.rawText}">
+                                                <span th:text="${line}"></span><br/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div> <!-- End of th:each loop for individual invoices -->
+
+                            <!-- Combined Text Format Display and Download - Placed OUTSIDE the loop -->
+                            <div class="result-section mt-4"
+                                 th:if="${#maps.containsKey(pdfData, 'combinedTextFormat') and pdfData.combinedTextFormat != null and !#strings.isEmpty(pdfData.combinedTextFormat)}">
+                                <h5 class="text-primary">Combined Generated Text Format (All Invoices)</h5>
+                                <textarea class="form-control text-format-area" id="combinedInvoiceTextFormat"
+                                          readonly
+                                          rows="15" th:text="${pdfData.combinedTextFormat}"></textarea>
+                                <button class="btn btn-primary btn-sm mt-2"
+                                        th:attr="onclick='downloadText(\'combinedInvoiceTextFormat\', \'' + ${dynamicFilenameBase} + '_all_invoices_data.txt\');'"
+                                        th:with="dynamicFilenameBase=(pdfData.fileName != null ? pdfData.fileName.replace('.pdf', '') : 'document')">
+                                    Download Combined Text
+                                </button>
+                            </div>
+
+                        </div> <!-- End of main 'multiple invoices' block -->
+
+
+                        <!-- Display for SINGLE Invoice -->
+                        <div class="result-section"
+                             th:if="${pdfData.invoiceType != 'multiple' and pdfData.extractedData != null}">
+                            <h5 class="text-success">Extracted Invoice Data</h5>
+                            <!-- Placeholder for JS to render extracted data -->
+                            <div id="singleInvoiceDataContainer"></div>
+
+                            <!-- Display and Download Text Format for single invoice -->
+                            <div class="mt-3"
+                                 th:if="${pdfData.textFormat != null and !#strings.isEmpty(pdfData.textFormat)}">
+                                <h6 class="text-secondary">Generated Text Format</h6>
+                                <textarea class="form-control text-format-area" id="singleInvoiceTextFormat" readonly
+                                          rows="10" th:text="${pdfData.textFormat}"></textarea>
+                                <button class="btn btn-secondary btn-sm mt-2"
+                                        th:attr="onclick='downloadText(\'singleInvoiceTextFormat\', \'invoice_' + ${dynamicFilenameBase} + '.txt\');'"
+                                        th:with="dynamicFilenameBase=(pdfData.extractedData.invoiceNumber != null ? pdfData.extractedData.invoiceNumber : 'data')">
+                                    Download Text
+                                </button>
+                            </div>
+
+                            <!-- Raw Text for single invoice (Collapsible) -->
+                            <div class="result-section mt-3"
+                                 th:if="${pdfData.rawText != null and #arrays.length(pdfData.rawText) > 0}">
+                                <h6 class="text-muted">
+                                    <button aria-expanded="false" class="btn btn-link p-0 text-muted btn-sm"
+                                            data-bs-target="#rawTextCollapseSingle"
+                                            data-bs-toggle="collapse" type="button">
+                                        Raw Extracted Text (Click to expand)
+                                    </button>
+                                </h6>
+                                <div class="collapse" id="rawTextCollapseSingle">
+                                    <div class="raw-text">
+                                        <div th:each="line : ${pdfData.rawText}">
+                                            <span th:text="${line}"></span><br/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Error Displays -->
+                        <div class="result-section"
+                             th:if="${pdfData.success == false and pdfData.ExtractionGlobalError != null}">
+                            <h5 class="text-danger">Processing Error</h5>
+                            <p th:text="${pdfData.ExtractionGlobalError}"></p>
+                        </div>
+                        <div class="result-section"
+                             th:if="${pdfData.success == false and pdfData.error != null and pdfData.ExtractionGlobalError == null}">
+                            <h5 class="text-danger">Processing Error</h5>
+                            <p th:text="${pdfData.error}"></p>
+                        </div>
+                    </div>
+                    <div class="mt-4" th:if="${pdfData == null and errorMessage != null}">
+                        <div class="alert alert-danger" role="alert" th:text="${errorMessage}"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script th:inline="javascript">
+    /*<![CDATA[*/
+    const pdfData = /*[[${pdfData}]]*/ null;
+
+    const fieldConfig = [
+        {
+            groupTitle: "Basic Invoice Information",
+            fields: [
+                {label: "Vendor Code", key: "vendorCode"},
+                {label: "Invoice Number", key: "invoiceNumber"},
+                {label: "Invoice Date", key: "invoiceDate"},
+                {label: "Vendor Plant Code", key: "vendorPlantCode"}
+            ]
+        },
+        {
+            groupTitle: "Tax & GST Information",
+            fields: [
+                {label: "GSTIN Number", key: "gstinNo"},
+                {label: "HSN Code", key: "hsnCode"},
+                {label: "SAC Code", key: "sacCode"}
+            ]
+        },
+        {
+            groupTitle: "Item & Order Information",
+            fields: [
+                {label: "Item Code", key: "itemCode"},
+                {label: "PO Number", key: "poNo"},
+                {label: "Line Number", key: "lineNo"},
+                {label: "Invoice Quantity", key: "invoiceQuantity"}
+            ]
+        },
+        {
+            groupTitle: "Pricing Information",
+            fields: [
+                {label: "Basic Rate", key: "basicRate"},
+                {label: "Basic Value", key: "basicValue"},
+                {label: "Freight", key: "freight"},
+                {label: "PF Charges", key: "pfCharges"},
+                {label: "Other Charges", key: "otherCharges"},
+                {label: "Sub Total", key: "subTotal"}
+            ]
+        },
+        {
+            groupTitle: "Tax Values",
+            fields: [
+                {label: "Additional Tax Value", key: "additionalTaxValue"},
+                {label: "Tax Base Value", key: "taxBaseValue"},
+                {label: "TCS Value", key: "tcsValue"}
+            ]
+        },
+        {
+            groupTitle: "CGST Information",
+            fields: [
+                {label: "CGST Percent", key: "cgstPercent"},
+                {label: "CGST Amount", key: "cgstAmt"}
+            ]
+        },
+        {
+            groupTitle: "SGST Information",
+            fields: [
+                {label: "SGST Percent", key: "sgstPercent"},
+                {label: "SGST Amount", key: "sgstAmt"}
+            ]
+        },
+        {
+            groupTitle: "UTGST Information",
+            fields: [
+                {label: "UTGST Percent", key: "utgstPercent"},
+                {label: "UTGST Amount", key: "utgstAmt"}
+            ]
+        },
+        {
+            groupTitle: "IGST Information",
+            fields: [
+                {label: "IGST Percent", key: "igstPercent"},
+                {label: "IGST Amount", key: "igstAmt"}
+            ]
+        },
+        {
+            groupTitle: "Total Amount",
+            fields: [
+                {label: "Total Amount", key: "totalAmt"}
+            ]
+        },
+        {
+            groupTitle: "E-Way Bill Information",
+            fields: [
+                {label: "E-Way Bill Number", key: "eWayBillNo"},
+                {label: "E-Way Bill Date", key: "eWayBillDate"},
+                {label: "Vehicle Number", key: "vehicleNo"}
+            ]
+        },
+        {
+            groupTitle: "Delivery Information",
+            fields: [
+                {label: "Bill To Ship To Code", key: "billToShipToCode"},
+                {label: "Delivery Challan Number", key: "deliveryChallanNumber"},
+                {label: "Delivery Challan Date", key: "deliveryChallanDate"},
+                {label: "Delivery Challan Amount", key: "deliveryChallanAmt"}
+            ]
+        },
+        {
+            groupTitle: "Additional Information",
+            fields: [
+                {label: "Remarks", key: "remarks"},
+                {label: "Signed QR Code", key: "signedQrCode"},
+                {label: "EDI Number", key: "ediNumber"}
+            ]
+        }
+    ];
+
+    function renderInvoiceFields(extractedData, containerElementId) {
+        const container = document.getElementById(containerElementId);
+        if (!container || !extractedData) {
+            // console.warn("Container or extractedData not found for ID:", containerElementId, extractedData);
+            return;
+        }
+        container.innerHTML = ''; // Clear previous content if any
+
+        fieldConfig.forEach(group => {
+            const groupDiv = document.createElement('div');
+            groupDiv.className = 'mb-4';
+
+            const groupHeader = document.createElement('h6');
+            groupHeader.className = 'text-secondary border-bottom pb-2';
+            groupHeader.textContent = group.groupTitle;
+            groupDiv.appendChild(groupHeader);
+
+            group.fields.forEach(field => {
+                const fieldRowDiv = document.createElement('div');
+                fieldRowDiv.className = 'field-row';
+
+                const rowDiv = document.createElement('div');
+                rowDiv.className = 'row';
+
+                const labelDiv = document.createElement('div');
+                labelDiv.className = 'col-sm-4 field-label';
+                labelDiv.textContent = field.label + ":";
+                rowDiv.appendChild(labelDiv);
+
+                const valueDiv = document.createElement('div');
+                valueDiv.className = 'col-sm-8 field-value';
+                const value = extractedData[field.key];
+
+                if (value === null || value === undefined || String(value).trim() === '') {
+                    valueDiv.textContent = 'Not Found';
+                    valueDiv.classList.add('not-found');
+                } else {
+                    valueDiv.textContent = String(value);
+                }
+                rowDiv.appendChild(valueDiv);
+                fieldRowDiv.appendChild(rowDiv);
+                groupDiv.appendChild(fieldRowDiv);
+            });
+            container.appendChild(groupDiv);
+        });
+    }
+
+    function downloadText(elementId, filename) {
+        const textarea = document.getElementById(elementId);
+        if (!textarea || !textarea.value) {
+            alert("No text content to download for " + elementId);
+            return;
+        }
+        const text = textarea.value;
+        const element = document.createElement('a');
+
+        // Create a Blob with UTF-8 BOM for better compatibility
+        const bom = new Uint8Array([0xEF, 0xBB, 0xBF]); // UTF-8 BOM
+        const blob = new Blob([bom, text], {type: 'text/plain;charset=utf-8'});
+        element.href = URL.createObjectURL(blob);
+        element.download = filename;
+
+        document.body.appendChild(element); // Required for Firefox
+        element.click();
+
+        document.body.removeChild(element);
+        URL.revokeObjectURL(element.href); // Clean up
+    }
+
+    // Ensure this script runs after the DOM is fully loaded
+    document.addEventListener('DOMContentLoaded', function () {
+        if (pdfData && pdfData.success === true) {
+            if (pdfData.invoiceType === 'multiple' && pdfData.multipleInvoices && pdfData.multipleInvoices.length > 0) {
+                pdfData.multipleInvoices.forEach((invoice, index) => {
+                    if (invoice.extractedData) {
+                        renderInvoiceFields(invoice.extractedData, `invoiceDataContainer${index + 1}`);
+                    }
+                });
+            } else if (pdfData.invoiceType !== 'multiple' && pdfData.extractedData) {
+                renderInvoiceFields(pdfData.extractedData, 'singleInvoiceDataContainer');
+            }
+        }
+    });
+    /*]]>*/
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

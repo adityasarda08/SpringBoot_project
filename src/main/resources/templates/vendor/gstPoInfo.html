@@ -1,0 +1,886 @@
+<!DOCTYPE html>
+<html data-bs-theme="light" lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title> Po Info Details </title>
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" th:href="@{/css/fromformat.css}"/>
+</head>
+
+<body>
+<div class="container">
+
+    <!--  Form Section Start -->
+    <section>
+        <div class="from_title text-center">
+            <label>PO Information Details Updation </label>
+        </div>
+        <div class="mt-2"></div>
+        <form th:object="${poinfoDetails}" onsubmit="event.preventDefault()">
+
+            <div class="row"></div>
+            <div class="button_row">
+                <a class="from_link" th:href="@{/gstPoInfo/new}">New</a>
+                <a class="from_link" th:href="@{/gstPoInfo/list}">Po Info List</a>
+
+                <button class="btn btn-primary" type="submit"
+                        onclick="collectFormData()">Save&nbsp;
+                </button>
+
+                <button class="btn-delete" type="button"
+                        onclick="deletePoInfo()">Delete
+                </button>
+
+                <button class="btn-delete" type="button"
+                        onclick="deletePoInfoByItemCode()">Delete Row
+                </button>
+
+            </div>
+
+            <!-- Error Container -->
+
+            <div class="mt-2"></div>
+            <div class="row mb-2" style="margin: 2px;">
+                <div
+                        class="col-md-2 col-lg-2 col-xl-2 text-sm-start text-md-start text-lg-end text-xl-end">
+                    <label class="col-form-label flex-shrink-1">Vendor Code</label>
+                </div>
+                <div class="form-group col-md-3 col-lg-2 offset-md-0">
+                    <input class="form-control form-control-sm" type="text"
+                           id="vendorCode" name="vendorCode"
+                           onclick="showVendorList('vendorList')" required="required"
+                           autocomplete="off" onfocusout="getPoInfoList()">
+                    <div id="dropdown-content-vendorList" class="dropdown-content" ></div>
+                </div>
+
+                <div class="col-md-2 col-lg-2 text-sm-start text-md-start text-lg-end text-xl-end">
+                    <label class="col-form-label flex-shrink-1">Vendor Name</label>
+                </div>
+                <div class="col-lg-3">
+                    <input class="form-control form-control-sm" type="text"
+                           id="vendorName" name="vendorName" readonly="readonly"
+                           required="required">
+                </div>
+                <div
+                        class="col-lg-2 text-sm-start text-md-start text-lg-end text-xl-end">
+                    <label class="col-form-label text-end flex-shrink-1">Plant
+                        Code</label>
+                </div>
+                <div class="col">
+                    <input class="form-control form-control-sm" id="vendorPlantCode"
+                           name="vendorPlantCode" type="text" readonly="readonly">
+                </div>
+
+                <input type="hidden" id="vendorState" name="vendorState">
+                <input type="hidden" id="gstNo" name="gstNo">
+
+            </div>
+
+
+            <!--  Start of Table Scroll pan  -->
+
+            <section>
+                <div class="overflow-auto" data-bs-spy="scroll">
+                    <div class="table-responsive border-5 border-primary">
+                        <datalist id="itemList"></datalist>
+                        <!--  Start of Table  -->
+                        <table class="table table-sm table-bordered tbl" id="my-table">
+                            <thead>
+                            <tr>
+                                <th class="text-center " style="width: 120px;font-size: 12px;">ItemCode</th>
+                                <th class="text-center" style="width: 250px;font-size: 12px;">ItemName</th>
+                                <th class="text-center" style="width: 100px;font-size: 12px;">Unit</th>
+                                <th class="text-center" style="width: 80px;font-size: 12px;">Rate</th>
+                                <th class="text-center" style="width: 60px;font-size: 12px;">poNumber</th>
+                                <th class="text-center" style="width: 80px;font-size: 12px;">poLineNumber</th>
+                                <th class="text-center" style="width: 80px;font-size: 12px;">CGST</th>
+                                <th class="text-center" style="width: 80px;font-size: 12px;">SGST</th>
+                                <th class="text-center" style="width: 80px;font-size: 12px;">IGST</th>
+                                <th class="text-center" style="width: 80px;font-size: 12px;">UTGST</th>
+                                <th class="text-center" style="font-size: 12px;">PO Detail</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td class="p-0 m-0">
+                                    <input type="text" name="itemCode1" id="itemCode1" list="itemList"
+                                           onclick="showItemDropdown(1)" autocomplete="off" style="width: 120px;">
+                                </td>
+                                <div id="dropdown-content-1" class="dropdown-content">
+                                </div>
+
+                                <td class="p-0"><input type="text" name="itemName1"
+                                                       id="itemName1" style="width: 250px;"></td>
+                                <td class="p-0"><input type="text" name="itemUnit1"
+                                                       id="itemUnit1" style="width: 100px;"></td>
+                                <td class="p-0"><input type="Number" name="itemRate1"
+                                                       id="itemRate1" style="width: 80px;" value="0" step="any"></td>
+                                <td class="p-0"><input type="Number" name=poNumber1
+                                                       id="poNumber1" value="0"></td>
+                                <td class="p-0"><input type="Number"
+                                                       name="poLineNumber1" id="poLineNumber1"
+                                                       style="width: 80px;" value="0" step="any"></td>
+                                <td class="p-0"><input type="Number" name="cgstPer1"
+                                                       id="cgstPer1" style="width: 80px;" value="0" step="any"></td>
+                                <td class="p-0"><input type="Number" name="sgstPer1"
+                                                       id="sgstPer1" style="width: 80px;" value="0" step="any"></td>
+                                <td class="p-0"><input type="Number" name="igstPer1"
+                                                       id="igstPer1" style="width: 80px;" value="0" step="any"></td>
+                                <td class="p-0"><input type="Number" name="utgstPer1"
+                                                       id="utgstPer1" style="width: 80px;" value="0" step="any"></td>
+                                <!--                                <td class="p-0"><input type="text" name="poRemark1"-->
+                                <!--                                                       id="poRemark1"></td>-->
+                                <td><input type="hidden" id="_id1" name="_id1">
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+
+                        <!--  End of Table  -->
+
+                    </div>
+
+                    <!--  The following code is for adding button on screen after table end  -->
+                    <div class="row mt-2" style="margin: 2px;">
+                        <div class="col d-flex gap-1">
+                            <button class="btn btn-primary btn-sm" type="button"
+                                    onclick="appendRow()">Add Row
+                            </button>
+                            <button class="btn btn-danger btn-sm" type="button"
+                                    onclick="removeSelectedRow()">Remove Row
+                            </button>
+                        </div>
+                    </div>
+
+                    <!--  The following code is for adding button on screen after table end  End -->
+
+
+                </div>
+                <!-- Cloisng of scroll pan  -->
+
+            </section>
+
+            <!--  Start of Table Scroll pan  -->
+
+
+            <!-- Global Error Display -->
+            <!-- <tr th:each="poinfoDetail, iterStat : ${poinfoDetails}"><td>
+            <div th:if="${#fields.hasErrors('poinfoDetails[' + iterStat.index + '].poNumber')}" th:errors="*{poinfoDetails[__${iterStat.index}__].poNumber}"></div> -->
+            </td>
+            </tr>
+            <span id="error-container"></span>
+            <!-- <div th:if="${allErrors}">
+                <div class="alert alert-danger" th:text="${allErrors}" >Error
+                    message here</div>
+            </div> -->
+
+        </form>
+
+    </section>
+    <!--  Form Section End -->
+</div>
+
+<!-- This code is used for  table alteration
+ exmpale . 1. adding new row
+           2. deleting row   -->
+
+
+<script th:inline="javascript">
+    var table = document.getElementById('my-table');// table reference
+    var rindex;
+
+    function appendRow() {
+        var tbl1 = document.getElementById('my-table'); // reference to the table
+        var rowCount = tbl1.rows.length; // get the number of rows
+        var itemCode1 = document
+            .getElementById("itemCode" + (rowCount-1)).value;
+        if (itemCode1.trim() === "") {
+            alert("itemcode in last row is blank");
+        } else {
+            var tbl = document.getElementById('my-table'), // table reference
+
+                row = tbl.insertRow(tbl.rows.length), // append table row
+                i;
+
+            // insert table cells to the new row
+            for (i = 0; i <= tbl.rows[0].cells.length; i++) {
+                createCell(row.insertCell(), i, 'row');
+            }
+        }
+
+    }
+
+
+    var index = 0;
+    function createCell(cell, text, style) {
+
+        var t1 = document.createElement("input"); // create input element
+        var tb1 = document.getElementById('my-table');
+        cell.setAttribute('class', "p-0");
+        index = tb1.rows.length - 1;
+        if (text == 0) {
+            t1.id = "itemCode" + index;
+            t1.name = 'itemCode' + index;
+            t1.setAttribute('type', 'text'); // Ensure the input type is set to text
+            t1.setAttribute('style', "width: 120px;");
+            t1.setAttribute('oninput', "setItemDetails(" + index + ")");
+            t1.setAttribute('oninput', "showItemDropdown(" + index + ")");
+            t1.setAttribute('onclick', "showItemDropdown(" + index + ")");
+            t1.setAttribute('list', "itemList");
+            t1.setAttribute('autocomplete', 'off'); // Disable autocomplete
+            t1.required = true;
+            // Create and append the dropdown content div
+            var dropdownDiv = document.createElement("div");
+            dropdownDiv.id = "dropdown-content-" + index;
+            dropdownDiv.className = "dropdown-content";
+            cell.appendChild(dropdownDiv);
+        }
+
+        if (text == 1) {
+            t1.id = "itemName" + index; // create the id for input element
+            t1.name = 'itemName' + index;
+            t1.setAttribute('style', "width: 250px;");
+            t1.setAttribute('readonly', true);
+            t1.required = true;
+        }
+
+        if (text == 2) {
+            t1.setAttribute('style', "width: 100px;");
+            t1.id = "itemUnit" + index;
+            t1.name = "itemUnit" + index;
+            t1.required = true;
+            t1.setAttribute('readonly', true);
+        }
+
+        if (text == 3) {
+
+            t1.id = "itemRate" + index;
+            t1.name = "itemRate" + index;
+            t1.type = "number";
+            t1.value = "0";
+            t1.setAttribute('style', "width: 80px;");
+            t1.step = "any";
+
+        }
+        if (text == 4) {
+            t1.id = "poNumber" + index;
+            t1.name = "poNumber" + index;
+            t1.type = "number";
+            t1.value = "0";
+            t1.step = "any";
+        }
+
+        if (text == 5) {
+            t1.setAttribute('style', "width: 80px;");
+            t1.id = "poLineNumber" + index;
+            t1.name = "poLineNumber" + index;
+            t1.type = "Number"
+            t1.step = "any";
+            t1.value = "0";
+        }
+        if (text == 6) {
+            t1.setAttribute('style', "width: 80px;");
+
+            t1.id = "cgstPer" + index;
+            t1.name = "cgstPer" + index;
+            t1.type = "Number"
+            t1.step = "any";
+            t1.value = "0";
+        }
+
+        if (text == 7) {
+            t1.setAttribute('style', "width: 80px;");
+
+            t1.id = "sgstPer" + index;
+            t1.name = "sgstPer" + index;
+            t1.type = "Number"
+            t1.step = "any";
+            t1.value = "0";
+        }
+
+        if (text == 8) {
+            t1.id = "igstPer" + index;
+            t1.name = "igstPer" + index; // create the id for input element
+            t1.type = "Number"
+            t1.step = "any";
+            t1.value = "0";
+            t1.setAttribute('style', "width: 80px;");
+
+        }
+
+        if (text == 9) {
+            t1.setAttribute('style', "width: 80px;");
+
+            t1.id = "utgstPer" + index;
+            t1.name = "utgstPer" + index;
+            t1.step = "any";
+            t1.value = "0";
+            t1.type = "Number"
+        }
+
+        if (text == 10) {
+            t1.id = "poRemark" + index;
+            t1.name = "poRemark" + index;
+            t1.value = "-";
+
+        }
+        if (text == 11) {
+            t1.id = "_id" + index;
+            t1.name = "_id" + index;
+            t1.type = "hidden"
+
+        }
+
+        txt = document.createTextNode(text); // create text node
+        t1.appendChild(txt); // append text node to the DIV
+        cell.appendChild(t1); // append DIV to the table cell
+        selectedRowToInput();
+    }
+
+    function selectedRowToInput() {
+        for (var i = 1; i < table.rows.length; i++) {
+            table.rows[i].onclick = function () {
+                rIndex = this.rowIndex;
+            };
+        }
+    }
+</script>
+
+
+<!-- The following java script is used for showing the Po Info data on Screen and
+     sending the Po Info data to our controller class -->
+
+
+<script th:inline="javascript">
+    const poInfoList = [[${gstPoInfo}]]; // Assuming InvoiceMaster is a JSON array
+    console.log("Data " ,poInfoList);
+    var i = 1;
+    for (const poInfoDeatils in poInfoList) {
+        var table = document.getElementById('my-table');
+
+        /* We are getting effictive Date From Po Info List And formating the Date for our required type
+         that is Date Type  */
+
+        // const formattedDate = date.toISOString().split('T')[0];
+        // const date = new Date(poInfoList[poInfoDeatils].poNumber);
+
+        // Set values for each input field in the current row
+        document.getElementById('vendorCode').value = poInfoList[poInfoDeatils].vendorCode;
+        document.getElementById('vendorCode').readOnly = true; // Make itemcode read-only
+        document.getElementById('vendorName').value = poInfoList[poInfoDeatils].vendorName;
+        document.getElementById('vendorPlantCode').value = poInfoList[poInfoDeatils].vendorPlantCode;
+        document.getElementById('itemCode' + i).value = poInfoList[poInfoDeatils].itemCode;
+        document.getElementById('itemCode' + i).readOnly = true; // Make itemcode read-only
+        document.getElementById('itemName' + i).value = poInfoList[poInfoDeatils].itemName;
+        document.getElementById('itemUnit' + i).value = poInfoList[poInfoDeatils].itemUnit;
+        document.getElementById('itemRate' + i).value = poInfoList[poInfoDeatils].itemRate;
+        document.getElementById('poNumber' + i).value = poInfoList[poInfoDeatils].poNumber;
+        document.getElementById('poLineNumber' + i).value = poInfoList[poInfoDeatils].poLineNumber;
+        document.getElementById('cgstPer' + i).value = poInfoList[poInfoDeatils].cgstPer;
+        document.getElementById('sgstPer' + i).value = poInfoList[poInfoDeatils].sgstPer;
+        document.getElementById('igstPer' + i).value = poInfoList[poInfoDeatils].igstPer;
+        document.getElementById('utgstPer' + i).value = poInfoList[poInfoDeatils].utgstPer;
+        document.getElementById('_id' + i).value = poInfoList[poInfoDeatils]._id;
+        i++;
+        if (((table.rows.length) - 1) == poInfoList.length) {
+        } else {
+            appendRow();
+        }
+    }
+
+
+    // document.addEventListener('DOMContentLoaded', function () {
+    //     // Your function here showItemDropdown(0); // Replace with your desired rowIndex or function call
+    //     getPoInfoList();
+    // });
+
+    function getPoInfoList() {
+        var vendorCode = document.getElementById('vendorCode').value;
+        var vendorPlantCode = document.getElementById('vendorPlantCode').value;
+        selectedRowToInput();
+
+        if (vendorCode && vendorPlantCode) {
+            var item_list_request = new XMLHttpRequest();
+            var url = "/gstPoInfo/get/" + vendorCode + "/" + vendorPlantCode; // Construct the URL with the actual vendorCode
+            item_list_request.open("GET", url, true);
+            item_list_request.send();
+
+            item_list_request.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+                    if (this.responseText.length > 0) {
+                        var data = JSON.parse(this.responseText);
+                        var i = 1;
+                        data.forEach(function (poInfoDetails) {
+                            var table = document.getElementById('my-table');
+                            // const date = new Date(poInfoDetails.poNumber);
+                            // const formattedDate = date.toISOString().split('T')[0];
+                            // Set values for each input field in the current row
+                            document.getElementById('vendorCode').value = poInfoDetails.vendorCode;
+                            document.getElementById('vendorCode').readOnly = true; // Make itemcode read-only
+                            document.getElementById('vendorName').value = poInfoDetails.vendorName;
+                            document.getElementById('vendorPlantCode').value = poInfoDetails.vendorPlantCode;
+                            document.getElementById('itemCode' + i).value = poInfoDetails.itemCode;
+                            document.getElementById('itemCode' + i).readOnly = true; // Make itemcode read-only
+                            document.getElementById('itemName' + i).value = poInfoDetails.itemName;
+                            document.getElementById('itemUnit' + i).value = poInfoDetails.itemUnit;
+                            document.getElementById('itemRate' + i).value = poInfoDetails.itemRate;
+                            document.getElementById('poNumber' + i).value = poInfoDetails.poNumber;
+                            document.getElementById('poLineNumber' + i).value = poInfoDetails.poLineNumber;
+                            document.getElementById('cgstPer' + i).value = poInfoDetails.cgstPer;
+                            document.getElementById('sgstPer' + i).value = poInfoDetails.sgstPer;
+                            document.getElementById('igstPer' + i).value = poInfoDetails.igstPer;
+                            document.getElementById('utgstPer' + i).value = poInfoDetails.utgstPer;
+                            // document.getElementById('poRemark' + i).value = poInfoDetails.poRemark;
+                            document.getElementById('_id' + i).value = poInfoDetails._id;
+                            i++;
+                            if (((table.rows.length) - 1) == data.length) {
+                            } else {
+                                appendRow();
+                            }
+                        });
+                    }
+                } else if (this.readyState == 4) {
+                    console.error("Error fetching data: " + this.status); // Log any error status
+                }
+            };
+        }
+    }
+
+
+    function deletePoInfo() {
+        var vendorCode = document.getElementById('vendorCode').value;
+        var vendorPlantCode = document.getElementById('vendorPlantCode').value;
+        selectedRowToInput();
+        if (vendorCode && vendorPlantCode) {
+            var poInfo_delete_request = new XMLHttpRequest();
+            var url = "/gstPoInfo/delete/" + vendorCode + "/" + vendorPlantCode; // Construct the URL with the actual vendorCode
+            poInfo_delete_request.open("GET", url, true);
+            poInfo_delete_request.send();
+            poInfo_delete_request.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+                    window.location.href = "/poinfo/list"; // Redirect to the list page after successful save
+                } else if (this.readyState == 4) {
+                    console.error("Error fetching data: " + this.status); // Log any error status
+                }
+            };
+        } else {
+            alert("Please select Vendor Code First ")
+        }
+    }
+
+
+    function getSelectedRow() {
+        var table = document.getElementById('my-table');
+        var rIndex = -1; // Initialize rIndex with a default value
+
+        for (var i = 1; i < table.rows.length; i++) {
+            table.rows[i].onclick = function() {
+                rIndex = this.rowIndex;
+                console.log("Selected Row Index: " + rIndex); // Log the selected row index
+            };
+        }
+        return rIndex;
+    }
+
+    var rIndex;
+
+    document.addEventListener('DOMContentLoaded', function() {
+        var table = document.getElementById('my-table');
+        table.addEventListener('click', function(event) {
+            var target = event.target;
+            // Ensure the target is within a table row
+            while (target && target.nodeName !== 'TR') {
+                target = target.parentNode;
+            }
+            if (target && target.rowIndex !== undefined) {
+                rIndex = target.rowIndex;
+            }
+        });
+    });
+
+    function removeSelectedRow(index) {
+        var table = document.getElementById('my-table');
+        var tbody = table.tBodies[0];
+        if(tbody.rows.length > 1 ) {
+            tbody.deleteRow(tbody.rows.length  - 1);
+        }
+       else {
+          alert("last row cannot be removed to add the further")
+       }
+    }
+
+
+    function deletePoInfoByItemCode() {
+        var vendorCode = document.getElementById('vendorCode').value;
+        var vendorPlantCode = document.getElementById('vendorPlantCode').value;
+        if (vendorCode && vendorPlantCode ) {
+            var ItemCode = document.getElementById('itemCode' + rIndex).value ;
+            console.log("Item Code : " + ItemCode);
+            if(ItemCode.length > 0){
+                var poInfo_delete_request = new XMLHttpRequest();
+                var url = "/gstPoInfo/delete/" + vendorCode+"/"+vendorPlantCode+"/"+ItemCode; // Construct the URL with the actual vendorCode
+                poInfo_delete_request.open("GET", url, true);
+                poInfo_delete_request.send();
+                poInfo_delete_request.onreadystatechange = function () {
+                    if (this.readyState == 4 && this.status == 200) {
+                        //window.location.href = contextPath + "/poinfo/list"; // Redirect to the list page after successful save
+                        removeSelectedRow(rIndex);
+                    } else if (this.readyState == 4) {
+                        console.error("Error fetching data: " + this.status); // Log any error status
+                    }
+                };
+            }else{
+                alert("Please select Item Code First ");
+            }
+
+        }else{
+            alert("Please select Vendor Code First ");
+        }
+    }
+
+
+
+    // Function to get the base context path
+    function getContextPath() {
+        var path = window.location.pathname;
+        return path.substring(0, path.indexOf("/", 2));
+    }
+
+
+
+    function saveErrorList() {
+
+
+        var errorMessage = "";
+
+        return errorMessage;
+    }
+
+    function collectFormData() {
+
+        var ERROR_MESSAGE_LIST = saveErrorList();
+
+        if(ERROR_MESSAGE_LIST.length === 0) {
+            var table = document.getElementById('my-table');
+            var x = table.rows.length; // Use 'table' instead of 'document.getElementById("my_table")'
+            var jsonData = [];
+
+            // Iterate over each row of the table
+
+            for (var i = 1; i < x; i++) {
+
+                var rowData = {
+                    "vendorCode": document.getElementById('vendorCode').value,
+                    "vendorName": document.getElementById('vendorName').value,
+                    "vendorPlantCode": document.getElementById('vendorPlantCode').value,
+                    "itemCode": document.getElementById('itemCode' + i).value,
+                    "_id": document.getElementById('_id' + i).value,
+                    "itemName": document.getElementById('itemName' + i).value,
+                    "itemUnit": document.getElementById('itemUnit' + i).value,
+                    "itemRate": document.getElementById('itemRate' + i).value,
+                    "poNumber": document
+                        .getElementById('poNumber' + i).value,
+                    "poLineNumber": document
+                        .getElementById('poLineNumber' + i).value,
+                    "cgstPer": document.getElementById('cgstPer' + i).value,
+                    "sgstPer": document.getElementById('sgstPer' + i).value,
+                    "igstPer": document.getElementById('igstPer' + i).value,
+                    "utgstPer": document.getElementById('utgstPer' + i).value,
+                    // "poRemark": document.getElementById('poRemark' + i).value,
+
+                };
+
+                jsonData.push(rowData); // Add rowData to the jsonData array
+            }
+
+            var contextPath = getContextPath();
+            console.log("Context Path Name " + contextPath);
+
+            var jsonString = JSON.stringify(jsonData); // Convert jsonData array to JSON string
+            var vendor_list_request = new XMLHttpRequest();
+            var saveLink = "/gstPoInfo/save";
+            console.log("Full URl " + saveLink);
+
+            vendor_list_request.open("POST", saveLink, true);
+            vendor_list_request.setRequestHeader('Content-Type',
+                'application/json'); // Set content type if sending JSON data
+            vendor_list_request.send(jsonString);
+            vendor_list_request.onreadystatechange = function () {
+                //console.log("Status of print"+this.status);
+                if (this.readyState == 4) {
+                    if (this.status == 200) {
+                        //console.log("Vendor List " + this.responseText);
+                        window.location.href ="/gstPoInfo/list"; // Redirect to the list page after successful save
+                    } else if (this.status == 400) {
+
+                        // Assuming server sends validation errors with status 400
+                        var errors = this.responseText;
+                        console.log("Error LIst " + errors);
+                        displayValidationErrors(errors);
+
+                    } else {
+                        // Handle other statuses
+                        console.log("Unexpected response status:", this.status);
+                    }
+                }
+            };
+        }else{
+            alert(ERROR_MESSAGE_LIST);
+        }
+    }
+
+    function displayValidationErrors(errors) {
+        var errorContainer = document.getElementById('error-container');
+        errorContainer.innerHTML = '';
+        var errorElement = document.createElement('div');
+        errorElement.className = 'alert alert-danger m-1 p-0 mt-2 mb-2';
+        errorElement.textContent = errors;
+        errorContainer.appendChild(errorElement);
+    }
+
+</script>
+
+<!-- The above Script For Table Alteration
+ The blow Script For Vendor And Item Auto Search -->
+
+<script th:inline="javascript">
+
+    function getContextPath() {
+        var path = window.location.pathname;
+        return path.substring(0, path.indexOf("/", 2));
+    }
+
+    /*
+        this below code is us for getting the vendor list from vendor controller the
+        URL is vendor/searchlist for datalist
+        after getting vendor list we set that vendor list to our HTML datalist object.
+     */
+
+    var contextPath = getContextPath();
+
+    function hideAllDropdowns() {
+        var dropdowns = document.getElementsByClassName('dropdown-content');
+        for (var i = 0; i < dropdowns.length; i++) {
+            dropdowns[i].style.display = 'none';
+        }
+    }
+
+
+    function fetchVendorGST() {
+        var vendorCode = document.getElementById("vendorCode").value;
+        var xhr = new XMLHttpRequest();
+        xhr.open("GET", "/vendors/getGstNo/" + vendorCode, true);
+        xhr.send();
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState == 4 && xhr.status == 200) {
+                document.getElementById("gstNo").innerText = xhr.responseText;
+            }
+        };
+
+    }
+
+    function showVendorList(vendorList) { // location=finish, raw, scrap
+        // Function to hide all dropdowns
+
+        var vendor_list_request = new XMLHttpRequest();
+        vendor_list_request.open("GET", "/vendors/searchlist", true);
+        vendor_list_request.send();
+        vendor_list_request.onreadystatechange = function () {
+            if (this.readyState == 4 && this.status == 200) {
+
+                var data = JSON.parse(this.responseText);
+
+                hideAllDropdowns(); // Hide all other dropdowns before showing the new one
+                dropdownContent = document.getElementById('dropdown-content-vendorList');
+                dropdownContent.innerHTML = '<input type="text" id="searchVendorInput" placeholder="Search for Vendor Code" style="width: 300px;">';
+                document.getElementById('searchVendorInput').addEventListener('keyup', function (event) {
+                    filterTable(event, 'vendorList');
+                });
+
+                // Clear previous items and add search input
+                var table = document.createElement('table');
+                table.id = "vendorList";
+                table.name = "vendorList";
+
+                var header = table.createTHead();
+                var headerRow = header.insertRow(0);
+                var headers = ["Vendor Code", "Plant Code","Vendor Name"];
+
+                headers.forEach(function (headerText) {
+                    var th = document.createElement('th');
+                    th.appendChild(document.createTextNode(headerText));
+                    headerRow.appendChild(th);
+                });
+
+                var body = table.createTBody();
+                data.forEach(function (item) {
+                    var row = body.insertRow();
+                    var cellVendorCode = row.insertCell();
+                    cellVendorCode.appendChild(document.createTextNode(item.vendorCode));
+
+                    var cellPlantCode = row.insertCell();
+                    cellPlantCode.appendChild(document.createTextNode(item.vendorPlantCode));
+
+                    // var cellPartyCode = row.insertCell();
+                    // cellPartyCode.appendChild(document.createTextNode(item.partyCode));
+
+                    var cellVendorName = row.insertCell();
+                    cellVendorName.appendChild(document.createTextNode(item.vendorName));
+
+                    // var cellVendorAddress = row.insertCell();
+                    // cellVendorAddress.appendChild(document.createTextNode(item.vendorOfficeAddress));
+
+                    // var cellVendorState = row.insertCell();
+                    // cellVendorState.appendChild(document.createTextNode(item.vendorState));
+
+                    row.onclick = function () {
+                        document.getElementById("vendorCode").value = item.vendorCode;
+                        document.getElementById("vendorName").value = item.vendorName;
+                        document.getElementById("vendorPlantCode").value = item.vendorPlantCode;
+                        // document.getElementById("vendorState").value = item.vendorState;
+                        fetchVendorGST();
+                        document.getElementById("vendorCode").focus();
+                        dropdownContent.style.display = "none"; // Hide dropdown after selection
+                    };
+                });
+                dropdownContent.appendChild(table);
+                dropdownContent.style.display = "block"; // Show dropdown
+            }
+        };
+    }
+
+    function showItemDropdown(rowIndex) {
+        var vendorCode = document.getElementById('vendorCode').value;
+        var vendorPlantCode = document.getElementById('vendorPlantCode').value;
+        selectedRowToInput();
+        if (vendorCode && vendorPlantCode) {
+            var item_list_request = new XMLHttpRequest();
+            item_list_request.open("GET", "/Item/searchlist", true);
+            item_list_request.send();
+            item_list_request.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+                    var data = JSON.parse(this.responseText);
+
+                    var dropdownContent = document.getElementById('dropdown-content-' + rowIndex);
+
+                    dropdownContent.innerHTML = `<input type="text" id="searchItemInput${rowIndex}" placeholder="Search for items..">`;
+                    document.getElementById(`searchItemInput${rowIndex}`).addEventListener('keyup', function (event) {
+                        filterTable(event, rowIndex);
+                    });
+
+                    // Clear previous items and add search input
+                    var table = document.createElement('table');
+                    table.id = "poList";
+                    table.name = "poList";
+
+                    var header = table.createTHead();
+                    var headerRow = header.insertRow(0);
+                    var headers = ["Item Code", "Item Name", "Unit"];
+
+                    headers.forEach(function (headerText) {
+                        var th = document.createElement('th');
+                        th.appendChild(document.createTextNode(headerText));
+                        headerRow.appendChild(th);
+                    });
+
+                    var body = table.createTBody();
+                    data.forEach(function (item) {
+
+                        var row = body.insertRow();
+                        var cellItemCode = row.insertCell();
+                        cellItemCode.appendChild(document.createTextNode(item.itemCode));
+                        var cellItemName = row.insertCell();
+                        cellItemName.appendChild(document.createTextNode(item.itemName));
+                        var cellItemUnit = row.insertCell();
+                        cellItemUnit.appendChild(document.createTextNode(item.itemUnit));
+
+                        // var cellitemTypeName = row.insertCell();
+                        // cellitemTypeName.appendChild(document.createTextNode(item.itemTypeName));
+                        row.onclick = function () {
+
+                            var existingItemCodes = [];
+                            var table = document.getElementById('my-table');
+                            var x = table.rows.length;
+
+                            // Iterate through each row of the table to check for existing item codes
+                            for (var j = 1; j < x; j++) {
+                                // Exclude the current row (rowIndex) from the check
+                                var itemCodeElement = document.getElementById('itemCode' + j);
+                                if (j !== rowIndex) {
+                                    // Push the item code of each row into the existingItemCodes array
+                                    console.log('itemCode' + j)
+                                    existingItemCodes.push(document.getElementById('itemCode' + j).value);
+                                    existingItemCodes.push(itemCodeElement.value);
+                                }
+                            }
+
+                            // Check if the selected item code already exists in the table
+                            if (existingItemCodes.includes(item.itemCode)) {
+                                alert("Item code " + item.itemCode + " already exists in the table.");
+                                return;
+                            }
+
+                            document.getElementById("itemCode" + rowIndex).value = item.itemCode;
+                            document.getElementById("itemName" + rowIndex).value = item.itemName;
+                            document.getElementById("itemUnit" + rowIndex).value = item.itemUnit;
+                            dropdownContent.style.display = "none"; // Hide dropdown after selection
+                        };
+                    });
+                    dropdownContent.appendChild(table);
+                    dropdownContent.style.display = "block"; // Show dropdown
+                }
+            };
+        }
+    }
+
+
+    function filterTable(event, rowIndex) {
+        var input, filter, table, tr, td, i, j, txtValue;
+        filter = event.target.value.toUpperCase();
+        table = document.querySelector('#dropdown-content-' + rowIndex + ' table');
+        tr = table.getElementsByTagName('tr');
+        // Loop through all table rows, and hide those who don't match the search query
+        for (i = 1; i < tr.length; i++) {
+            // Start from 1 to skip the header row
+            tr[i].style.display = 'none'; // Assume row is hidden
+            td = tr[i].getElementsByTagName('td');
+            for (j = 0; j < td.length; j++) {
+                if (td[j]) {
+                    txtValue = td[j].textContent || td[j].innerText;
+                    if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                        tr[i].style.display = ''; // Show row break; // If match found, show the row and skip to the next row
+                    }
+                }
+            }
+        }
+    }
+
+
+    // Function to hide all dropdowns
+    function hideAllDropdowns() {
+        var dropdowns = document.getElementsByClassName('dropdown-content');
+        for (var i = 0; i < dropdowns.length; i++) {
+            dropdowns[i].style.display = 'none';
+        }
+    }
+    // Optionally hide dropdowns when clicking outside
+    document.addEventListener('click', function (event) {
+        var dropdowns = document.getElementsByClassName('dropdown-content');
+        for (var i = 0; i < dropdowns.length; i++) {
+            if (!dropdowns[i].contains(event.target)) {
+                dropdowns[i].style.display = 'none';
+            }
+        }
+    });
+</script>
+
+<script
+        src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,628 @@
+<!-- Created with Jaspersoft Studio version 7.0.1.final using JasperReports Library version 7.0.1-573496633c2b4074e32f433154b543003f7d2498  -->
+<jasperReport name="BajajBarcode" language="java" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="fe15f0f1-917f-4737-bdcb-e731c92037f0">
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="table">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<parameter name="vendorCode" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<field name="invoiceNumber" class="java.lang.String"/>
+	<field name="companyName" class="java.lang.String"/>
+	<field name="companyAddress" class="java.lang.String"/>
+	<field name="companyPanNo" class="java.lang.String"/>
+	<field name="companyGstNo" class="java.lang.String"/>
+	<field name="companyStateCode" class="java.lang.String"/>
+	<field name="taxReverseCharge" class="java.lang.String"/>
+	<field name="companyContactNo" class="java.lang.String"/>
+	<field name="companyEmail" class="java.lang.String"/>
+	<field name="companyWebsite" class="java.lang.String"/>
+	<field name="invoiceDate" class="java.util.Date"/>
+	<field name="vendorCode" class="java.lang.String"/>
+	<field name="vendorPlantCode" class="java.lang.String"/>
+	<field name="vendorName" class="java.lang.String"/>
+	<field name="vendorAddress" class="java.lang.String"/>
+	<field name="vendorGstNo" class="java.lang.String"/>
+	<field name="vendorCIN" class="java.lang.String"/>
+	<field name="vendorStateCode" class="java.lang.String"/>
+	<field name="vendorPAN" class="java.lang.String"/>
+	<field name="hsnCode" class="java.lang.String"/>
+	<field name="sacCode" class="java.lang.String"/>
+	<field name="itemCode" class="java.lang.String"/>
+	<field name="poNo" class="java.lang.String"/>
+	<field name="lineNo" class="java.lang.String"/>
+	<field name="invoiceQuantity" class="java.lang.Integer"/>
+	<field name="basicRate" class="java.lang.Double"/>
+	<field name="basicAmount" class="java.lang.Double"/>
+	<field name="freight" class="java.lang.Double"/>
+	<field name="othersCharges" class="java.lang.Double"/>
+	<field name="subTotal" class="java.lang.Double"/>
+	<field name="additionalTaxAmount" class="java.lang.Double"/>
+	<field name="taxableAmount" class="java.lang.Double"/>
+	<field name="cgstPercentage" class="java.lang.Double"/>
+	<field name="cgstAmount" class="java.lang.Double"/>
+	<field name="sgstPercentage" class="java.lang.Double"/>
+	<field name="sgstAmount" class="java.lang.Double"/>
+	<field name="utgstPercentage" class="java.lang.Double"/>
+	<field name="utgstAmount" class="java.lang.Double"/>
+	<field name="igstPercentage" class="java.lang.Double"/>
+	<field name="igstAmount" class="java.lang.Double"/>
+	<field name="totalAmount" class="java.lang.Double"/>
+	<field name="ewayBillNo" class="java.lang.String"/>
+	<field name="ewayBillDate" class="java.util.Date"/>
+	<field name="vehicleNo" class="java.lang.String"/>
+	<field name="remark1" class="java.lang.String"/>
+	<field name="remark2" class="java.lang.String"/>
+	<field name="ediNumber" class="java.lang.String"/>
+	<field name="shiftVendorCode" class="java.lang.String"/>
+	<field name="itemRemark1" class="java.lang.String"/>
+	<field name="itemRemark2" class="java.lang.String"/>
+	<field name="signedQrCode" class="java.lang.String"/>
+	<field name="deliveryChallanNo" class="java.lang.String"/>
+	<field name="deliveryChallanDate" class="java.lang.String"/>
+	<field name="deliveryChallanAmount" class="java.lang.Double"/>
+	<field name="tcsValue" class="java.lang.Double"/>
+	<field name="companyCode" class="java.lang.String"/>
+	<field name="itemName" class="java.lang.String"/>
+	<field name="itemUnit" class="java.lang.String"/>
+	<field name="shiftVendorName" class="java.lang.String"/>
+	<field name="shippingAddress" class="java.lang.String"/>
+	<field name="shippingGstNo" class="java.lang.String"/>
+	<field name="shippingStateCode" class="java.lang.String"/>
+	<background height="802" splitType="Stretch">
+		<element kind="line" uuid="7e07f659-adec-4564-8ec5-031128049c75" x="1" y="0" width="554" height="1"/>
+		<element kind="line" uuid="d972fc59-b1a0-4376-b7ff-34a8d1b5f398" x="0" y="801" width="556" height="1"/>
+		<element kind="line" uuid="37c2aae3-bafc-4fc0-bc77-bf4839180e00" x="0" y="0" width="1" height="800"/>
+		<element kind="line" uuid="975280b5-b1b3-449a-850e-2a703f17f8ea" x="555" y="0" width="1" height="800"/>
+		<element kind="line" uuid="1e686c10-4724-4ed9-b7d0-e7adcd377b9e" x="208" y="494" width="1" height="49">
+			<pen lineWidth="0.5"/>
+		</element>
+		<element kind="line" uuid="b089a415-9236-4c68-bb30-66fef0bc6ca2" x="393" y="494" width="1" height="49">
+			<pen lineWidth="0.5"/>
+		</element>
+		<element kind="line" uuid="011a99f2-4149-4579-aa46-9bc360076793" x="478" y="494" width="1" height="49">
+			<pen lineWidth="0.5"/>
+		</element>
+		<element kind="line" uuid="82310ea2-a0d5-40c8-832b-2ff2e5a56e1c" x="271" y="494" width="1" height="49">
+			<pen lineWidth="0.5"/>
+		</element>
+		<element kind="line" uuid="c7770cdc-b40e-42c1-a7b6-fd280e1e1e42" x="345" y="494" width="1" height="49">
+			<pen lineWidth="0.5"/>
+		</element>
+	</background>
+	<title height="1" splitType="Stretch"/>
+	<pageHeader splitType="Stretch"/>
+	<columnHeader height="493" splitType="Stretch">
+		<element kind="staticText" uuid="764e55a9-a29b-4693-9a6e-cee47dd73466" x="2" y="143" width="161" height="11" fontName="SansSerif" fontSize="8.0" bold="false">
+			<text><![CDATA[Sold To Party(Name and Address )]]></text>
+		</element>
+		<element kind="line" uuid="59b49730-e819-4c07-8ad6-3100e25a0fc1" x="0" y="492" width="556" height="1">
+			<pen lineWidth="0.5"/>
+		</element>
+		<element kind="staticText" uuid="49aa2712-f8cf-44b3-a507-7cdc529b352a" x="2" y="295" width="67" height="14" fontName="SansSerif" bold="true">
+			<text><![CDATA[Invoice No ]]></text>
+		</element>
+		<element kind="staticText" uuid="b11220e0-16c9-4529-b470-1e8bd2c8a8ee" x="2" y="394" width="68" height="14" fontName="SansSerif" bold="false">
+			<text><![CDATA[Part No]]></text>
+		</element>
+		<element kind="staticText" uuid="3cafbc82-65d7-49a8-8c3f-0c3e33c32a57" x="338" y="185" width="79" height="13" fontName="SansSerif" bold="false">
+			<text><![CDATA[Unloading Point ]]></text>
+		</element>
+		<element kind="staticText" uuid="56dd1e18-7cb0-4ddb-b7e7-8d9f9941f626" x="3" y="435" width="68" height="14" fontName="SansSerif" bold="false">
+			<text><![CDATA[Invoice Qty ]]></text>
+		</element>
+		<element kind="staticText" uuid="8a9a8f31-56b8-451e-8b0b-bd21d2566cf1" x="2" y="277" width="67" height="14" fontName="SansSerif" bold="false">
+			<text><![CDATA[Vendor Code ]]></text>
+		</element>
+		<element kind="line" uuid="82002657-f9d0-46ad-87c4-24efcad93740" x="0" y="274" width="272" height="1" printInFirstWholeBand="true">
+			<pen lineWidth="0.5"/>
+		</element>
+		<element kind="staticText" uuid="2e3edb33-3de6-4b94-b988-0142cec4bfbb" x="2" y="354" width="67" height="14" fontName="SansSerif" bold="false">
+			<text><![CDATA[Line Item No ]]></text>
+		</element>
+		<element kind="line" uuid="ebd027ea-1dc9-4dd2-951a-d99ed0ca6507" x="0" y="254" width="554" height="1" printInFirstWholeBand="true">
+			<pen lineWidth="0.5"/>
+		</element>
+		<element kind="line" uuid="9d647ae9-db65-4ae4-b070-4e9f21ff842d" x="0" y="452" width="272" height="1">
+			<pen lineWidth="0.5"/>
+		</element>
+		<element kind="staticText" uuid="88529e80-f88e-4b06-92ab-d36090672a00" x="2" y="335" width="68" height="14" fontName="SansSerif" bold="false">
+			<text><![CDATA[PO NO /Date ]]></text>
+		</element>
+		<element kind="staticText" uuid="01cb4b07-b68f-4501-9116-7f0f6d7c87c8" x="338" y="211" width="79" height="13" fontName="SansSerif" bold="false">
+			<text><![CDATA[Time of Removal]]></text>
+		</element>
+		<element kind="line" uuid="de5e2fc0-a05c-4bf4-88c5-a15469465f93" x="0" y="431" width="272" height="1">
+			<pen lineWidth="0.5"/>
+		</element>
+		<element kind="staticText" uuid="603661af-3840-4076-85cb-b5914970b207" x="2" y="374" width="68" height="14" fontName="SansSerif" bold="false">
+			<text><![CDATA[Rate (Rs)]]></text>
+		</element>
+		<element kind="staticText" uuid="a4f978eb-c142-48f9-b8f9-4179ba12dc83" x="338" y="198" width="79" height="13" fontName="SansSerif" bold="false">
+			<text><![CDATA[Time of Issue]]></text>
+		</element>
+		<element kind="staticText" uuid="94344f33-c629-4afd-8d42-07101b976d26" x="208" y="476" width="63" height="15" fontName="SansSerif" bold="true" hTextAlign="Center">
+			<text><![CDATA[Pack. Details ]]></text>
+		</element>
+		<element kind="line" uuid="b9b40aa7-3bea-44f4-8956-e252e5ac0722" x="0" y="332" width="272" height="1">
+			<pen lineWidth="0.5"/>
+		</element>
+		<element kind="line" uuid="95d60960-081f-4b0d-8dc9-7ac6aeeb6012" x="0" y="370" width="271" height="1">
+			<pen lineWidth="0.5"/>
+		</element>
+		<element kind="staticText" uuid="abe9de65-7d92-43f8-84eb-cbdc2802eed4" x="338" y="172" width="79" height="13" fontName="SansSerif" bold="false">
+			<text><![CDATA[Vehicle No]]></text>
+		</element>
+		<element kind="line" uuid="1d001870-eef8-4ada-853c-24079d20ca7c" x="0" y="410" width="272" height="1">
+			<pen lineWidth="0.5"/>
+		</element>
+		<element kind="staticText" uuid="da2be7d5-f985-4731-964a-2bfc557104a1" x="1" y="257" width="67" height="14" fontName="SansSerif" bold="true">
+			<text><![CDATA[EDI NO ]]></text>
+		</element>
+		<element kind="staticText" uuid="b77df8ce-fc4b-4457-a88d-c0a67c05df98" x="10" y="475" width="133" height="15" fontName="SansSerif" bold="true">
+			<text><![CDATA[Part Name]]></text>
+		</element>
+		<element kind="line" uuid="210fe1a6-4d9b-422d-aa57-2e9dee0d6af5" x="0" y="351" width="271" height="1">
+			<pen lineWidth="0.5"/>
+		</element>
+		<element kind="staticText" uuid="ff7aae8c-b3ef-49f9-a17d-67d2a9ea602c" x="2" y="414" width="68" height="14" fontName="SansSerif" bold="true">
+			<text><![CDATA[HSN CODE]]></text>
+		</element>
+		<element kind="staticText" uuid="fcf5c625-45a8-4cf0-8b85-6a423b4fef4f" x="3" y="456" width="67" height="14" fontName="SansSerif" bold="false">
+			<text><![CDATA[Bill Amt (Rs)]]></text>
+		</element>
+		<element kind="line" uuid="1345467f-0205-4cb5-b87c-5f89ab1c3710" x="0" y="473" width="555" height="1">
+			<pen lineWidth="0.5"/>
+		</element>
+		<element kind="staticText" uuid="07a95767-c0aa-4ec5-bf84-ce164805a531" x="274" y="475" width="71" height="15" fontName="SansSerif" bold="true" hTextAlign="Center">
+			<text><![CDATA[QTY]]></text>
+		</element>
+		<element kind="staticText" uuid="1edd762e-0445-4484-9ea2-0e1e20573059" x="347" y="475" width="44" height="15" fontName="SansSerif" bold="true" hTextAlign="Center">
+			<text><![CDATA[Unit]]></text>
+		</element>
+		<element kind="staticText" uuid="e9ce802c-75d3-435f-89b2-ad3eb81a2be7" x="407" y="475" width="58" height="15" fontName="SansSerif" bold="true" hTextAlign="Center">
+			<text><![CDATA[Rate / Unit ]]></text>
+		</element>
+		<element kind="staticText" uuid="873bf5cd-6aa2-42ec-8b31-d125de99272d" x="485" y="475" width="66" height="15" fontName="SansSerif" bold="true" hTextAlign="Center">
+			<text><![CDATA[ Ass.Value Rs.]]></text>
+		</element>
+		<element kind="textField" uuid="b1ee0b5a-21ff-441f-9f43-678bd4519f82" x="2" y="186" width="161" height="30" fontName="SansSerif" bold="false">
+			<expression><![CDATA[$F{vendorAddress}]]></expression>
+		</element>
+		<element kind="line" uuid="f23ec8aa-3ed8-40ab-85bf-57078a89e5b0" x="271" y="255" width="1" height="238">
+			<pen lineWidth="0.5"/>
+		</element>
+		<element kind="textField" uuid="bcfb8f7b-be7f-4df8-8c20-0048d78d3531" x="52" y="84" width="111" height="11" fontName="SansSerif" fontSize="8.0" bold="false">
+			<expression><![CDATA[$F{companyPanNo}]]></expression>
+		</element>
+		<element kind="textField" uuid="b27585ea-193a-4f74-aa28-14d9f2981c43" x="85" y="277" width="140" height="14" fontName="SansSerif" bold="false">
+			<expression><![CDATA[$F{vendorCode}]]></expression>
+		</element>
+		<element kind="textField" uuid="0ed62337-16d4-4c6d-ae5f-bcbe6e291695" x="85" y="295" width="140" height="18" fontName="SansSerif" fontSize="12.0" bold="true">
+			<expression><![CDATA[$F{invoiceNumber}]]></expression>
+		</element>
+		<element kind="textField" uuid="b7672f40-4130-404e-a76f-de0773ac7904" x="85" y="317" width="140" height="14" fontName="SansSerif" pattern="dd/MM/yyyy" bold="false">
+			<expression><![CDATA[$F{invoiceDate}]]></expression>
+		</element>
+		<element kind="textField" uuid="8f22a694-1ae1-4871-9cf2-0dc084703bf9" x="85" y="334" width="140" height="14" fontName="SansSerif" bold="false">
+			<expression><![CDATA[$F{poNo}]]></expression>
+		</element>
+		<element kind="textField" uuid="bb2f82b8-c957-4cbb-bd89-f6db6a3a29f6" x="85" y="354" width="140" height="14" fontName="SansSerif" bold="false">
+			<expression><![CDATA[$F{lineNo}]]></expression>
+		</element>
+		<element kind="textField" uuid="a4a50cad-7b9a-4c88-94fc-8d2d395d914b" x="85" y="374" width="140" height="14" fontName="SansSerif" pattern="###0.00" bold="false">
+			<expression><![CDATA[$F{basicRate}]]></expression>
+		</element>
+		<element kind="textField" uuid="e0b66ed1-b6e2-483a-a82b-d0676c1ac001" x="85" y="394" width="140" height="14" fontName="SansSerif" bold="false">
+			<expression><![CDATA[$F{itemCode}]]></expression>
+		</element>
+		<element kind="textField" uuid="e171d928-b72e-4e21-842b-985be9a16690" x="85" y="434" width="140" height="14" fontName="SansSerif" pattern="###0.00" bold="false">
+			<expression><![CDATA[$F{invoiceQuantity}]]></expression>
+		</element>
+		<element kind="textField" uuid="3cd143e5-da12-4ac6-bd9e-7906e7c5fb36" x="85" y="455" width="140" height="14" fontName="SansSerif" pattern="###0.00" bold="false">
+			<expression><![CDATA[$F{totalAmount}]]></expression>
+		</element>
+		<element kind="textField" uuid="e6fd7a0e-aff8-4e8c-9756-7d857f812ec8" x="418" y="172" width="130" height="13" fontName="SansSerif" bold="false">
+			<expression><![CDATA[$F{vehicleNo}]]></expression>
+		</element>
+		<element kind="textField" uuid="c6a5df7f-d813-4a72-8fc0-75fcf7854172" x="418" y="185" width="130" height="13" fontName="SansSerif" bold="false">
+			<expression><![CDATA[$F{vendorPlantCode}]]></expression>
+		</element>
+		<element kind="component" uuid="72ec71c2-f237-426f-b97f-e4f349ae6c49" x="287" y="453" width="200" height="15">
+			<component kind="barcode4j:Code128" textPosition="none">
+				<codeExpression><![CDATA[$F{totalAmount}]]></codeExpression>
+			</component>
+		</element>
+		<element kind="component" uuid="572bdbcf-b293-43b4-a040-3a1415c6a567" x="289" y="258" width="200" height="15">
+			<printWhenExpression><![CDATA[$F{ediNumber}.length()>1]]></printWhenExpression>
+			<component kind="barcode4j:Code128" textPosition="none">
+				<codeExpression><![CDATA[$F{ediNumber}]]></codeExpression>
+			</component>
+		</element>
+		<element kind="textField" uuid="2e8ea242-e410-4fd7-aa0f-927ef79c7c01" x="336" y="0" width="217" height="15" fontName="SansSerif" printInFirstWholeBand="true" hTextAlign="Right">
+			<expression><![CDATA[$F{companyName}]]></expression>
+		</element>
+		<element kind="textField" uuid="efbb4a1e-1665-4ee2-be9c-6ec1a8085c56" x="84" y="256" width="140" height="18" fontName="SansSerif" fontSize="12.0" blankWhenNull="true" bold="true">
+			<expression><![CDATA[$F{ediNumber}]]></expression>
+		</element>
+		<element kind="component" uuid="b86a023b-635b-49b3-bb34-3fb2336ec514" x="289" y="304" width="200" height="15">
+			<component kind="barcode4j:Code128" textPosition="none">
+				<codeExpression><![CDATA[$F{invoiceNumber}]]></codeExpression>
+			</component>
+		</element>
+		<element kind="component" uuid="da857006-a489-4dae-9b2d-45cde16bcf20" x="289" y="332" width="200" height="15">
+			<component kind="barcode4j:Code128" textPosition="none">
+				<codeExpression><![CDATA[$F{poNo}]]></codeExpression>
+			</component>
+		</element>
+		<element kind="component" uuid="ff7d6c16-70d8-4823-908e-8c0959a2ff4f" x="289" y="393" width="200" height="15">
+			<component kind="barcode4j:Code128" textPosition="none">
+				<codeExpression><![CDATA[$F{itemCode}]]></codeExpression>
+			</component>
+		</element>
+		<element kind="textField" uuid="0ef755c8-abb3-4b7b-aa8a-8553a7344d0f" x="85" y="414" width="140" height="14" fontName="SansSerif">
+			<expression><![CDATA[$F{hsnCode}]]></expression>
+		</element>
+		<element kind="textField" uuid="9a914c64-7636-4316-809e-9bc1023f6644" x="418" y="198" width="130" height="13" fontName="SansSerif" pattern="h.mm a">
+			<expression><![CDATA[new java.util.Date()]]></expression>
+		</element>
+		<element kind="textField" uuid="8a4f1728-710c-4911-bfc5-8706e58781df" x="418" y="211" width="130" height="13" fontName="SansSerif" pattern="h.mm a">
+			<expression><![CDATA[new java.util.Date()]]></expression>
+		</element>
+		<element kind="textField" uuid="f1347f77-9a06-451c-b11c-6c8fd20c796f" x="2" y="45" width="329" height="18" fontName="SansSerif" fontSize="14.0" bold="true">
+			<expression><![CDATA[$F{companyName}]]></expression>
+		</element>
+		<element kind="staticText" uuid="4398869b-a597-4f02-8b52-7696c0510429" x="166" y="0" width="165" height="15" fontName="SansSerif" bold="true" hTextAlign="Center">
+			<text><![CDATA[TAX  INVOICE]]></text>
+		</element>
+		<element kind="line" uuid="8650fc29-13d0-478c-b145-a4f4b033c2e3" x="76" y="255" width="1" height="218">
+			<pen lineWidth="0.5"/>
+		</element>
+		<element kind="textField" uuid="7bf51c4b-2a2e-4f08-a2aa-0b86ee7453b4" x="2" y="64" width="329" height="20" fontName="SansSerif" bold="false">
+			<expression><![CDATA[$F{companyAddress}]]></expression>
+		</element>
+		<element kind="line" uuid="c616a0f2-fd7e-4b2d-af9b-0e8953775d07" x="393" y="475" width="1" height="17">
+			<pen lineWidth="0.5"/>
+		</element>
+		<element kind="line" uuid="ce5cab86-e99b-4acb-9f48-e6b8d1590573" x="478" y="473" width="1" height="19">
+			<pen lineWidth="0.5"/>
+		</element>
+		<element kind="image" uuid="887781f2-a1b8-4a60-bd17-a8b348aed756" x="3" y="2" width="163" height="42">
+			<expression><![CDATA["Logo.jpg"]]></expression>
+		</element>
+		<element kind="staticText" uuid="a16c296f-b37a-4901-ba75-c66ba40ba465" x="2" y="84" width="50" height="11" fontName="SansSerif" fontSize="8.0" bold="false">
+			<text><![CDATA[PAN NO :]]></text>
+		</element>
+		<element kind="staticText" uuid="ba86cb97-b44d-4ebb-88b2-6e1cf8cb6df3" x="2" y="317" width="67" height="14" fontName="SansSerif" bold="false">
+			<text><![CDATA[Invoice Date ]]></text>
+		</element>
+		<element kind="line" uuid="f88c837f-6c6b-4f48-ac14-2e5d54900dad" x="0" y="390" width="272" height="1">
+			<pen lineWidth="0.5"/>
+		</element>
+		<element kind="line" uuid="df695b10-0c8b-46ff-8a71-e461281dc2bd" x="0" y="313" width="272" height="1">
+			<pen lineWidth="0.5"/>
+		</element>
+		<element kind="line" uuid="379a1834-444b-4a9c-b2bb-4649c2b1a0f0" x="163" y="143" width="1" height="111" printInFirstWholeBand="true">
+			<pen lineWidth="0.5"/>
+		</element>
+		<element kind="line" uuid="1ea07242-6315-417e-a74e-4387218bc779" x="0" y="124" width="336" height="1">
+			<pen lineWidth="0.5"/>
+		</element>
+		<element kind="staticText" uuid="9714e498-5aac-40c8-a119-3bfd85ecf4a7" x="2" y="95" width="50" height="11" fontName="SansSerif" fontSize="8.0" bold="false">
+			<text><![CDATA[State Code]]></text>
+		</element>
+		<element kind="staticText" uuid="ec8d916b-7871-45b4-8e8f-434bb8cc6914" x="166" y="95" width="50" height="11" fontName="SansSerif" fontSize="8.0" bold="false">
+			<text><![CDATA[GSTIN]]></text>
+		</element>
+		<element kind="line" uuid="4eb8acb0-f3ae-4e1c-9d48-641fa08ebb98" x="334" y="0" width="1" height="172" printInFirstWholeBand="true">
+			<pen lineWidth="0.5"/>
+		</element>
+		<element kind="textField" uuid="18210789-f1d3-45a7-a0ea-06a30508dfed" x="2" y="155" width="161" height="30" fontName="SansSerif" fontSize="9.0" bold="false">
+			<expression><![CDATA[$F{vendorName}]]></expression>
+		</element>
+		<element kind="staticText" uuid="32f14de6-2009-4ee3-81fe-23d1adeccbbf" x="2" y="110" width="124" height="12" fontName="SansSerif" fontSize="8.0" bold="false">
+			<text><![CDATA[Whether Tax on Reverse Change]]></text>
+		</element>
+		<element kind="staticText" uuid="09a9187e-40db-4250-bdab-dc2c07cf68eb" x="2" y="231" width="50" height="11" fontName="SansSerif" fontSize="8.0" bold="false">
+			<text><![CDATA[GSTIN]]></text>
+		</element>
+		<element kind="staticText" uuid="658288b2-fb9e-42ed-a7c1-1e582c32f950" x="2" y="217" width="50" height="11" fontName="SansSerif" fontSize="8.0" bold="false">
+			<text><![CDATA[State Code]]></text>
+		</element>
+		<element kind="rectangle" uuid="0d77893a-dedd-4531-a858-b7768bd7bba4" x="335" y="21" width="219" height="75">
+			<pen lineWidth="0.5"/>
+		</element>
+		<element kind="rectangle" uuid="6d12d0ef-6435-4a8a-937c-14f963f7c1c5" x="335" y="96" width="220" height="75">
+			<pen lineWidth="0.5"/>
+		</element>
+		<element kind="line" uuid="ee4db50e-0e68-4470-a631-c601996e62b4" x="335" y="171" width="1" height="83" printInFirstWholeBand="true">
+			<pen lineWidth="0.5"/>
+		</element>
+		<element kind="line" uuid="95254c2a-1408-4e03-8f5e-eb946db9b000" x="2" y="292" width="272" height="1">
+			<pen lineWidth="0.5"/>
+		</element>
+		<element kind="line" uuid="2e92b0dc-2daa-47f1-8b72-46de5a864f5d" x="345" y="474" width="1" height="18">
+			<pen lineWidth="0.5"/>
+		</element>
+		<element kind="line" uuid="cf095398-4ea3-4d5b-bddf-4198ee3bc07e" x="208" y="474" width="1" height="18">
+			<pen lineWidth="0.5"/>
+		</element>
+		<element kind="textField" uuid="674aa97e-27c8-4ba9-9797-0cec39cae288" x="52" y="217" width="111" height="11" fontName="SansSerif" fontSize="8.0" bold="false">
+			<expression><![CDATA[$F{vendorStateCode}]]></expression>
+		</element>
+		<element kind="textField" uuid="55f5185c-9ab2-4f4b-b3a0-36ff5e51bf70" x="52" y="231" width="112" height="11" fontName="SansSerif" fontSize="8.0" bold="false">
+			<expression><![CDATA[$F{vendorGstNo}]]></expression>
+		</element>
+		<element kind="staticText" uuid="2811efc8-dcbd-4bd3-a913-8d5c409e1978" x="166" y="84" width="50" height="11" fontName="SansSerif" fontSize="8.0" bold="false">
+			<text><![CDATA[CIN NO. :]]></text>
+		</element>
+		<element kind="textField" uuid="4cb5687a-56ee-43c8-a9b7-988622d45d95" x="52" y="95" width="111" height="11" fontName="SansSerif" fontSize="8.0" bold="false">
+			<expression><![CDATA[$F{companyStateCode}]]></expression>
+		</element>
+		<element kind="textField" uuid="f2ed5f0a-c698-4500-b141-cd5764067e69" x="216" y="95" width="111" height="11" fontName="SansSerif" fontSize="8.0" bold="false">
+			<expression><![CDATA[$F{companyGstNo}]]></expression>
+		</element>
+		<element kind="textField" uuid="1291d621-d735-4cf6-8253-6ae2f093be84" x="127" y="110" width="50" height="11" fontName="SansSerif" fontSize="8.0" bold="false">
+			<expression><![CDATA[$F{taxReverseCharge}]]></expression>
+		</element>
+		<element kind="line" uuid="e96936ef-de79-451c-918c-7576fe35741c" x="0" y="142" width="336" height="1">
+			<pen lineWidth="0.5"/>
+		</element>
+		<element kind="textField" uuid="be34a760-ec0d-48e8-930b-2b212c7c6191" x="219" y="127" width="100" height="14" fontName="SansSerif" pattern="dd/MM/yyyy" bold="true">
+			<expression><![CDATA[$F{invoiceDate}]]></expression>
+		</element>
+		<element kind="staticText" uuid="f59ffb88-0d85-447c-9a37-76b86fb4c82c" x="3" y="125" width="62" height="18" fontName="SansSerif" fontSize="12.0" bold="true">
+			<text><![CDATA[Invoice No ]]></text>
+		</element>
+		<element kind="staticText" uuid="210d18cc-eb15-4177-a346-b6c58de3059f" x="152" y="127" width="67" height="14" fontName="SansSerif" bold="true">
+			<text><![CDATA[Invoice Date ]]></text>
+		</element>
+		<element kind="textField" uuid="cfa8f266-f244-4fe0-b624-821ef5373009" x="65" y="125" width="76" height="18" fontName="SansSerif" fontSize="12.0" bold="true">
+			<expression><![CDATA[$F{invoiceNumber}]]></expression>
+		</element>
+		<element kind="staticText" uuid="40cc8f55-33b5-4815-988a-f6fa48007267" x="339" y="224" width="79" height="13" fontName="SansSerif" bold="false">
+			<text><![CDATA[E-way Bill No]]></text>
+		</element>
+		<element kind="staticText" uuid="63ad7551-02e7-4c7a-9b9f-16ba71876877" x="339" y="237" width="79" height="13" fontName="SansSerif" bold="false">
+			<text><![CDATA[E-way Bill Date]]></text>
+		</element>
+		<element kind="textField" uuid="14707b9b-b8c1-4512-a079-f2f760d9ef30" x="418" y="224" width="130" height="13" fontName="SansSerif" bold="false">
+			<expression><![CDATA[$F{ewayBillNo}]]></expression>
+		</element>
+		<element kind="textField" uuid="22444716-eb61-400f-a465-09e2de0dbe47" x="418" y="237" width="130" height="13" fontName="SansSerif" bold="false">
+			<expression><![CDATA[$F{ewayBillDate}]]></expression>
+		</element>
+		<element kind="staticText" uuid="89c6da1d-5637-4430-b7ac-a6b05df8bcdd" x="388" y="53" width="126" height="12" forecolor="#666666" fontName="SansSerif" fontSize="8.0" bold="false">
+			<text><![CDATA[Space for affixing GST credit Sticker ]]></text>
+		</element>
+		<element kind="staticText" uuid="33f1dc9f-6158-4922-bad9-a9b68f3dedf6" x="388" y="126" width="126" height="12" forecolor="#666666" fontName="SansSerif" fontSize="8.0" bold="false">
+			<text><![CDATA[Space for affixing Unloading Sticker ]]></text>
+		</element>
+		<element kind="component" uuid="0fe0c858-27be-4489-b76f-3ee131c8a9b1" x="219" y="107" width="108" height="15">
+			<component kind="barcode4j:Code128" textPosition="none">
+				<codeExpression><![CDATA[$F{companyGstNo}]]></codeExpression>
+			</component>
+		</element>
+		<element kind="component" uuid="fda68516-2de6-4aac-9787-ef6606de61b6" x="289" y="281" width="200" height="15">
+			<component kind="barcode4j:Code128" textPosition="none">
+				<codeExpression><![CDATA[$F{vendorCode}]]></codeExpression>
+			</component>
+		</element>
+		<element kind="component" uuid="e4a4ff2b-bf4c-4e06-af92-0b833c167262" x="289" y="356" width="200" height="15">
+			<component kind="barcode4j:Code128" textPosition="none">
+				<codeExpression><![CDATA[$F{lineNo}]]></codeExpression>
+			</component>
+		</element>
+		<element kind="component" uuid="04f74eac-9186-448e-b0ca-4478388f4733" x="289" y="414" width="200" height="15">
+			<component kind="barcode4j:Code128" textPosition="none">
+				<codeExpression><![CDATA[$F{invoiceQuantity}]]></codeExpression>
+			</component>
+		</element>
+		<element kind="staticText" uuid="c28fcd7d-5f10-417f-aa19-f5e15f5f3eb7" x="167" y="143" width="164" height="12" fontName="SansSerif" fontSize="8.0" bold="false">
+			<text><![CDATA[Place of Supply (Name and Address )]]></text>
+		</element>
+		<element kind="textField" uuid="a3c1cfb3-aa6d-4d12-968d-b61865880f4a" x="167" y="155" width="164" height="30" fontName="SansSerif" fontSize="9.0" bold="false">
+			<expression><![CDATA[$F{shiftVendorName}]]></expression>
+		</element>
+		<element kind="textField" uuid="d7a9f8bd-3758-4a5a-9536-055328b4c046" x="166" y="185" width="165" height="38" fontName="SansSerif" fontSize="8.0" bold="false">
+			<expression><![CDATA[$F{shippingAddress}]]></expression>
+		</element>
+		<element kind="textField" uuid="5639d671-aa7c-4b1a-bbab-ec12c3fc0092" x="167" y="238" width="159" height="11" fontName="SansSerif" fontSize="8.0" bold="false">
+			<printWhenExpression><![CDATA[$F{shippingGstNo} != ""]]></printWhenExpression>
+			<expression><![CDATA["GSTN : "+$F{shippingGstNo}]]></expression>
+		</element>
+		<element kind="textField" uuid="88029b5e-2fef-4830-b002-654cd3b624b4" x="167" y="225" width="164" height="11" fontName="SansSerif" fontSize="8.0" bold="false">
+			<printWhenExpression><![CDATA[$F{shippingStateCode} != ""]]></printWhenExpression>
+			<expression><![CDATA["State : "+$F{shippingStateCode}]]></expression>
+		</element>
+	</columnHeader>
+	<detail>
+		<band height="28" splitType="Stretch">
+			<element kind="textField" uuid="f359a970-cef0-4c53-9f83-4f100c353002" x="3" y="0" width="204" height="25" fontName="SansSerif" bold="false">
+				<expression><![CDATA[$F{itemName}]]></expression>
+			</element>
+			<element kind="textField" uuid="cdf9535f-4bb8-408c-9e29-c8930350129e" x="274" y="1" width="71" height="24" fontName="SansSerif" pattern="###0.00" hTextAlign="Center">
+				<expression><![CDATA[$F{invoiceQuantity}]]></expression>
+			</element>
+			<element kind="textField" uuid="e3a6f2da-bb29-4380-a75a-d062d2762461" x="407" y="1" width="58" height="24" fontName="SansSerif" pattern="###0.00" hTextAlign="Center">
+				<expression><![CDATA[$F{basicRate}]]></expression>
+			</element>
+			<element kind="textField" uuid="5117884a-c0eb-480f-a043-b92d1f2abf0d" x="485" y="1" width="67" height="24" fontName="SansSerif" pattern="###0.00" hTextAlign="Right">
+				<expression><![CDATA[$F{basicAmount}]]></expression>
+			</element>
+			<element kind="textField" uuid="c0ad0531-6bd3-4fb5-ba84-9f15a7f3f0e1" x="345" y="1" width="45" height="24" fontName="SansSerif" hTextAlign="Center">
+				<expression><![CDATA[$F{itemUnit}]]></expression>
+			</element>
+		</band>
+	</detail>
+	<columnFooter height="258" splitType="Stretch">
+		<element kind="line" uuid="d7a98e1a-a9cb-4756-ba6a-6baf6f960cc4" x="0" y="1" width="555" height="1">
+			<pen lineWidth="0.5"/>
+		</element>
+		<element kind="staticText" uuid="12e7cd97-5c0b-469e-b6c8-699e9a474a39" x="2" y="2" width="82" height="24" fontName="SansSerif">
+			<text><![CDATA[IGST IN WORDS:]]></text>
+		</element>
+		<element kind="line" uuid="cc44bcf9-3008-47ca-a139-d76dbaf535ca" x="393" y="38" width="162" height="1">
+			<pen lineWidth="0.5"/>
+		</element>
+		<element kind="staticText" uuid="e7ea2598-6ab9-4c7a-b44a-3f82d24e7665" x="2" y="136" width="332" height="75" fontName="SansSerif" fontSize="8.0" hTextAlign="Justified">
+			<text><![CDATA[I / we certify that our registration certificate under the GST Act, 2017 is in force on the date on which the supply of goods specified in this Tax Invoice is made by me/us & the transaction of supply covered by this Tax Invoice had been effected by me/us & it shall be accounted for in the turnover of supplies while filing of return & the due tax if any payable on the supplies has been paid or shall be paid. Further certified that the particulars given above are true and correct & the amount indicated represents the prices actually charged and that there is no flow if additional consideration directly or indirectly from the buyer. Interest @ 18% p.a. charged on all A/c outstanding more than one month after invoice has been rendered.]]></text>
+		</element>
+		<element kind="line" uuid="45cfc9de-472d-43da-ad48-fa78bd971741" x="394" y="98" width="161" height="1">
+			<pen lineWidth="0.5"/>
+		</element>
+		<element kind="line" uuid="bf2602c0-bd86-4802-a2ed-2facc6bb4fb9" x="339" y="180" width="217" height="1">
+			<pen lineWidth="0.5"/>
+		</element>
+		<element kind="staticText" uuid="559a523f-3dd4-401a-ab5c-567cba46c012" x="345" y="236" width="208" height="15" fontName="SansSerif" hTextAlign="Center">
+			<text><![CDATA[Authorised signatory]]></text>
+		</element>
+		<element kind="textField" uuid="4fc277b5-0542-4ddc-8202-5d3b4657447e" x="339" y="183" width="214" height="30" fontName="SansSerif" fontSize="9.0" hTextAlign="Center">
+			<expression><![CDATA["For " + $F{companyName}]]></expression>
+		</element>
+		<element kind="staticText" uuid="7f0b906f-e00c-4442-a633-4dd08b209626" x="399" y="3" width="77" height="15" fontName="SansSerif" bold="false">
+			<text><![CDATA[Basic Amount]]></text>
+		</element>
+		<element kind="staticText" uuid="4bbe71aa-e3d9-4b8a-bcc5-9ee57a20c549" x="399" y="60" width="50" height="15" fontName="SansSerif" bold="false">
+			<text><![CDATA[IGST]]></text>
+		</element>
+		<element kind="staticText" uuid="a45d84e3-90d8-4007-9d6d-eca1d26ea767" x="399" y="80" width="49" height="15" fontName="SansSerif" bold="false">
+			<text><![CDATA[CGST]]></text>
+		</element>
+		<element kind="staticText" uuid="1ae24262-49a5-483b-8903-294a611bee28" x="352" y="159" width="106" height="20" fontName="SansSerif" fontSize="12.0" bold="true" hTextAlign="Right">
+			<text><![CDATA[Grand Total]]></text>
+		</element>
+		<element kind="line" uuid="7ce9b927-53cd-4f0e-8353-0380464f4bc4" x="393" y="-1" width="1" height="135">
+			<pen lineWidth="0.5"/>
+		</element>
+		<element kind="line" uuid="121af03d-6fee-49b8-b27c-e346f2ac3908" x="393" y="19" width="161" height="1">
+			<pen lineWidth="0.5"/>
+		</element>
+		<element kind="line" uuid="9a345975-67cb-445a-bd55-6f52dbfa4061" x="393" y="58" width="162" height="1">
+			<pen lineWidth="0.5"/>
+		</element>
+		<element kind="line" uuid="68c2413a-1036-442e-bf8d-9f662067dad4" x="394" y="78" width="160" height="1">
+			<pen lineWidth="0.5"/>
+		</element>
+		<element kind="line" uuid="e059185c-6b63-4df4-94fc-cfc5dbe64d27" x="338" y="156" width="217" height="1">
+			<pen lineWidth="0.5"/>
+		</element>
+		<element kind="line" uuid="03ac6f54-d72e-4e30-8ccd-2bb3c2763e82" x="478" y="0" width="1" height="180">
+			<pen lineWidth="0.5"/>
+		</element>
+		<element kind="textField" uuid="6c112691-fad0-4555-ae29-ff5b4d94648b" x="482" y="3" width="67" height="15" fontName="SansSerif" pattern="###0.00" bold="true" hTextAlign="Right">
+			<expression><![CDATA[$F{basicAmount}]]></expression>
+		</element>
+		<element kind="textField" uuid="87d182e3-838a-4b90-be53-cd29aeaba70b" x="481" y="60" width="67" height="15" fontName="SansSerif" pattern="###0.00" bold="true" hTextAlign="Right">
+			<expression><![CDATA[$F{igstAmount}]]></expression>
+		</element>
+		<element kind="textField" uuid="e0f00bd0-59ee-4706-9656-12cccbe78e11" x="481" y="80" width="67" height="15" fontName="SansSerif" pattern="###0.00" bold="true" hTextAlign="Right">
+			<expression><![CDATA[$F{cgstAmount}]]></expression>
+		</element>
+		<element kind="textField" uuid="da18ba2c-8b51-4068-a735-db2fab0fb314" x="482" y="99" width="67" height="15" fontName="SansSerif" pattern="###0.00" bold="true" hTextAlign="Right">
+			<expression><![CDATA[$F{sgstAmount}]]></expression>
+		</element>
+		<element kind="textField" uuid="356f5e36-3697-418e-8580-64247334b8fb" x="476" y="162" width="75" height="15" fontName="SansSerif" pattern="###0.00" bold="true" hTextAlign="Right">
+			<expression><![CDATA[$F{totalAmount}]]></expression>
+		</element>
+		<element kind="textField" uuid="41f766d1-8612-4513-8ec5-390623f90e16" x="449" y="60" width="28" height="15" fontName="SansSerif" bold="false" hTextAlign="Right">
+			<expression><![CDATA[$F{igstPercentage}+" %"]]></expression>
+		</element>
+		<element kind="line" uuid="41ee7190-86bd-4930-8daf-fd4feef8f73d" x="0" y="134" width="555" height="1">
+			<pen lineWidth="0.5"/>
+		</element>
+		<element kind="textField" uuid="f538c4ef-bd70-4df7-a17a-673b3d888e7d" x="449" y="80" width="28" height="15" fontName="SansSerif" bold="false" hTextAlign="Right">
+			<expression><![CDATA[$F{cgstPercentage}+" %"]]></expression>
+		</element>
+		<element kind="textField" uuid="48903aa4-1f7f-4b87-8c92-70b96b08cb3a" x="447" y="99" width="28" height="15" fontName="SansSerif" bold="false" hTextAlign="Right">
+			<expression><![CDATA[$F{sgstPercentage}+" %"]]></expression>
+		</element>
+		<element kind="staticText" uuid="bb9a7a25-1ed6-46a1-b367-adf8550678e2" x="399" y="99" width="48" height="15" fontName="SansSerif" bold="false">
+			<text><![CDATA[SGST]]></text>
+		</element>
+		<element kind="line" uuid="31fb33c4-992c-4abe-beff-56830e79b751" x="394" y="115" width="162" height="1">
+			<pen lineWidth="0.5"/>
+		</element>
+		<element kind="staticText" uuid="5997bc8d-e5b1-4cf9-9fac-b4879c734d52" x="2" y="26" width="82" height="24" fontName="SansSerif">
+			<text><![CDATA[CGST IN WORDS:]]></text>
+		</element>
+		<element kind="staticText" uuid="4b399e83-bf6e-4191-bed8-28aa8cd22e31" x="2" y="50" width="82" height="24" fontName="SansSerif">
+			<text><![CDATA[SGST IN WORDS:]]></text>
+		</element>
+		<element kind="staticText" uuid="aef4da24-d960-4722-9ce5-9fb8cf3ccff8" x="2" y="100" width="82" height="15" fontName="SansSerif">
+			<text><![CDATA[Transport Mode]]></text>
+		</element>
+		<element kind="staticText" uuid="621f3540-31a3-4263-b221-b755f95ac6bc" x="2" y="115" width="82" height="15" fontName="SansSerif">
+			<text><![CDATA[Transporter's Name]]></text>
+		</element>
+		<element kind="staticText" uuid="16f4ab65-d309-4d5c-8a7f-708d63446890" x="399" y="117" width="48" height="15" fontName="SansSerif" bold="false">
+			<text><![CDATA[UTGST]]></text>
+		</element>
+		<element kind="textField" uuid="bc3a6b43-4992-44a1-85ce-e4fbffc9755d" x="449" y="117" width="28" height="15" fontName="SansSerif" bold="false" hTextAlign="Right">
+			<expression><![CDATA[$F{utgstPercentage}+" %"]]></expression>
+		</element>
+		<element kind="textField" uuid="e3bf919b-b10f-41ac-a616-315cd105ef61" x="482" y="117" width="67" height="15" fontName="SansSerif" pattern="###0.00" bold="true" hTextAlign="Right">
+			<expression><![CDATA[$F{utgstAmount}]]></expression>
+		</element>
+		<element kind="textField" uuid="98beffd8-c926-4c7d-a8bd-a981753e0bbe" x="85" y="115" width="224" height="14" fontName="SansSerif" bold="false">
+			<expression><![CDATA[$F{remark2}]]></expression>
+		</element>
+		<element kind="line" uuid="3b0f9595-9a65-4017-b1d0-e1d3500918d3" x="338" y="136" width="1" height="122">
+			<pen lineWidth="0.5"/>
+		</element>
+		<element kind="staticText" uuid="f1771673-1f28-4888-9211-dbb15f81f0b9" x="194" y="243" width="66" height="15" fontName="SansSerif" hTextAlign="Center">
+			<text><![CDATA[Prepared By]]></text>
+		</element>
+		<element kind="staticText" uuid="835e2201-eec1-4832-b55f-331efed61bcd" x="274" y="243" width="64" height="15" fontName="SansSerif" hTextAlign="Center">
+			<text><![CDATA[Checked By]]></text>
+		</element>
+		<element kind="textField" uuid="a372aae7-f0fd-4236-92c6-5347f3753042" x="84" y="26" width="308" height="24" fontName="SansSerif" fontSize="9.0" bold="false">
+			<expression><![CDATA[new com.dataline.BajajPortal.convert.EnglishNumberToWords().convert($F{cgstAmount})]]></expression>
+		</element>
+		<element kind="textField" uuid="52804b0f-5f82-4314-8052-1848ef80ba1a" x="84" y="50" width="308" height="24" fontName="SansSerif" fontSize="9.0" bold="false">
+			<expression><![CDATA[new com.dataline.BajajPortal.convert.EnglishNumberToWords().convert($F{sgstAmount})]]></expression>
+		</element>
+		<element kind="textField" uuid="0c56dbf3-3a65-4de6-beb7-6ec08ae8cf33" x="84" y="2" width="308" height="24" fontName="SansSerif" fontSize="9.0" bold="false">
+			<expression><![CDATA[new com.dataline.BajajPortal.convert.EnglishNumberToWords().convert($F{igstAmount})]]></expression>
+		</element>
+		<element kind="staticText" uuid="0f9777d9-e949-4db9-b61a-26ab26360bee" x="399" y="21" width="50" height="15" fontName="SansSerif" bold="false">
+			<text><![CDATA[Freight ]]></text>
+		</element>
+		<element kind="staticText" uuid="7a8a6b33-4f63-4055-be32-40b64f0af4a4" x="498" y="21" width="50" height="15" fontName="SansSerif" bold="false" hTextAlign="Right">
+			<text><![CDATA[0.00]]></text>
+		</element>
+		<element kind="staticText" uuid="7abc9200-a40d-4f28-8d92-7e8acd316bd3" x="399" y="41" width="77" height="15" fontName="SansSerif" bold="false">
+			<text><![CDATA[Taxabl Amount]]></text>
+		</element>
+		<element kind="textField" uuid="c80c0cae-a4a0-49cd-bc61-8c0617a0ca9c" x="481" y="41" width="67" height="15" fontName="SansSerif" pattern="###0.00" bold="true" hTextAlign="Right">
+			<expression><![CDATA[$F{taxableAmount}]]></expression>
+		</element>
+		<element kind="staticText" uuid="bc81eb5d-7140-4374-84ea-5ce09084e52f" x="1" y="74" width="82" height="24" fontName="SansSerif">
+			<text><![CDATA[TOTAL IN WORDS:]]></text>
+		</element>
+		<element kind="textField" uuid="dba92e86-a497-45b0-a024-df3bd72c1440" x="85" y="74" width="308" height="24" fontName="SansSerif" fontSize="9.0" bold="false">
+			<expression><![CDATA[new com.dataline.BajajPortal.convert.EnglishNumberToWords().convert($F{totalAmount})]]></expression>
+		</element>
+	</columnFooter>
+	<pageFooter splitType="Stretch"/>
+	<summary splitType="Stretch"/>
+</jasperReport>

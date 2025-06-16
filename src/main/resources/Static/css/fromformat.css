@@ -1,0 +1,256 @@
+
+body {
+    background-color: white;
+}
+
+.container {
+    border: 1px solid blueviolet;
+    margin-top: 5px;
+    width: 100%;
+}
+
+.from_title {
+    width: 100%;
+    margin-top: 5px;
+    background-color: var(--bs-link-hover-color);
+    font-size: 20px;
+    color: var(--bs-info-bg-subtle);
+}
+
+.from_title label {
+    background-color: #0a58ca;
+    text-align: center;
+    width: 95%;
+    margin-top: 3px;
+
+}
+
+.form-label {
+    white-space: nowrap;
+}
+
+.from_format {
+    margin-top: 10px;
+    margin-left: 10px;
+    margin-right: 10px;
+
+}
+
+.from-format {
+    display: flex;
+    width: 100%;
+}
+
+.from-format .left {
+    width: 85%;
+    border: 1px solid #2b2f32;
+    margin: 0;
+    padding: 0;
+}
+
+.from-format .right {
+    width: 15%;
+    border: 1px solid #2b2f32;
+}
+
+.row {
+    margin: 0; /* Set margin to 0 to reduce space */
+    padding: 1px 0; /* Adjust padding to reduce space */
+    line-height: 22px;
+    font-size: 12px;
+}
+
+.button_row {
+    background-color: var(--bs-primary-bg-subtle);
+    width: 100%;
+    display: flex; /* Use flexbox for alignment */
+    justify-content: flex-start; /* Align items to the start */
+    gap: 1px; /* Add a 1px gap between items */
+}
+
+.button_row .btn-delete {
+    background-color: #c93636;
+    color: #e0e085;
+}
+
+
+.row label {
+    text-align: right;
+    height: 25px; /* Set a fixed height for labels */
+    padding: 2px 0; /* Adjust padding to reduce height */
+}
+
+input.form-control,
+select.form-select {
+    height: 25px; /* Set a fixed height for input fields and select dropdowns */
+    padding: 2px 5px; /* Adjust padding to reduce height */
+    font-size: 12px;
+    width: 100%;
+}
+
+.button_row a,
+.button_row button {
+    font-size: 12px;
+    font-weight: bold;
+    /*background-color: blue; !* Set background color to blue *!*/
+    color: white; /* Set text color to white for contrast */
+    padding: 5px 10px; /* Adjust padding */
+    border-radius: 5px; /* Optional: round the corners */
+    text-decoration: none; /* Remove underline from the link */
+    margin: 1px; /* Add 1px margin on all sides */
+    display: inline-flex; /* Ensure the box fits around the content */
+    align-items: center; /* Center align text vertically */
+    justify-content: center; /* Center align text horizontally */
+    height: 34px; /* Adjust height to match buttons */
+    line-height: 22px;
+}
+
+.text-upper {
+    text-transform: uppercase;
+}
+
+.button_row a:hover,
+.button_row button:hover {
+    color: #1f2e59;
+}
+
+.from_link {
+    font-size: 12px;
+    font-weight: bold;
+    height: 15px;
+    background-color: blue; /* Set background color to blue */
+    color: white; /* Set text color to white for contrast */
+    padding: 10px 20px; /* Add some padding */
+    border-radius: 5px; /* Optional: round the corners */
+    display: inline-block; /* Ensure the box fits around the content */
+    text-decoration: none; /* Remove underline from the link */
+}
+
+.from_link:hover {
+    color: #1f2e59;
+}
+
+
+.text-danger {
+    color: red;
+    margin-top: 5px; /* Optional: Add space above the error message */
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: block; /* Initially hide the dropdown */
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 300px;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+    max-height: 200px;
+    overflow-y: auto;
+    /*border: 1px solid #ccc;*/
+}
+
+.dropdown-content table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.dropdown-content table tbody tr td {
+    line-height: 1; /* Adjust the line-height as needed */
+}
+
+.dropdown-content table thead tr th {
+    line-height: 1; /* Adjust the line-height as needed */
+}
+
+.dropdown-content table thead tr th {
+    font-size: 12px;
+    font-weight: bold;
+    text-align: left;
+    border: 1px solid #aab7b8;
+    padding: 5px;
+    word-wrap: break-word;
+}
+
+.dropdown-content table tbody tr td {
+    font-size: 12px;
+    font-weight: normal;
+    text-align: left;
+    border: 1px solid #aab7b8;
+    padding: 5px;
+    word-wrap: break-word;
+}
+
+.dropdown-content table tr:nth-child(even) {
+    background-color: #ccc;
+}
+
+.dropdown-content table th {
+    background-color: #f2f2f2;
+}
+
+.dropdown-content table tr:hover {
+    background-color: #ddd;
+}
+
+.btn-1 {
+    height: 21px; /* Adjust the height as needed */
+    width: 100%;
+    font-size: 10px;
+    text-align: center;
+    margin-top: 0;
+    padding-top: 0;
+    background-color: #0a58ca;
+}
+
+.tbl tbody tr {
+    height: 15px;
+}
+
+.tbl tbody tr td {
+    line-height: 1;
+}
+
+.tbl thead tr th {
+    font-size: 12px;
+    font-weight: bold;
+    text-align: left;
+    border: 1px solid #aab7b8;
+    padding: 5px;
+    word-wrap: break-word;
+    text-wrap: wrap;
+    vertical-align: top;
+    height: 10px;
+}
+
+.tbl tbody tr td {
+    font-size: 12px;
+    font-weight: normal;
+    text-align: left;
+    border: 1px solid #aab7b8;
+    padding: 5px;
+    word-wrap: break-word;
+}
+
+/* Reduce space between input rows */
+.from_format .row {
+    margin-bottom: 1px; /* tighter spacing */
+}
+
+/* Tweak label alignment if needed */
+.form-label {
+    margin-bottom: 0;
+    /*padding-top: 0.35rem;*/
+    /*font-weight: 500;*/
+    /*font-size: 0.9rem;*/
+}
+
+/* Ensure inputs don't stretch too far down */
+/*.form-control,*/
+/*.form-select {*/
+/*    padding: 0.35rem 0.6rem;*/
+/*    font-size: 0.9rem;*/
+/*}*/

@@ -1,0 +1,195 @@
+@import url(https://fonts.googleapis.com/css?family=Poppins&display=swap);
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    background: #ccc;
+    display: flex;
+    justify-content: left;
+    /*min-height: 100vh;*/
+}
+
+.container {
+    max-width: 1496px;
+    width: 100%;
+    background: #fff;
+    box-shadow: 2px 5px 10px rgba(0, 0, 0, 0.5);
+    margin-top: 0;
+    padding-top: 0;
+}
+
+/* Table heading styles */
+
+.table-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+}
+
+.table-heading .title {
+    text-align: center;
+    width: 80%;
+}
+
+.table-heading .searchText {
+    width: 20%;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.table-heading .searchText input {
+    width: 100%;
+    padding: 5px;
+}
+
+.table-heading .searchText .search-icon {
+    margin-right: 5px;
+    padding-top: 5px;
+}
+
+.tbl {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.tbl thead {
+    background: #424949;
+    color: #fff;
+}
+
+/* Set a specific height for table rows */
+.tbl tbody tr {
+    height: 15px; /* Adjust the height as needed */
+}
+
+/* Alternatively, control the height using line-height */
+.tbl tbody tr td {
+    line-height: 1; /* Adjust the line-height as needed */
+    /* padding: 10px; /* Adjust padding for better spacing */
+}
+
+.tbl thead tr th {
+    font-size: 0.7rem;
+    padding: 0.7rem 0rem 0rem 0.7rem;
+    text-align: left;
+    letter-spacing: 0.2rem;
+    vertical-align: top;
+    border: 1px solid #aab7b8;
+    height: 10px;
+    word-wrap: break-word;
+    text-wrap: wrap;
+}
+
+.tbl tbody tr td {
+    font-size: 12px;
+    font-weight: normal;
+    text-align: left;
+    border: 1px solid #aab7b8;
+    padding: 5px;
+    word-wrap: break-word;
+}
+
+.tbl tr:nth-child(even) {
+    background-color: #ccc;
+}
+
+.tbl tr:hover td {
+    background-color: #839192;
+    color: #000;
+    transition: all 0.3s ease-in;
+    cursor: pointer;
+}
+
+.tbl a {
+    display: inline-block;
+    border: none;
+    margin: 0;
+    padding: 0.4rem;
+    border-radius: 1px;
+    outline: none;
+    cursor: pointer;
+}
+
+.btn_new {
+    background: #e74c3c;
+    color: #fff;
+}
+
+.btn_edit {
+    background: #1e8449;
+    color: #fff;
+}
+
+.table-wrapper {
+    /*max-height: 300px; !* Set desired height *!*/
+    overflow-y: auto; /* Enable vertical scrolling */
+}
+
+.filter-box {
+    border: 1px solid #ccc;
+    padding: 5px;
+    text-align: center;
+    cursor: pointer;
+    background-color: #f9f9f9;
+}
+
+.filter-icon {
+    width: 10px;
+    height: 10px;
+    display: inline-block;
+    margin-left: 5px;
+    background-color: #1f2e59;
+    cursor: pointer;
+}
+
+.hidden {
+    display: none;
+}
+
+.filter-dropdown {
+    width: 100%;
+    padding: 2px;
+    height: 25px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #f9f9f9;
+    cursor: pointer;
+    font-size: 12px;
+    line-height: normal;
+    margin-top: 5px; /* Add some margin to avoid overlapping with the text */
+}
+
+
+@media (max-width: 768px) {
+
+    .tbl thead {
+        display: none;
+    }
+
+    .tbl. tr,
+    .tbl td {
+        display: block;
+        width: 100%;
+    }
+
+    .tbl tr {
+        margin-bottom: 1rem;
+    }
+
+    .tbl tbody tr td {
+        text-align: right;
+        position: relative;
+    }
+
+    .tbl td::before {
+        content: attr(data-label);
+        position: absolute;
+        left: 0;
+    }
+}

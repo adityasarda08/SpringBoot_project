@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>PDF to Text Converter</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .display-area { /* Common style for text display areas */
+            white-space: pre-wrap; /* Preserve whitespace and newlines */
+            word-wrap: break-word; /* Break long words */
+            overflow-y: auto;
+            border: 1px solid #ccc;
+            padding: 10px;
+            background-color: #f8f9fa;
+        }
+
+        #rawPdfTextDisplay {
+            max-height: 300px; /* Specific height for raw text */
+        }
+
+        #processedCsvDisplay {
+            max-height: 250px; /* Specific height for CSV data */
+        }
+    </style>
+</head>
+<body class="bg-light p-5">
+<div class="container">
+    <div class="card">
+        <div class="card-header">
+            <h2>PDF to Text Converter</h2>
+        </div>
+        <div class="card-body">
+            <form enctype="multipart/form-data" id="uploadForm">
+                <div class="mb-3">
+                    <label class="form-label" for="file">Select PDF File</label>
+                    <input accept=".pdf" class="form-control" id="file" name="file" required type="file">
+                </div>
+                <button class="btn btn-success" type="submit">Upload and Convert</button>
+            </form>
+
+            <div class="mt-4 alert d-none" id="resultMessage"></div>
+
+            <!-- Section for Processed CSV Data -->
+            <div class="mt-4 d-none" id="processedCsvSection">
+                <h5>Processed CSV Data (Downloadable Content):</h5>
+                <div class="form-control display-area" id="processedCsvDisplay"></div>
+            </div>
+
+            <!-- Section for Raw PDF Text -->
+            <div class="mt-4 d-none" id="rawTextSection">
+                <h5>Raw Extracted PDF Text:</h5>
+                <div class="form-control display-area" id="rawPdfTextDisplay"></div>
+            </div>
+
+            <div class="mt-3 d-none" id="downloadSection">
+                <button class="btn btn-primary" id="downloadBtn">Download Converted CSV File</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    let downloadedFileName = "";
+
+    document.getElementById("uploadForm").addEventListener("submit", function (e) {
+        e.preventDefault();
+        const fileInput = document.getElementById("file");
+        const resultMessageDiv = document.getElementById("resultMessage");
+
+        const rawTextSectionDiv = document.getElementById("rawTextSection");
+        const rawPdfTextDisplayDiv = document.getElementById("rawPdfTextDisplay");
+
+        // Get references for the new CSV display area
+        const processedCsvSectionDiv = document.getElementById("processedCsvSection");
+        const processedCsvDisplayDiv = document.getElementById("processedCsvDisplay");
+
+        const downloadSectionDiv = document.getElementById("downloadSection");
+
+        // Clear previous results
+        resultMessageDiv.className = "mt-4 alert d-none";
+        resultMessageDiv.textContent = "";
+
+        rawTextSectionDiv.classList.add("d-none");
+        rawPdfTextDisplayDiv.textContent = "";
+
+        processedCsvSectionDiv.classList.add("d-none"); // Clear new section
+        processedCsvDisplayDiv.textContent = "";      // Clear new display area
+
+        downloadSectionDiv.classList.add("d-none");
+
+        const formData = new FormData();
+        formData.append("file", fileInput.files[0]);
+
+        fetch("/pdf/convert", {
+            method: "POST",
+            body: formData
+        }).then(response => response.json())
+            .then(data => {
+                if (data.error) {
+                    resultMessageDiv.className = "mt-4 alert alert-danger";
+                    resultMessageDiv.textContent = data.error;
+                } else {
+                    resultMessageDiv.className = "mt-4 alert alert-success";
+                    resultMessageDiv.textContent = data.conversionMessage;
+
+                    // Display Processed CSV Data
+                    if (data.processedCsvData) {
+                        processedCsvDisplayDiv.textContent = data.processedCsvData;
+                        processedCsvSectionDiv.classList.remove("d-none");
+                    }
+
+                    // Display Raw PDF Text
+                    if (data.rawPdfText) {
+                        rawPdfTextDisplayDiv.textContent = data.rawPdfText;
+                        rawTextSectionDiv.classList.remove("d-none");
+                    }
+
+                    downloadedFileName = data.fileName;
+                    downloadSectionDiv.classList.remove("d-none");
+                }
+            }).catch(err => {
+            resultMessageDiv.className = "mt-4 alert alert-danger";
+            resultMessageDiv.textContent = "Error: " + err.message;
+        });
+    });
+
+    document.getElementById("downloadBtn").addEventListener("click", function () {
+        if (downloadedFileName) {
+            window.location.href = "/pdf/download/" + downloadedFileName;
+        }
+    });
+</script>
+</body>
+</html>

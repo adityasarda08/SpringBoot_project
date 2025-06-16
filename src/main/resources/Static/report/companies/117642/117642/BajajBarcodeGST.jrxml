@@ -1,0 +1,377 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="BajajBarcode" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="fe15f0f1-917f-4737-bdcb-e731c92037f0">
+	<property name="ireport.zoom" value="2.1961500000000007"/>
+	<property name="ireport.x" value="300"/>
+	<property name="ireport.y" value="984"/>
+	<style name="table">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<parameter name="VENDOR_CODE" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT invoiceprint.PLANT_CODE,
+       invoiceprint.VENDOR_CODE,
+       invoiceprint.HSN_CODE,
+       invoiceprint.SAC_CODE,
+       invoiceprint.ITEM_CODE,
+       invoiceprint.PURCHASE_ORDER_NO,
+       invoiceprint.PO_LINE_NO,
+       invoiceprint.INVOICE_NO,
+       invoiceprint.INVOICE_DATE,
+       invoiceprint.INVOICE_QUANTITY,
+       invoiceprint.ITEM_RATE,
+       invoiceprint.ASSESSABLE_AMOUNT,
+       invoiceprint.FREIGHT_CHARGES,
+       invoiceprint.PANDF_CHARGES,
+       invoiceprint.OTHERS_CHARGES,
+       invoiceprint.SUBTOTAL,
+       invoiceprint.ADDITIONAL_CHARGES,
+       invoiceprint.TAXBASE_AMOUNT,
+       invoiceprint.CGST_PER,
+       invoiceprint.CGST_AMOUNT,
+       invoiceprint.SGST_PER,
+       invoiceprint.SGST_AMOUNT,
+       invoiceprint.UTGST_PER,
+       invoiceprint.UTGST_AMOUNT,
+       invoiceprint.IGST_PER,
+       invoiceprint.IGST_AMOUNT,
+       invoiceprint.TOTAL_INVOICE_AMOUNT,
+       invoiceprint.E_WAY_BILL_NO,
+       invoiceprint.E_WAY_BILL_DATE,
+       invoiceprint.VEHICLE_NO,
+       invoiceprint.REMARKS1,
+       invoiceprint.REMARKS2,
+       invoiceprint.IRN_NO,
+       invoiceprint.EDI_NO,
+       invoiceprint.SHIPPING_CODE,
+       invoiceprint.REMARKS3,
+       invoiceprint.REMARKS4,
+       invoiceprint.USER_CODE,
+       invoiceprint.COMPANY_VENDOR_CODE,
+       invoiceprint.LABLE,
+       itemmaster.ITEMNAME,
+       itemmaster.Acunit,
+       vendormaster.VENDOR_NAME,
+       vendormaster.ADDRESS,
+       vendormaster.GSTNO,
+       vendormaster.CINNO,
+       vendormaster.STATECODE,
+       vendormaster.PANNO,
+       companymaster.COMPANY_NAME,
+       companymaster.COMPANY_ADDRESS,
+       companymaster.COMPANY_GSTNO,
+       companymaster.COMPANY_STATE_CODE,
+       companymaster.TAX_REVERSE_CHARGE,
+       companymaster.COMPANY_PAN_NO,
+       companymaster.COMPANY_CIN_NO,
+       companymaster.CONTACT_NO,
+       companymaster.EMAIL_ID,
+       companymaster.WEBSITE,
+       companymaster.COMPANY_REMARK1,
+       companymaster.COMPANY_REMARK2,
+       shippingmaster.SHIPPING_VENDORNAME,
+       shippingmaster.SHIPPING_ADDRESS1,
+       shippingmaster.SHIPPING_ADDRESS2,
+       shippingmaster.GST_NO as SHIPPING_GST_NO,
+       shippingmaster.STATE_CODE as SHIPPING_STATE_CODE
+from invoice_print invoiceprint ,
+     itemmaster itemmaster,
+     vendormaster vendormaster ,
+     usercompanydetails companymaster,
+     shippingmaster shippingmaster
+
+Where invoiceprint.ITEM_CODE = itemmaster.ITEMCODE
+and  invoiceprint.COMPANY_VENDOR_CODE = itemmaster.COMPANY_VENDORCODE
+AND  invoiceprint.VENDOR_CODE = vendormaster.VENDORCODE
+AND  invoiceprint.PLANT_CODE = vendormaster.PLANTCODE
+
+AND  invoiceprint.COMPANY_VENDOR_CODE = vendormaster.COMPANY_VENDORCODE
+AND  invoiceprint.COMPANY_VENDOR_CODE = companymaster.COMPANY_VENDORCODE
+
+
+AND  invoiceprint.REMARKS2 = shippingmaster.SHIPPING_CODE
+AND  invoiceprint.COMPANY_VENDOR_CODE = shippingmaster.COMPANY_VENDORCODE
+AND  invoiceprint.VENDOR_CODE = $P{VENDOR_CODE}]]>
+	</queryString>
+	<field name="PLANT_CODE" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="VENDOR_CODE" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="HSN_CODE" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="SAC_CODE" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="ITEM_CODE" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="PURCHASE_ORDER_NO" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="PO_LINE_NO" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="INVOICE_NO" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="INVOICE_DATE" class="java.sql.Date">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="INVOICE_QUANTITY" class="java.lang.Double">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="ITEM_RATE" class="java.lang.Double">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="ASSESSABLE_AMOUNT" class="java.lang.Double">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="FREIGHT_CHARGES" class="java.lang.Double">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="PANDF_CHARGES" class="java.lang.Double">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="OTHERS_CHARGES" class="java.lang.Double">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="SUBTOTAL" class="java.lang.Double">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="ADDITIONAL_CHARGES" class="java.lang.Double">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="TAXBASE_AMOUNT" class="java.lang.Double">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="CGST_PER" class="java.lang.Double">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="CGST_AMOUNT" class="java.lang.Double">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="SGST_PER" class="java.lang.Double">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="SGST_AMOUNT" class="java.lang.Double">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="UTGST_PER" class="java.lang.Double">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="UTGST_AMOUNT" class="java.lang.Double">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="IGST_PER" class="java.lang.Double">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="IGST_AMOUNT" class="java.lang.Double">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="TOTAL_INVOICE_AMOUNT" class="java.lang.Double">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="E_WAY_BILL_NO" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="E_WAY_BILL_DATE" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="VEHICLE_NO" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="REMARKS1" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="REMARKS2" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="IRN_NO" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="EDI_NO" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="SHIPPING_CODE" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="REMARKS3" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="REMARKS4" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="USER_CODE" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="COMPANY_VENDOR_CODE" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="LABLE" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="ITEMNAME" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Acunit" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="VENDOR_NAME" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="ADDRESS" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="GSTNO" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="CINNO" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="STATECODE" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="PANNO" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="COMPANY_NAME" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="COMPANY_ADDRESS" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="COMPANY_GSTNO" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="COMPANY_STATE_CODE" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="TAX_REVERSE_CHARGE" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="COMPANY_PAN_NO" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="COMPANY_CIN_NO" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="CONTACT_NO" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="EMAIL_ID" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="WEBSITE" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="COMPANY_REMARK1" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="COMPANY_REMARK2" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="SHIPPING_VENDORNAME" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="SHIPPING_ADDRESS1" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="SHIPPING_ADDRESS2" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="SHIPPING_GST_NO" class="java.lang.String"/>
+	<field name="SHIPPING_STATE_CODE" class="java.lang.String"/>
+	<title>
+		<band splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<detail>
+		<band height="787">
+			<staticText>
+				<reportElement x="219" y="516" width="67" height="14" uuid="49aa2712-f8cf-44b3-a507-7cdc529b352a"/>
+				<textElement>
+					<font fontName="SansSerif" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Invoice No ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="219" y="492" width="67" height="14" uuid="da2be7d5-f985-4731-964a-2bfc557104a1"/>
+				<textElement>
+					<font fontName="SansSerif" isBold="true"/>
+				</textElement>
+				<text><![CDATA[EDI NO ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="219" y="535" width="67" height="14" uuid="fcf5c625-45a8-4cf0-8b85-6a423b4fef4f"/>
+				<textElement>
+					<font fontName="SansSerif" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Bill Amt (Rs)]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="286" y="516" width="158" height="14" uuid="0ed62337-16d4-4c6d-ae5f-bcbe6e291695"/>
+				<textElement>
+					<font fontName="SansSerif" size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{INVOICE_NO}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00">
+				<reportElement x="286" y="535" width="70" height="14" uuid="3cd143e5-da12-4ac6-bd9e-7906e7c5fb36"/>
+				<textElement>
+					<font fontName="SansSerif" size="8" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{TOTAL_INVOICE_AMOUNT}]]></textFieldExpression>
+			</textField>
+			<componentElement>
+				<reportElement x="356" y="533" width="110" height="21" uuid="72ec71c2-f237-426f-b97f-e4f349ae6c49"/>
+				<jr:Code128 xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" moduleWidth="1.0" textPosition="none">
+					<jr:codeExpression><![CDATA[$F{TOTAL_INVOICE_AMOUNT}]]></jr:codeExpression>
+				</jr:Code128>
+			</componentElement>
+			<componentElement>
+				<reportElement x="356" y="492" width="110" height="21" uuid="572bdbcf-b293-43b4-a040-3a1415c6a567">
+					<printWhenExpression><![CDATA[$F{EDI_NO}.length()>1]]></printWhenExpression>
+				</reportElement>
+				<jr:Code128 xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" moduleWidth="1.0" textPosition="none">
+					<jr:codeExpression><![CDATA[$F{EDI_NO}]]></jr:codeExpression>
+				</jr:Code128>
+			</componentElement>
+			<textField isBlankWhenNull="true">
+				<reportElement x="286" y="492" width="70" height="14" uuid="efbb4a1e-1665-4ee2-be9c-6ec1a8085c56"/>
+				<textElement>
+					<font fontName="SansSerif" size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{EDI_NO}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

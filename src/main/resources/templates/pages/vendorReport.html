@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title>Order Report Page</title>
+    <meta content="width=device-width, initial-scale=1.0, shrink-to-fit=no" name="viewport">
+    <link rel="stylesheet" th:href="@{/css/indexlist.css}"/>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" rel="stylesheet"/>
+</head>
+<body>
+<div class="container">
+    <div class="sidebar">
+        <div class="nav">
+            <div class="menu">
+                <ul class="menu-items">
+                    <li class="active item">
+                        <a href="#">
+                            <span class="text">Vendor Report</span>
+                        </a>
+                        <ul class="sub-menu">
+                            <li class="item">
+                                <a th:href="@{'/vendors/vendorMasterReport'}">
+                                    <span class="text"> Vendor MASTER REPORT </span>
+                                </a>
+                            </li>
+
+                            <li class="item">
+                                <a th:href="@{'/TaxInvoice/vendorsummary'}">
+                                    <span class="text"> Vendor SUMMARY REPORT </span>
+                                </a>
+                            </li>
+
+                            <li class="item">
+                                <a th:href="@{'/TaxInvoice/vendorwise'}">
+                                    <span class="text"> Vendor WISE REPORT </span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.js"></script>
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $(".menu > ul > li").click(function (event) { // remove active class from already active
+            $(this).siblings().removeClass("active").find("ul").slideUp();
+            // add active class to clicked
+            $(this).toggleClass("active");
+            // if it has sub menu open it
+            $(this).find("ul").slideToggle();
+        });
+    });
+
+</script>
+
+</body>
+</html>
