@@ -2,8 +2,6 @@ services:
   - type: web
     name: springboot-mongo-thymeleaf
     env: docker
-    buildCommand: "./mvnw clean package -DskipTests"
-    startCommand: "java -jar target/BajajPortal-0.0.1-SNAPSHOT.jar"
     plan: free
     envVars:
       - key: SPRING_PROFILES_ACTIVE
