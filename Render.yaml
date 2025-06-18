@@ -1,0 +1,12 @@
+services:
+  - type: web
+    name: springboot-mongo-thymeleaf
+    env: java
+    buildCommand: "./mvnw clean package -DskipTests"
+    startCommand: "java -jar target/BajajPortal-0.0.1-SNAPSHOT.jar"
+    plan: free
+    envVars:
+      - key: SPRING_PROFILES_ACTIVE
+        value: default
+      - key: MONGO_URI
+        value: mongodb+srv://bajajportal:1234567890@cluster0.hemp1.mongodb.net/bajajportal?retryWrites=true&w=majority&appName=Cluster0
